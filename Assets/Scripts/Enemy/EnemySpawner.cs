@@ -20,9 +20,9 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemyOutsideScreen()
     {
         // 화면 중심(플레이어 위치) 기준, 랜덤 방향으로 spawnDistance만큼 떨어진 곳에 스폰
-        
-        Vector2 playerPos = FindAnyObjectByType<PlayerMovement>().transform.position;
-        float angle = Random.Range(0f, 2f * Mathf.PI);
+
+        Vector2 playerPos = GameManager.Instance.PlayerTransform.position;
+        float angle = Random.Range(0f, 1f * Mathf.PI);
         Vector2 spawnDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         Vector2 spawnPos = playerPos + spawnDir * spawnDistance;
 

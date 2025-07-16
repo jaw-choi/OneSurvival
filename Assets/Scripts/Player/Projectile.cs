@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 5;
+    public float speed = 5f;
+    public int damage = 2;
     Vector2 dir;
 
     public void Init(Vector2 direction)

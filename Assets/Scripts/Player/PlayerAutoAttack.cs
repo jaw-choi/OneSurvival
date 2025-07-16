@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAutoAttack : MonoBehaviour
 {
     public GameObject projectilePrefab;
-    public float attackInterval = 0.5f;
+    public float attackInterval = 1.5f;
     float timer = 0f;
 
     void Update()

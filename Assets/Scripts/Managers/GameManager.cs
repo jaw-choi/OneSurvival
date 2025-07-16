@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public Transform PlayerTransform { get; private set; }
     public CanvasGroup gameOverPanel;
     public Image fadeImage; // PanelÀÇ Image ÄÄÆ÷³ÍÆ®
     public TextMeshProUGUI gameOverText;
     private bool readyToClick = false;
+    public int Gold { get; private set; } = 0;
     void Awake()
     {
         // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º ÇÒ´ç
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameOverPanel.gameObject.SetActive(false);
+        PlayerTransform = FindAnyObjectByType<PlayerMovement>().transform;
     }
 
     public void GameOver()
@@ -35,7 +38,12 @@ public class GameManager : MonoBehaviour
         gameOverPanel.gameObject.SetActive(true);
         StartCoroutine(FadeIn());
     }
-
+    public void AddGold(int value)
+    {
+        Gold += value;
+        // °ñµå°¡ ¹Ù²î¸é UI ¾÷µ¥ÀÌÆ®
+        UIManager.Instance.UpdateGoldUI(Gold);
+    }
     IEnumerator FadeIn()
     {
         Color c = fadeImage.color;
