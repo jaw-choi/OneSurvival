@@ -2,19 +2,37 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHp = 100;
-    int currHp;
+    public float maxHealth = 100f;
+    private float currentHealth;
+
+    public HealthBar healthBarPrefab;
+    private HealthBar healthBarInstance;
+
 
     void Start()
     {
-        currHp = maxHp;
+        currentHealth = maxHealth;
+
+        if (healthBarPrefab != null)
+        {
+            Canvas worldCanvas = Object.FindFirstObjectByType<Canvas>(); // World Space Canvas
+            healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
+            healthBarInstance.SetTarget(transform);
+            healthBarInstance.SetHealth(currentHealth, maxHealth);
+        }
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float amount)
     {
-        currHp -= dmg;
-        Debug.Log("player hp is " + currHp);
-        if (currHp <= 0)
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        Debug.Log("currentHealth" + currentHealth);
+        if (healthBarInstance != null)
+        {
+            healthBarInstance.SetHealth(currentHealth, maxHealth);
+        }
+
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -22,8 +40,13 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Player Dead");
+        //Debug.Log("Player Dead");
+        //gameObject.SetActive(false);
+
+        Destroy(gameObject);
+        if (healthBarInstance != null)
+            Destroy(healthBarInstance.gameObject);
+
         GameManager.Instance.GameOver();
-        gameObject.SetActive(false);
     }
 }

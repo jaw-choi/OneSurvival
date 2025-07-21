@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Collision!");
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1);
+                playerHealth.TakeDamage(5);
             }
         }
     }

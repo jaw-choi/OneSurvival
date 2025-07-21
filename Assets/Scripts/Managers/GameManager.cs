@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public bool IsGameOver { get; private set; } = false;
     public Transform PlayerTransform { get; private set; }
     public CanvasGroup gameOverPanel;
     public Image fadeImage; // PanelÀÇ Image ÄÄÆ÷³ÍÆ®
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        IsGameOver = false;
     }
 
     void Start()
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        IsGameOver = true;
+        //Time.timeScale = 0f;
         gameOverPanel.gameObject.SetActive(true);
         StartCoroutine(FadeIn());
     }
