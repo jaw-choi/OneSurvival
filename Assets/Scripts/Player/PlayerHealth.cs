@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currHp -= dmg;
+        Debug.Log("player hp is " + currHp);
         if (currHp <= 0)
         {
             Die();
