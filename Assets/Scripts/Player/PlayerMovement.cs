@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    Vector2 moveInput;
+    private Animator animator;
+    private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-
+    Vector2 movement;
+    public float moveSpeed = 3f;
     void Start()
     {
         // Get the SpriteRenderer component
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -17,24 +20,21 @@ public class PlayerMovement : MonoBehaviour
         // Get horizontal input (-1 for left, 1 for right)
         float move = Input.GetAxisRaw("Horizontal");
 
-        // If moving right
-        if (move > 0)
-        {
-            spriteRenderer.flipX = false; // Face right
-        }
-        // If moving left
-        else if (move < 0)
-        {
-            spriteRenderer.flipX = true; // Face left
-        }
+        if (move > 0) spriteRenderer.flipX = false;
+        else if (move < 0) spriteRenderer.flipX = true;
         // If not moving, do nothing (keep current direction)
 
-        // PC: 키보드, 모바일: 조이스틱으로 변경 가능
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
-        moveInput = moveInput.normalized;
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        transform.Translate(moveInput * moveSpeed * Time.deltaTime);
+        // 애니메이터에 이동 여부 전달
+        bool isMoving = movement.sqrMagnitude > 0.01f;
+        animator.SetBool("isMoving", isMoving);
+    }
+
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
     /*
