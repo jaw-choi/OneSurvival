@@ -57,18 +57,12 @@ Vampire Survivors 스타일의 자동 공격 생존 게임입니다.
 ---
 
 ## 🗂️ 폴더 구조
-
+...
 
 
 ## 🛠️ 설치 및 실행 방법
+...
 
-1. Unity 2022.3 이상 설치
-2. 본 레포지토리 클론
-   ```bash
-   git clone https://github.com/your-id/your-repo-name.git
-Unity에서 프로젝트 열기
-
-MainScene 실행
 
 📈 개발 로드맵
  기본 무기 시스템 구축
