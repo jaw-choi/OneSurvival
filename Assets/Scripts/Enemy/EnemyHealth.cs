@@ -3,14 +3,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHp = 10;
-    int currHp;
+    float currHp;
 
     void OnEnable()
     {
         currHp = maxHp;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         Debug.Log(this.name + " get damage" + dmg);
         currHp -= dmg;

@@ -3,8 +3,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed = 5f;
-    public int damage = 2;
+    public float damage = 2;
+    private int pierceCount;
     Vector2 dir;
+
+    public void SetData(float damage, int pierce)
+    {
+        this.damage = damage;
+        this.pierceCount = pierce;
+    }
 
     public void Init(Vector2 direction)
     {
@@ -23,7 +30,9 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("hit the Enemy");
             col.GetComponent<EnemyHealth>().TakeDamage(damage);
-            Destroy(gameObject);
+            pierceCount--;
+            if (pierceCount <= 0)
+                Destroy(gameObject);
         }
     }
 }
