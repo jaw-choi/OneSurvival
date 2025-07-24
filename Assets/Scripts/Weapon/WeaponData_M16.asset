@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4371ce47fbac343478d7a03981516372, type: 3}
+  m_Name: WeaponData_M16
+  m_EditorClassIdentifier: 
+  weaponName: M16
+  weaponIcon: {fileID: 21300066, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  projectilePrefab: {fileID: 8341461869080158616, guid: a6e573a65a7ac2a4b9ce2f05eab95b29,
+    type: 3}
+  projectileData: {fileID: 0}
+  fireType: 0
+  attackCooldown: 3
+  burstCount: 3
+  timeBetweenBurstShots: 0.2
+  attackRange: 3
+  areaRadius: 0
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  attackSFX: {fileID: 0}
+  attackAnimName: 
+  damage: 5
+  fireRate: 2
+  projectileSpeed: 2
+  pierceCount: 2

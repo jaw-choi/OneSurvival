@@ -1,30 +1,27 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAutoAttack : MonoBehaviour
 {
-    public GameObject projectilePrefab;
-    public float attackInterval = 1.5f;
-    float timer = 0f;
+    public Weapon weapon;
 
-    void Update()
+    private void Start()
     {
-        timer += Time.deltaTime;
-        if (timer >= attackInterval)
+        StartCoroutine(AutoFireRoutine());
+    }
+    private IEnumerator AutoFireRoutine()
+    {
+        while (true)
         {
-            timer = 0f;
             GameObject nearestEnemy = FindNearestEnemy();
             if (nearestEnemy != null)
             {
                 Vector2 dir = (nearestEnemy.transform.position - transform.position).normalized;
-                Fire(dir);
+                weapon.Fire(dir);
             }
-        }
-    }
 
-    void Fire(Vector2 direction)
-    {
-        GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        proj.GetComponent<Projectile>().Init(direction);
+            yield return new WaitForSeconds(weapon.weaponData.attackCooldown);
+        }
     }
 
     GameObject FindNearestEnemy()
