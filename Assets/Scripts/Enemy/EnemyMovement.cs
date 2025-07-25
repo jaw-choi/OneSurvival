@@ -2,23 +2,24 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    private EnemyBase enemyBase;
     private SpriteRenderer spriteRenderer;
     public float speed = 2f;
 
     void Start()
     {
         // Get the SpriteRenderer component
+        enemyBase = GetComponent<EnemyBase>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (enemyBase.isDead) return; // if enemy dead, do not move
         if (GameManager.Instance.PlayerTransform == null) return;
 
-        Vector2 playerPos = GameManager.Instance.PlayerTransform.position;
-        Vector2 enemyPos = this.transform.position;
-        Vector2 direction = (playerPos - enemyPos).normalized;
+        Vector2 direction = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
 
         // Get horizontal input (-1 for left, 1 for right)
 

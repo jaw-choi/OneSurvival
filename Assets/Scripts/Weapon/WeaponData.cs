@@ -23,12 +23,10 @@ public class WeaponData : ScriptableObject
     public AudioClip attackSFX;
     public string attackAnimName;
 
-    [Header("Stat")]
-    public float damage;
-    public float fireRate;
-    public float projectileSpeed;
-    public int pierceCount;
+    [Header("Level Scaling")]
+    public float[] fireRateMultiplierPerLevel;
+    public float[] damageMultiplierPerLevel;
+    public float[] speedMultiplierPerLevel;
+    public float[] pierceBonusPerLevel;
 
-    //[Header("Level Up")]
-    //public WeaponData nextLevelWeapon;
 }

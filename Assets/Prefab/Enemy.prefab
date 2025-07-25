@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7143216581958075441}
   - component: {fileID: 6028343776265338379}
-  - component: {fileID: 4379134307651626438}
   - component: {fileID: 5769293151660403257}
   - component: {fileID: 3826281281885389647}
+  - component: {fileID: 2545843408727850167}
   - component: {fileID: -9189982401158626682}
   - component: {fileID: 408668609792734015}
   m_Layer: 0
@@ -92,19 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4379134307651626438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4720730591617371777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15aa5087b4f01e84e8ecdc26b502d295, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 10
 --- !u!50 &5769293151660403257
 Rigidbody2D:
   serializedVersion: 5
@@ -145,6 +132,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+--- !u!114 &2545843408727850167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720730591617371777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d15d8dff44cb3468a560343b3f6759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: d01307e8c008bbc42a6a61a0a09bb38a, type: 2}
+  currentHP: 0
 --- !u!95 &-9189982401158626682
 Animator:
   serializedVersion: 7

@@ -13,8 +13,9 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            EnemyBase enemy = other.GetComponent<EnemyBase>();
             Debug.Log("Collision!");
-            if (playerHealth != null)
+            if (playerHealth != null && !enemy.isDead)
             {
                 playerHealth.TakeDamage(5);
             }

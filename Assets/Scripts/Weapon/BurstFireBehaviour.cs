@@ -24,7 +24,8 @@ public class BurstFireBehaviour : IWeaponFireBehaviour
             Vector2 currentPosition = ownerTransform.position;
 
             GameObject proj = Object.Instantiate(data.projectilePrefab, currentPosition, Quaternion.identity);
-            proj.GetComponent<Projectile>().Init(direction.normalized * data.projectileSpeed);
+            proj.GetComponent<Projectile>().Init(direction.normalized * data.projectileData.speed);
+            proj.GetComponent<Projectile>().SetData(data.projectileData);
             Debug.Log($"[{Time.time:F2}] น฿ป็ {i + 1} / {data.burstCount}");
             yield return new WaitForSeconds(data.timeBetweenBurstShots);
         }
