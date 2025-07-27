@@ -9,6 +9,10 @@ public class ExpGem : MonoBehaviour
     private Transform target;              // 플레이어 위치
     private bool isAbsorbing = false;
 
+    public void SetExp(int amount)
+    {
+        expAmount = amount;
+    }
     void Start()
     {
         target = GameManager.Instance.PlayerTransform;

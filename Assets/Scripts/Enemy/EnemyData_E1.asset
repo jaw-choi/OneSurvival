@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Goblin
   maxHP: 10
   moveSpeed: 2
-  expDrop: 1
+  expDrop: 2
   expGemPrefab: {fileID: 2818411570915226872, guid: 2747bb9388b9fde4bb4028f0b49826a0,
     type: 3}
   animatorController: {fileID: 9100000, guid: ebc4339c978237a419eb9739004ec5b2, type: 2}

@@ -67,7 +67,10 @@ public class EnemyBase : MonoBehaviour
         // Drop exp
         if (data.expGemPrefab != null)
         {
-            Instantiate(data.expGemPrefab, transform.position, Quaternion.identity);
+            GameObject gem = Instantiate(data.expGemPrefab, transform.position, Quaternion.identity);
+            ExpGem expGem = gem.GetComponent<ExpGem>();
+            if (expGem != null)
+                expGem.SetExp(data.expDrop); // 경험치 전달
         }
     }
 

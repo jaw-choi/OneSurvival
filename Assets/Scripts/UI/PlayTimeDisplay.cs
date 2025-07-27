@@ -9,6 +9,7 @@ public class PlayTimeDisplay : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.IsGameOver) return;
         elapsedTime += Time.deltaTime;
 
         //int hours = (int)(elapsedTime / 3600);
@@ -16,5 +17,9 @@ public class PlayTimeDisplay : MonoBehaviour
         int seconds = (int)(elapsedTime % 60);
 
         playTimeText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+    }
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
     }
 }

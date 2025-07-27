@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileName: Circle
   sprite: {fileID: 0}
-  speed: 2
-  damage: 4
+  speed: 4
+  damage: 10
   lifetime: 1
-  pierceCount: 2
+  pierceCount: 1
   moveType: 0
   hitType: 0
   aoeRadius: 0

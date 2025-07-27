@@ -18,9 +18,9 @@ MonoBehaviour:
     type: 3}
   projectileData: {fileID: 11400000, guid: 74c86309dab97c44cb2524dd79f32772, type: 2}
   fireType: 0
-  attackCooldown: 3
-  burstCount: 3
-  timeBetweenBurstShots: 0.2
+  attackCooldown: 2
+  burstCount: 1
+  timeBetweenBurstShots: 0
   attackRange: 3
   areaRadius: 0
   enemyLayerMask:

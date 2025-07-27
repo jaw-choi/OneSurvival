@@ -15,7 +15,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (healthBarPrefab != null)
         {
-            Canvas worldCanvas = Object.FindFirstObjectByType<Canvas>(); // World Space Canvas
+            //Canvas worldCanvas = Object.FindFirstObjectByType<Canvas>(); // World Space Canvas
+            GameObject canvasObj = GameObject.Find("WorldSpaceCanvas");
+            Canvas worldCanvas = canvasObj?.GetComponent<Canvas>();
             healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
             healthBarInstance.SetTarget(transform);
             healthBarInstance.SetHealth(currentHealth, maxHealth);

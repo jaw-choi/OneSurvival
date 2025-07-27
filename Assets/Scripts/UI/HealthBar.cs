@@ -20,6 +20,15 @@ public class HealthBar : MonoBehaviour
     void LateUpdate()
     {
         if (target != null)
+        {
             transform.position = target.position + offset;
+
+            // 카메라 방향으로 회전 (UI가 항상 카메라를 향함)
+            var cam = Camera.main;
+            if (cam != null)
+            {
+                transform.forward = cam.transform.forward;
+            }
+        }
     }
 }
