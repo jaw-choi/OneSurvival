@@ -3,8 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/WeaponData", order = 2)]
 public class WeaponData : ScriptableObject
 {
+
     public string weaponName;
     public Sprite weaponIcon;
+    public GameObject weaponPrefab;      // 무기 자체 프리팹
     public GameObject projectilePrefab;
     public ProjectileData projectileData;
 

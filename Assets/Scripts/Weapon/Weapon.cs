@@ -2,46 +2,57 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public WeaponData weaponData;
-    private IWeaponFireBehaviour fireBehaviour;
-    //private float cooldownTimer;
+    public WeaponData weaponData { get; private set; }
 
-    void Awake()
+    private IWeaponFireBehaviour fireBehaviour;
+    private int currentLevel;
+    private float lastFireTime;
+
+    public void Initialize(WeaponData data, int startLevel)
     {
-        // 나중에 무기 종류에 따라 동적으로 변경 가능
-        fireBehaviour = new BurstFireBehaviour(this); // 또는 SingleShotBehaviour 등
-        //fireBehaviour = new SingleShotBehaviour(this); // 또는 SingleShotBehaviour 등
+        weaponData = data;
+        currentLevel = startLevel;
+        SetFireBehaviourByType(weaponData.fireType);
+        lastFireTime = -999f; // 처음엔 즉시 발사 가능하도록
     }
-    //void Update()
-    //{
-    //    cooldownTimer -= Time.deltaTime;
-    //    if (cooldownTimer <= 0f)
-    //    {
-    //        Fire();
-    //        cooldownTimer = weaponData.attackCooldown;
-    //    }
-    //}
+
+    public bool CanFire()
+    {
+        return Time.time >= lastFireTime + weaponData.attackCooldown;
+    }
 
     public void Fire(Vector2 direction)
     {
-        fireBehaviour.Fire(transform.position, direction, weaponData);
-        //if (weaponData.projectilePrefab != null)
-        //{
-        //    GameObject projectile = Instantiate(
-        //        weaponData.projectilePrefab,
-        //        transform.position,
-        //        transform.rotation
-        //    );
-
-        //    Projectile projScript = projectile.GetComponent<Projectile>();
-        //    if (projScript != null)
-        //    {
-        //        projScript.SetData(weaponData.damage, weaponData.pierceCount);
-        //    }
-        //}
+        if (fireBehaviour != null && CanFire())
+        {
+            fireBehaviour.Fire(transform.position, direction, weaponData);
+            lastFireTime = Time.time;
+        }
     }
-    public void SetFireBehaviour(IWeaponFireBehaviour behaviour)
+
+    public void Upgrade()
     {
-        fireBehaviour = behaviour;
+        currentLevel++;
+        Debug.Log($"{weaponData.weaponName} 무기 레벨업 → Lv.{currentLevel}");
+    }
+
+    private void SetFireBehaviourByType(WeaponFireType fireType)
+    {
+        switch (fireType)
+        {
+            case WeaponFireType.Burst:
+                fireBehaviour = new BurstFireBehaviour(this);
+                break;
+            //case WeaponFireType.Single:
+            //    fireBehaviour = new SingleShotFireBehaviour(this);
+            //    break;
+            //case WeaponFireType.Area:
+            //    fireBehaviour = new AreaFireBehaviour(this);
+            //    break;
+            //// 필요한 타입 계속 추가
+            default:
+                fireBehaviour = new BurstFireBehaviour(this);
+                break;
+        }
     }
 }

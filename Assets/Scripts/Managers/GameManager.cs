@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public CanvasGroup gameOverPanel;
     public Image fadeImage; // Panel의 Image 컴포넌트
     public TextMeshProUGUI gameOverText;
+    public WeaponData defaultWeaponData;
     //private bool readyToClick = false;
     public int Gold { get; private set; } = 0;
     void Awake()
@@ -31,11 +32,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Init();
+    }
+    public void Init()
+    {
         gameOverPanel.gameObject.SetActive(false);
         PlayerTransform = FindAnyObjectByType<PlayerMovement>().transform;
         GameStateManager.Instance.ChangeState(new InGameState());
-    }
+        // 무기 1회만 생성
+        Weapon weapon = WeaponManager.Instance.AddWeapon(defaultWeaponData);
 
+        // 자동 공격 컴포넌트 초기화
+        var autoAttack = FindAnyObjectByType<PlayerAutoAttack>();
+        autoAttack.Initialize(weapon);
+    }
     public void GameOver()
     {
         IsGameOver = true;

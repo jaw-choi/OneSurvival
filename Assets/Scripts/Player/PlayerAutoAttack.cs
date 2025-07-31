@@ -1,28 +1,38 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAutoAttack : MonoBehaviour
 {
     public Weapon weapon;
 
-    private void Start()
+    public void Initialize(Weapon weapon)
     {
+        //this.weapon = weapon;
         StartCoroutine(AutoFireRoutine());
     }
     private IEnumerator AutoFireRoutine()
     {
         while (true)
         {
-            GameObject nearestEnemy = FindNearestEnemy();
-            if (nearestEnemy != null)
+            List<Weapon> weapons = WeaponManager.Instance.GetAllWeapons();
+
+            foreach (var weapon in weapons)
             {
-                Vector2 dir = (nearestEnemy.transform.position - transform.position).normalized;
-                weapon.Fire(dir);
+                if (weapon.weaponData == null) continue;
+
+                GameObject nearestEnemy = FindNearestEnemy();
+                if (nearestEnemy != null)
+                {
+                    Vector2 dir = (nearestEnemy.transform.position - transform.position).normalized;
+                    weapon.Fire(dir);
+                }
             }
 
-            yield return new WaitForSeconds(weapon.weaponData.attackCooldown);
+            yield return null; // 매 프레임마다 반복
         }
     }
+
 
     GameObject FindNearestEnemy()
     {

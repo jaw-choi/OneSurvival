@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProjectileData_P1
   m_EditorClassIdentifier: 
   projectileName: Circle
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 265406c4eb5581249bb0f7999d03774c, type: 3}
   speed: 4
   damage: 10
   lifetime: 1
