@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerExpManager : MonoBehaviour
 {
-
+    public static PlayerExpManager Instance { get; private set; }
     [Header("경험치 상태")]
     public int currentExp = 0;
     public int currentLevel = 1;
@@ -13,6 +13,10 @@ public class PlayerExpManager : MonoBehaviour
 
     public System.Action<int> OnLevelUp; // 레벨업 이벤트 (UI나 이펙트 연결용)
 
+    void Awake()
+    {
+        Instance = this;
+    }
     public void AddExp(int amount)
     {
         currentExp += amount;

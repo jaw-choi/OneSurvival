@@ -35,9 +35,8 @@ public class ExpGem : MonoBehaviour
             // 가까워지면 흡수
             if (dist < 0.2f)
             {
-                PlayerExpManager exp = target.GetComponent<PlayerExpManager>();
-                if (exp != null)
-                    exp.AddExp(expAmount);
+                if (PlayerExpManager.Instance != null)
+                    PlayerExpManager.Instance.AddExp(expAmount);
 
                 Destroy(gameObject);
             }
