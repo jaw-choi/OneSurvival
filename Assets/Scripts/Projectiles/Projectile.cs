@@ -7,12 +7,13 @@ public class Projectile : MonoBehaviour
     private int pierceCount;
     Vector2 dir;
 
-    public void SetData(ProjectileData data)
+    public void SetData(ProjectileData baseData, Weapon weapon)
     {
-        damage = data.damage;
-        speed = data.speed;
-        pierceCount = data.pierceCount;
-        Destroy(gameObject, data.lifetime);
+        damage = baseData.damage * weapon.GetDamageMultiplier();
+        speed = baseData.speed * weapon.GetSpeedMultiplier();
+        pierceCount = baseData.pierceCount + Mathf.RoundToInt(weapon.GetPierceBonus());
+
+        Destroy(gameObject, baseData.lifetime);
     }
 
     public void Init(Vector2 direction)

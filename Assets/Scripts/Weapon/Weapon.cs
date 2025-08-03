@@ -18,7 +18,8 @@ public class Weapon : MonoBehaviour
 
     public bool CanFire()
     {
-        return Time.time >= lastFireTime + weaponData.attackCooldown;
+        float cooldown = weaponData.attackCooldown / GetFireRateMultiplier();
+        return Time.time >= lastFireTime + cooldown;
     }
 
     public void Fire(Vector2 direction)
@@ -54,5 +55,37 @@ public class Weapon : MonoBehaviour
                 fireBehaviour = new BurstFireBehaviour(this);
                 break;
         }
+    }
+
+    public float GetDamageMultiplier()
+    {
+        if (weaponData.damageMultiplierPerLevel.Length >= currentLevel)
+            return weaponData.damageMultiplierPerLevel[currentLevel - 1];
+        else
+            return 1f;
+    }
+
+    public float GetFireRateMultiplier()
+    {
+        if (weaponData.fireRateMultiplierPerLevel.Length >= currentLevel)
+            return weaponData.fireRateMultiplierPerLevel[currentLevel - 1];
+        else
+            return 1f;
+    }
+
+    public float GetSpeedMultiplier()
+    {
+        if (weaponData.speedMultiplierPerLevel.Length >= currentLevel)
+            return weaponData.speedMultiplierPerLevel[currentLevel - 1];
+        else
+            return 1f;
+    }
+
+    public float GetPierceBonus()
+    {
+        if (weaponData.pierceBonusPerLevel.Length >= currentLevel)
+            return weaponData.pierceBonusPerLevel[currentLevel - 1];
+        else
+            return 0f;
     }
 }

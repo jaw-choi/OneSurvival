@@ -5,29 +5,34 @@ public class BurstFireBehaviour : IWeaponFireBehaviour
 {
     private MonoBehaviour coroutineOwner;
     private Transform ownerTransform;
+    private Weapon weapon;
 
-    public BurstFireBehaviour(MonoBehaviour owner)
+    public BurstFireBehaviour(Weapon weapon)
     {
-        this.coroutineOwner = owner;
-        ownerTransform = owner.transform;
+        this.weapon = weapon;
+        coroutineOwner = weapon;
+        ownerTransform = weapon.transform;
     }
 
     public void Fire(Vector2 position, Vector2 direction, WeaponData data)
     {
-        coroutineOwner.StartCoroutine(FireBurst(direction, data));
+        coroutineOwner.StartCoroutine(FireBurst(direction));
     }
 
-    private IEnumerator FireBurst(Vector2 direction, WeaponData data)
+    private IEnumerator FireBurst(Vector2 direction)
     {
-        for (int i = 0; i < data.burstCount; i++)
+        for (int i = 0; i < weapon.weaponData.burstCount; i++)
         {
             Vector2 currentPosition = ownerTransform.position;
 
-            GameObject proj = Object.Instantiate(data.projectilePrefab, currentPosition, Quaternion.identity);
-            proj.GetComponent<Projectile>().Init(direction.normalized * data.projectileData.speed);
-            proj.GetComponent<Projectile>().SetData(data.projectileData);
-            Debug.Log($"[{Time.time:F2}] 발사 {i + 1} / {data.burstCount}");
-            yield return new WaitForSeconds(data.timeBetweenBurstShots);
+            GameObject proj = Object.Instantiate(weapon.weaponData.projectilePrefab, currentPosition, Quaternion.identity);
+
+            Projectile projectile = proj.GetComponent<Projectile>();
+            projectile.SetData(weapon.weaponData.projectileData, weapon); // 강화 수치 적용
+            projectile.Init(direction.normalized); // 방향만 전달
+
+            Debug.Log($"[{Time.time:F2}] 발사 {i + 1} / {weapon.weaponData.burstCount}");
+            yield return new WaitForSeconds(weapon.weaponData.timeBetweenBurstShots);
         }
     }
 
