@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbb95a61d8b455e4bb488c6aeb5f7800, type: 3}
-  m_Name: ProjectileData_P1
+  m_Name: ProjectileData_Bible
   m_EditorClassIdentifier: 
-  projectileName: Circle
-  sprite: {fileID: 21300000, guid: 265406c4eb5581249bb0f7999d03774c, type: 3}
-  speed: 4
+  projectileName: Bible
+  sprite: {fileID: 21300000, guid: 2750b4c5b3ad38d43b4d095b1c6e9c0b, type: 3}
+  speed: 3
   damage: 10
-  lifetime: 1
-  pierceCount: 1
-  moveType: 0
-  hitType: 0
-  aoeRadius: 0
+  lifetime: 3
+  pierceCount: 5
+  moveType: 2
+  hitType: 1
+  aoeRadius: 2
   hitEffectPrefab: {fileID: 0}
   hitSFX: {fileID: 0}

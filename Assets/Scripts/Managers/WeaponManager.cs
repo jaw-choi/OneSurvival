@@ -6,8 +6,10 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager Instance { get; private set; }
 
     [SerializeField] private Transform weaponHolder;
+    [SerializeField] private GameObject aoeVisualizerPrefab;
 
     private List<Weapon> weapons = new List<Weapon>();
+    private GarlicWeapon GarlicWeapons;
 
     void Awake()
     {
@@ -19,14 +21,15 @@ public class WeaponManager : MonoBehaviour
 
     public Weapon AddWeapon(WeaponData data)
     {
-        // 이미 있는 무기라면 리턴하지 말고 새로 생성 (중복 허용 안하면 이 조건 추가)
         if (HasWeapon(data))
             return null;
 
-        GameObject weaponObj = Instantiate(data.weaponPrefab, weaponHolder); // 무기 프리팹 사용
+        GameObject weaponObj = Instantiate(data.weaponPrefab, weaponHolder);
         Weapon weapon = weaponObj.GetComponent<Weapon>();
         weapon.Initialize(data, 1);
         weapons.Add(weapon);
+
+        //CheckAoeWeaponStatus();
         return weapon;
     }
 
@@ -39,13 +42,19 @@ public class WeaponManager : MonoBehaviour
     {
         Weapon weapon = weapons.Find(w => w.weaponData == data);
         if (weapon != null)
+        {
             weapon.Upgrade();
+            //CheckAoeWeaponStatus();
+        }
         else
+        {
             Debug.LogWarning($"업그레이드 실패: 무기 {data.weaponName} 없음");
+        }
     }
 
     public List<Weapon> GetAllWeapons()
     {
         return weapons;
     }
+
 }

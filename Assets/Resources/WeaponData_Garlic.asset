@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Garlic
   weaponIcon: {fileID: 21300066, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  weaponPrefab: {fileID: 9133424743827533876, guid: b8f0548ec82882742a19c9ff649c4670,
+  weaponPrefab: {fileID: 3158357368613742983, guid: 7cf6684e783b6044eb87dc1007d11fec,
     type: 3}
   projectilePrefab: {fileID: 8341461869080158616, guid: a6e573a65a7ac2a4b9ce2f05eab95b29,
     type: 3}
-  projectileData: {fileID: 11400000, guid: 74c86309dab97c44cb2524dd79f32772, type: 2}
-  fireType: 1
+  projectileData: {fileID: 11400000, guid: ed441d53ed7ca4d4d8dfee957dc4411b, type: 2}
+  fireType: 3
   attackCooldown: 1
   burstCount: 2
-  timeBetweenBurstShots: 0
+  timeBetweenBurstShots: 1
   attackRange: 3
-  areaRadius: 0
+  areaRadius: 1
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   attackSFX: {fileID: 0}
   attackAnimName: 
   fireRateMultiplierPerLevel:

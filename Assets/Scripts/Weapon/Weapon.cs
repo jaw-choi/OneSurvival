@@ -11,9 +11,9 @@ public class Weapon : MonoBehaviour
     public void Initialize(WeaponData data, int startLevel)
     {
         weaponData = data;
-        currentLevel = startLevel;
+        currentLevel = Mathf.Max(1, startLevel);
         SetFireBehaviourByType(weaponData.fireType);
-        lastFireTime = -999f; // 처음엔 즉시 발사 가능하도록
+        lastFireTime = -999f;
     }
 
     public bool CanFire()
@@ -44,48 +44,48 @@ public class Weapon : MonoBehaviour
             case WeaponFireType.Burst:
                 fireBehaviour = new BurstFireBehaviour(this);
                 break;
-            //case WeaponFireType.Single:
-            //    fireBehaviour = new SingleShotFireBehaviour(this);
-            //    break;
-            //case WeaponFireType.Area:
-            //    fireBehaviour = new AreaFireBehaviour(this);
-            //    break;
-            //// 필요한 타입 계속 추가
+
+            case WeaponFireType.Single:
+                fireBehaviour = new SingleShotBehaviour(this);
+                break;
+
+            case WeaponFireType.Flamethrower:
+                fireBehaviour = new FlamethrowerBehaviour(this);
+                break;
+            case WeaponFireType.Aoe:
+                fireBehaviour = new AoeFireBehaviour(this);
+                break;
             default:
+                Debug.LogWarning($"Unknown FireType: {fireType}, defaulting to Burst");
                 fireBehaviour = new BurstFireBehaviour(this);
                 break;
         }
     }
 
+    private int LevelIndex => Mathf.Clamp(currentLevel - 1, 0, 5);
+
     public float GetDamageMultiplier()
     {
-        if (weaponData.damageMultiplierPerLevel.Length >= currentLevel)
-            return weaponData.damageMultiplierPerLevel[currentLevel - 1];
-        else
-            return 1f;
+        return GetValueOrDefault(weaponData.damageMultiplierPerLevel, 1f);
     }
 
     public float GetFireRateMultiplier()
     {
-        if (weaponData.fireRateMultiplierPerLevel.Length >= currentLevel)
-            return weaponData.fireRateMultiplierPerLevel[currentLevel - 1];
-        else
-            return 1f;
+        return GetValueOrDefault(weaponData.fireRateMultiplierPerLevel, 1f);
     }
 
     public float GetSpeedMultiplier()
     {
-        if (weaponData.speedMultiplierPerLevel.Length >= currentLevel)
-            return weaponData.speedMultiplierPerLevel[currentLevel - 1];
-        else
-            return 1f;
+        return GetValueOrDefault(weaponData.speedMultiplierPerLevel, 1f);
     }
 
     public float GetPierceBonus()
     {
-        if (weaponData.pierceBonusPerLevel.Length >= currentLevel)
-            return weaponData.pierceBonusPerLevel[currentLevel - 1];
-        else
-            return 0f;
+        return GetValueOrDefault(weaponData.pierceBonusPerLevel, 0f);
+    }
+
+    private float GetValueOrDefault(float[] array, float fallback)
+    {
+        return (array != null && LevelIndex < array.Length) ? array[LevelIndex] : fallback;
     }
 }

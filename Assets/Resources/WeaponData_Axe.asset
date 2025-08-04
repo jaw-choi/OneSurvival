@@ -16,10 +16,10 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300066, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   weaponPrefab: {fileID: 9133424743827533876, guid: b8f0548ec82882742a19c9ff649c4670,
     type: 3}
-  projectilePrefab: {fileID: 8341461869080158616, guid: a6e573a65a7ac2a4b9ce2f05eab95b29,
+  projectilePrefab: {fileID: 7355188811844864829, guid: 1a765624b2d4fbb4587c1986c5f1a24d,
     type: 3}
-  projectileData: {fileID: 11400000, guid: 74c86309dab97c44cb2524dd79f32772, type: 2}
-  fireType: 1
+  projectileData: {fileID: 11400000, guid: b9bb31b631ed8944e823df067daa4916, type: 2}
+  fireType: 0
   attackCooldown: 1.5
   burstCount: 5
   timeBetweenBurstShots: 0
