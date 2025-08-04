@@ -17,8 +17,10 @@ public class WeaponChoiceUI : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        allWeaponData = WeaponDatabaseLoader.Instance.GetAll(); // 무기 데이터 리스트 가져오기
-        
+    }
+    void Start()
+    {
+        allWeaponData = WeaponDatabaseLoader.Instance.GetAll();
     }
 
     public void ShowChoices()
