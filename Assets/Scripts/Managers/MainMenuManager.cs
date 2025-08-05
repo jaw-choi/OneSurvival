@@ -7,7 +7,10 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene"); // ∞‘¿” æ¿ ¿Ã∏ß
     }
-
+    public void OnClickUpGrade()
+    {
+        SceneManager.LoadScene("UpgradeScene");
+    }
     public void OnClickSettings()
     {
         Debug.Log("Settings clicked");

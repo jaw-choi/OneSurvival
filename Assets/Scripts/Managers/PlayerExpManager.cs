@@ -19,9 +19,10 @@ public class PlayerExpManager : MonoBehaviour
     }
     public void AddExp(int amount)
     {
-        currentExp += amount;
-        Debug.Log($"EXP +{amount} ¡æ {currentExp}/{expToNextLevel}");
+        int bonus = Mathf.RoundToInt(amount * (PlayerStats.Instance.GetExpBonusMultiplier() - 1f));
+        currentExp += amount + bonus;
 
+        Debug.Log($"EXP +{amount} (+{bonus} º¸³Ê½º) ¡æ {currentExp}/{expToNextLevel}");
         while (currentExp >= expToNextLevel)
         {
             currentExp -= expToNextLevel;

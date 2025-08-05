@@ -66,7 +66,9 @@ public class Weapon : MonoBehaviour
 
     public float GetDamageMultiplier()
     {
-        return GetValueOrDefault(weaponData.damageMultiplierPerLevel, 1f);
+        float baseMult = GetValueOrDefault(weaponData.damageMultiplierPerLevel, 1f);
+        float permBonus = 1f + PermanentStatManager.GetValue(PermanentStatType.Damage);
+        return baseMult * permBonus;
     }
 
     public float GetFireRateMultiplier()
@@ -76,7 +78,9 @@ public class Weapon : MonoBehaviour
 
     public float GetSpeedMultiplier()
     {
-        return GetValueOrDefault(weaponData.speedMultiplierPerLevel, 1f);
+        float baseMult = GetValueOrDefault(weaponData.speedMultiplierPerLevel, 1f);
+        float permBonus = 1f + PermanentStatManager.GetValue(PermanentStatType.ProjectileSpeed);
+        return baseMult * permBonus;
     }
 
     public float GetPierceBonus()

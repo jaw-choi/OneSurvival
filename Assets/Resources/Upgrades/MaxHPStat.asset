@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e9d1f6b5f28146a3fa411592bc542, type: 3}
+  m_Name: MaxHPStat
+  m_EditorClassIdentifier: 
+  statType: 1
+  displayName: Max HP
+  maxLevel: 3
+  costPerLevel: c8000000f401000020030000
+  valuePerLevel:
+  - 1
+  - 2
+  - 3
