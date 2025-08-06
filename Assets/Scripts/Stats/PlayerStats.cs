@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
+    [Header("Player")]
+    public string characterName = "One Man";
 
     [Header("Base Stats")]
     public float baseDamage = 5f;

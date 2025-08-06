@@ -64,6 +64,9 @@ public class EnemyBase : MonoBehaviour
             rb.simulated = false;
         }
 
+        if (EnemyKillCounter.Instance != null)
+            EnemyKillCounter.Instance.AddKill();
+
         // Drop exp
         if (data.expGemPrefab != null)
         {

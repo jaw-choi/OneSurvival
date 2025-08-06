@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
     public float damage;
     private int pierceCount;
     private Vector2 dir;
+    private Weapon ownerWeapon;
 
     private Transform player;
     private Transform homingTarget;
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
         damage = baseData.damage * weapon.GetDamageMultiplier();
         speed = baseData.speed * weapon.GetSpeedMultiplier();
         pierceCount = baseData.pierceCount + Mathf.RoundToInt(weapon.GetPierceBonus());
-
+        ownerWeapon = weapon;
         Destroy(gameObject, baseData.lifetime);
     }
 
@@ -158,11 +159,13 @@ public class Projectile : MonoBehaviour
         {
             case ProjectileHitType.SingleHit:
                 col.GetComponent<EnemyBase>().TakeDamage(damage);
+                ownerWeapon?.AddDamage(damage); // 누적 데미지 기록
                 Destroy(gameObject);
                 break;
 
             case ProjectileHitType.Pierce:
                 col.GetComponent<EnemyBase>().TakeDamage(damage);
+                ownerWeapon?.AddDamage(damage); // 누적 데미지 기록
                 pierceCount--;
                 if (pierceCount <= 0)
                     Destroy(gameObject);
@@ -173,7 +176,10 @@ public class Projectile : MonoBehaviour
                 foreach (var enemy in targets)
                 {
                     if (enemy.CompareTag("Enemy"))
+                    {
                         enemy.GetComponent<EnemyBase>().TakeDamage(damage);
+                        ownerWeapon?.AddDamage(damage); // 누적 데미지 기록
+                    }
                 }
                 Destroy(gameObject);
                 break;

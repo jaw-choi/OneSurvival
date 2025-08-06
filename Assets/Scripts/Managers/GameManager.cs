@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public Image fadeImage; // Panel의 Image 컴포넌트
     public TextMeshProUGUI gameOverText;
     public WeaponData defaultWeaponData;
-    //private bool readyToClick = false;
+    private float gameStartTime;
+    public float ElapsedTime => Time.time - gameStartTime;
     public int Gold { get; private set; } = 0;
     void Awake()
     {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     }
     public void Init()
     {
+        gameStartTime = Time.time;
         gameOverPanel.gameObject.SetActive(false);
         PlayerTransform = FindAnyObjectByType<PlayerMovement>().transform;
         GameStateManager.Instance.ChangeState(new InGameState());
@@ -48,7 +50,31 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        if (IsGameOver) return;
+
         IsGameOver = true;
+
+        // 1. 결과 데이터 저장
+        GameResultData result = GameResultData.Instance;
+        result.playTime = Time.timeSinceLevelLoad; // 또는 gameStartTime 따로 기록해도 됨
+        result.totalGold = Gold;
+        result.playerLevel = PlayerExpManager.Instance.currentLevel;
+        result.enemyKillCount = EnemyKillCounter.Instance.TotalKills;
+        result.characterName = PlayerStats.Instance.characterName;
+        result.mapName = SceneManager.GetActiveScene().name;
+
+        foreach (var weapon in WeaponManager.Instance.GetAllWeapons())
+        {
+            var w = new WeaponResult();
+            w.weaponName = weapon.weaponData.weaponName;
+            w.weaponLevel = weapon.currentLevel;
+            w.totalDamage = weapon.TotalDealtDamage;
+            w.heldTime = Time.time - weapon.TimeAcquired;
+            result.weaponResults.Add(w);
+        }
+
+        // 2. 게임 오버 UI 보여주기 (선택)
+        //StartCoroutine(ShowGameOverAndLoadResult());
     }
 
     public void AddGold(int value)

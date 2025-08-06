@@ -4,11 +4,17 @@ public class EnemySpawner : MonoBehaviour
 {
     public EnemyPooler enemyPooler;
     public float spawnInterval = 1.5f;
+    public float initialSpawnInterval = 1.5f;
     private float timer = 0f;
     public float spawnDistance = 4f; // 화면 밖(월드 기준) 거리
+    public float minSpawnInterval = 0.3f;
+    public float difficultyRampTime = 300f; // 5분 동안 난이도 증가
 
     void Update()
     {
+        float t = Mathf.Clamp01(GameManager.Instance.ElapsedTime / difficultyRampTime);
+        spawnInterval = Mathf.Lerp(initialSpawnInterval, minSpawnInterval, t);
+
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {

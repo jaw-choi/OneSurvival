@@ -51143,7 +51143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPooler: {fileID: 982520011}
   spawnInterval: 1
+  initialSpawnInterval: 1.5
   spawnDistance: 4
+  minSpawnInterval: 0.3
+  difficultyRampTime: 300
 --- !u!1001 &1007785271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52556,6 +52559,8 @@ GameObject:
   - component: {fileID: 1515923804}
   - component: {fileID: 1515923803}
   - component: {fileID: 1515923805}
+  - component: {fileID: 1515923806}
+  - component: {fileID: 1515923807}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -52604,6 +52609,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3ff5b8c80e7c704db5d4b93537d1fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1515923806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515923802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3714f0e6e49cd4e46b14cdde74a91614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: One Man
+  baseDamage: 5
+  baseMoveSpeed: 3
+  baseMaxHealth: 100
+  baseRegen: 0
+--- !u!114 &1515923807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515923802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91948280c5cb6d468504f04f1c26b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1565013730

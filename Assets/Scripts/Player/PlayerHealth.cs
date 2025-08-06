@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         HandleRegen();
     }
     void HandleRegen()
-    {
+    { 
         float regenAmount = PlayerStats.Instance.TotalRegen;
         if (regenAmount <= 0f) return;
 

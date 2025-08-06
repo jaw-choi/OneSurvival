@@ -5,15 +5,18 @@ public class Weapon : MonoBehaviour
     public WeaponData weaponData { get; private set; }
 
     private IWeaponFireBehaviour fireBehaviour;
-    private int currentLevel;
+    public int currentLevel;
     private float lastFireTime;
-
+    public float TotalDealtDamage { get; private set; } = 0f;
+    public float TimeAcquired { get; private set; } = 0f;
     public void Initialize(WeaponData data, int startLevel)
     {
         weaponData = data;
         currentLevel = Mathf.Max(1, startLevel);
         SetFireBehaviourByType(weaponData.fireType);
         lastFireTime = -999f;
+        TimeAcquired = Time.time;
+        TotalDealtDamage = 0f;
     }
 
     public bool CanFire()
@@ -30,7 +33,10 @@ public class Weapon : MonoBehaviour
             lastFireTime = Time.time;
         }
     }
-
+    public void AddDamage(float amount)
+    {
+        TotalDealtDamage += amount;
+    }
     public void Upgrade()
     {
         currentLevel++;
