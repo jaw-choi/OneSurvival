@@ -21,7 +21,7 @@ public class DebugUI : MonoBehaviour
     }
     private void RefreshAllStatItems()
     {
-        foreach (var item in FindObjectsOfType<StatUpgradeUIItem>())
+        foreach (var item in FindObjectsByType<StatUpgradeUIItem>(FindObjectsSortMode.None))
         {
             item.Refresh();
         }

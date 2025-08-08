@@ -18,18 +18,18 @@ public class ResultSceneManager : MonoBehaviour
     {
         var result = GameResultData.Instance;
 
-        playTimeText.text = FormatTime(result.playTime);
-        goldText.text = result.totalGold.ToString();
+        playTimeText.text = "플레이 시간 : " + FormatTime(result.playTime);
+        goldText.text = "얻은 골드 : " + result.totalGold.ToString();
         levelText.text = $"Lv. {result.playerLevel}";
         killCountText.text = $"{result.enemyKillCount} Kills";
-        characterNameText.text = result.characterName;
-        mapNameText.text = result.mapName;
+        characterNameText.text = $"캐릭터 : {result.characterName}";
+        mapNameText.text = $"맵 : {result.mapName}";
 
         foreach (var w in result.weaponResults)
         {
             GameObject item = Instantiate(weaponResultItemPrefab, weaponListParent);
             var tmp = item.GetComponentInChildren<TextMeshProUGUI>();
-            tmp.text = $"{w.weaponName} Lv.{w.weaponLevel} - {w.totalDamage} dmg - {w.dps:F1} DPS - {w.heldTime:F1}s";
+            tmp.text = $"무기 {w.weaponName} - Lv.{w.weaponLevel} \n 데미지 : {w.totalDamage} \n 초당 데미지 {w.dps:F1} \n 소유시간 : {w.heldTime:F1}초";
         }
     }
 

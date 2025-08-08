@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class EnemyPooler : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public int poolSize = 10;
+    public int poolSize = 30;
     private List<GameObject> pool = new List<GameObject>();
 
     void Awake()

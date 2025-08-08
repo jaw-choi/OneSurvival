@@ -17,6 +17,12 @@ public class BurstFireBehaviour : IWeaponFireBehaviour
     public void Fire(Vector2 position, Vector2 direction, WeaponData data)
     {
         coroutineOwner.StartCoroutine(FireBurst(direction));
+        Vector2 center = ownerTransform.position;
+        if (data.projectileData.hitEffectPrefab != null)
+            Object.Instantiate(data.projectileData.hitEffectPrefab, center, Quaternion.identity);
+
+        if (data.projectileData.hitSFX != null)
+            AudioSource.PlayClipAtPoint(data.projectileData.hitSFX, center);
     }
 
     private IEnumerator FireBurst(Vector2 direction)
@@ -34,6 +40,7 @@ public class BurstFireBehaviour : IWeaponFireBehaviour
             Debug.Log($"[{Time.time:F2}] น฿ป็ {i + 1} / {weapon.weaponData.burstCount}");
             yield return new WaitForSeconds(weapon.weaponData.timeBetweenBurstShots);
         }
+
     }
 
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   speed: 3
   damage: 10
   lifetime: 3
-  pierceCount: 5
+  pierceCount: 2
   moveType: 2
   hitType: 1
   aoeRadius: 2

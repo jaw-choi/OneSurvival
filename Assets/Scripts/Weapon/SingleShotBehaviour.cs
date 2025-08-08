@@ -17,5 +17,11 @@ public class SingleShotBehaviour : IWeaponFireBehaviour
         Projectile projectile = proj.GetComponent<Projectile>();
         projectile.SetData(data.projectileData, weapon);
         projectile.Init(direction.normalized);
+        Vector2 center = ownerTransform.position;
+        if (data.projectileData.hitEffectPrefab != null)
+            Object.Instantiate(data.projectileData.hitEffectPrefab, center, Quaternion.identity);
+
+        if (data.projectileData.hitSFX != null)
+            AudioSource.PlayClipAtPoint(data.projectileData.hitSFX, center);
     }
 }

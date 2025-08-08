@@ -9,7 +9,7 @@ public class PlayerExpManager : MonoBehaviour
     public int expToNextLevel = 10;
 
     [Header("레벨업 증가량")]
-    public float expGrowthRate = 2.2f; // 다음 레벨업까지 필요 경험치 증가 비율
+    public float expGrowthRate = 2.5f; // 다음 레벨업까지 필요 경험치 증가 비율
 
     public System.Action<int> OnLevelUp; // 레벨업 이벤트 (UI나 이펙트 연결용)
 

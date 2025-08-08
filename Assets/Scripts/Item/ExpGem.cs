@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ExpGem : MonoBehaviour
 {
-    public int expAmount = 10;
+    public int expAmount = 1;
     public float absorbRange = 2f;         // 흡수 시작 거리
     public float absorbSpeed = 5f;         // 흡수 이동 속도
 
