@@ -1,17 +1,26 @@
+// Assets/Scripts/Pooling/EnemyPooler.cs
 using UnityEngine;
 using System.Collections.Generic;
 
 public class EnemyPooler : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    // Use SO-only
+    public EnemyData data;              // prefab, pool size, stats are in SO
     public int poolSize = 30;
-    private List<GameObject> pool = new List<GameObject>();
+
+    private readonly List<GameObject> pool = new();
 
     void Awake()
     {
+        if (data == null || data.prefab == null)
+        {
+            Debug.LogError("EnemyPooler: EnemyData or prefab is missing.");
+            return;
+        }
+
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+            GameObject obj = Instantiate(data.prefab, Vector3.zero, Quaternion.identity, transform);
             obj.SetActive(false);
             pool.Add(obj);
         }
@@ -19,15 +28,19 @@ public class EnemyPooler : MonoBehaviour
 
     public GameObject GetEnemy()
     {
-        foreach (var obj in pool)
+        for (int i = 0; i < pool.Count; i++)
         {
-            if (!obj.activeInHierarchy)
+            if (!pool[i].activeInHierarchy)
             {
-                obj.SetActive(true);
-                return obj;
+                pool[i].SetActive(true);
+                return pool[i];
             }
         }
-        // 풀에 남는 게 없으면 새로 만들거나, null 반환(확장 가능)
+        // Optional: expand
+        // var obj = Instantiate(data.prefab, transform);
+        // obj.SetActive(true);
+        // pool.Add(obj);
+        // return obj;
         return null;
     }
 }

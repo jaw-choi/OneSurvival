@@ -40,6 +40,8 @@ public class GarlicWeapon : MonoBehaviour
             if (target.CompareTag("Enemy"))
                 target.GetComponent<EnemyBase>()?.TakeDamage(damage);
         }
+        weapon.AddDamage(damage);
+
     }
 
     void UpdateVisualRadius()
