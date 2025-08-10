@@ -11,12 +11,14 @@ public class MainMenuManager : MonoBehaviour
         }
         else
         {
-            GameResultData.Instance.Reset(); // 이전 기록 제거
+            GameResultData.Instance.Reset();
         }
     }
 
     public void OnClickStart()
     {
+        if (GameResultData.Instance != null)
+            GameResultData.Instance.Reset();
         SceneManager.LoadScene("GameScene"); // 게임 씬 이름
     }
     public void OnClickUpGrade()

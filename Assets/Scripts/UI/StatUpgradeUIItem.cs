@@ -48,4 +48,26 @@ public class StatUpgradeUIItem : MonoBehaviour
             UIManager.Instance.UpdateGoldUI(GoldManager.Instance.Gold);
         }
     }
+
+    void OnEnable()
+    {
+        if (GoldManager.Instance != null)
+        {
+            // 골드 변경 시 자동 새로고침
+            GoldManager.Instance.OnGoldChanged.AddListener(OnGoldChanged);
+        }
+    }
+
+    void OnDisable()
+    {
+        if (GoldManager.Instance != null)
+        {
+            GoldManager.Instance.OnGoldChanged.RemoveListener(OnGoldChanged);
+        }
+    }
+
+    private void OnGoldChanged(int currentGold)
+    {
+        Refresh(); // 골드 기준으로 버튼 interactable 갱신
+    }
 }

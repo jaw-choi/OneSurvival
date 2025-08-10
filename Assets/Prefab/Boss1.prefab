@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -9189982401158626682}
   - component: {fileID: 408668609792734015}
   m_Layer: 0
-  m_Name: Enemy 3
+  m_Name: Boss1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3739491a635c3de479e7e2243f14448a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a13fef80e4f845e448f126d026ac31a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d15d8dff44cb3468a560343b3f6759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 28f5dd031ce4a904fa3a992caa0772f5, type: 2}
+  data: {fileID: 11400000, guid: db1da09487680724f9bcbc6c5c838ffa, type: 2}
   currentHP: 0
 --- !u!95 &-9189982401158626682
 Animator:
@@ -156,7 +156,7 @@ Animator:
   m_GameObject: {fileID: 4720730591617371777}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e54c5fb387d3f6c489c046d267e1fc1b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 60ee202b53ee20d46a0e0a6512378ea1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

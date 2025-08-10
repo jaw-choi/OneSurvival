@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d15d8dff44cb3468a560343b3f6759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5ae1804d72ef7d348abddebf38f28357, type: 2}
+  data: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
   currentHP: 0
 --- !u!95 &-9189982401158626682
 Animator:

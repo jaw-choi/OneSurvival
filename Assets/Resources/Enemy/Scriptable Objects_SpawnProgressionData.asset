@@ -73,6 +73,10 @@ MonoBehaviour:
     endTime: 20
     enemy: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
     weight: 1
+  - startTime: 15
+    endTime: 16
+    enemy: {fileID: 11400000, guid: db1da09487680724f9bcbc6c5c838ffa, type: 2}
+    weight: 1
   - startTime: 20
     endTime: 30
     enemy: {fileID: 11400000, guid: 28f5dd031ce4a904fa3a992caa0772f5, type: 2}

@@ -19,16 +19,15 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // 싱글톤 인스턴스 할당
+        IsGameOver = false;
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 유지
         }
         else
         {
             Destroy(gameObject);
         }
-        IsGameOver = false;
     }
 
     void Start()
@@ -47,6 +46,15 @@ public class GameManager : MonoBehaviour
         // 자동 공격 컴포넌트 초기화
         var autoAttack = FindAnyObjectByType<PlayerAutoAttack>();
         autoAttack.Initialize(weapon);
+        IsGameOver = false;
+    }
+    public void ResetRunState()
+    {
+        IsGameOver = false;
+        Gold = 0;
+        gameStartTime = Time.time;
+        StopAllCoroutines();
+        CancelInvoke();
     }
     public void GameOver()
     {

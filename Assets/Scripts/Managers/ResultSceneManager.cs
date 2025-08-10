@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ResultSceneManager : MonoBehaviour
 {
@@ -38,5 +39,11 @@ public class ResultSceneManager : MonoBehaviour
         int min = Mathf.FloorToInt(time / 60);
         int sec = Mathf.FloorToInt(time % 60);
         return $"{min:D2}:{sec:D2}";
+    }
+    public void OnClickMainMenu()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.ResetRunState(); // 런 상태 초기화
+        SceneManager.LoadScene("MainMenu");
     }
 }

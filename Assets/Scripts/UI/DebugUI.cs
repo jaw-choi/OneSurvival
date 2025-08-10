@@ -8,7 +8,7 @@ public class DebugUI : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         Debug.Log("PlayerPrefs (stat + gold) Reset");
-
+        GoldManager.Instance.SetGold(0);
         // 즉시 UI 반영
         UIManager.Instance.UpdateGoldUI(0);
         RefreshAllStatItems();

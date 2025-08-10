@@ -16,7 +16,6 @@ public class GoldManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             LoadGold();
         }
         else
@@ -49,7 +48,19 @@ public class GoldManager : MonoBehaviour
         PlayerPrefs.SetInt(GOLD_KEY, Gold);
         PlayerPrefs.Save();
     }
+    public void SetGold(int amount)
+    {
+        // 음수 방지
+        Gold = Mathf.Max(0, amount);
+        SaveGold();
+        OnGoldChanged.Invoke(Gold);
+    }
 
+    // 골드 완전 초기화(리셋 버튼에서 호출)
+    public void ResetGold()
+    {
+        SetGold(0);
+    }
     private void LoadGold()
     {
         Gold = PlayerPrefs.GetInt(GOLD_KEY, 0); // 기본값 0
