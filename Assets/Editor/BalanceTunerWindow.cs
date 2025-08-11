@@ -15,6 +15,7 @@ public class BalanceTunerWindow : EditorWindow
     private const string WEAPON_DATA_TYPE = "WeaponData";
     private const string PROJECTILE_DATA_TYPE = "ProjectileData";
     private const string ENEMY_DATA_TYPE = "EnemyData";
+    private const string SPAWN_DATA_TYPE = "SpawnProgressionData";
 
     // Common property paths (edit these if your fields differ)
     // WeaponData
@@ -45,8 +46,15 @@ public class BalanceTunerWindow : EditorWindow
         "goldDrop",         // int/float
         "spawnWeight"       // int/float (optional)
     };
-
-    private enum Tab { Weapons, Projectiles, Enemies }
+    private static readonly string[] SpawnProps = {
+    "difficultyDuration",
+    "groupIntervalSec",
+    "groupSize",
+    "inGroupStagger",
+    "spawnDistance",
+    "formationSpacing"
+    };
+    private enum Tab { Weapons, Projectiles, Enemies, Spawn }
     private Tab currentTab = Tab.Weapons;
 
     // Data caches
@@ -58,6 +66,7 @@ public class BalanceTunerWindow : EditorWindow
     private List<Object> allWeapons = new List<Object>();
     private List<Object> allProjectiles = new List<Object>();
     private List<Object> allEnemies = new List<Object>();
+    private List<Object> allSpawns = new List<Object>();
 
     private HashSet<Object> selection = new HashSet<Object>();
     private SerializedObject serializedSelected; // single selection drawer
@@ -82,6 +91,7 @@ public class BalanceTunerWindow : EditorWindow
         allWeapons = LoadAllOfType(WEAPON_DATA_TYPE);
         allProjectiles = LoadAllOfType(PROJECTILE_DATA_TYPE);
         allEnemies = LoadAllOfType(ENEMY_DATA_TYPE);
+        allSpawns = LoadAllOfType(SPAWN_DATA_TYPE);
         Repaint();
     }
 
@@ -124,7 +134,7 @@ public class BalanceTunerWindow : EditorWindow
     private void DrawToolbar()
     {
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
-        var newTab = (Tab)GUILayout.Toolbar((int)currentTab, new[] { "Weapons", "Projectiles", "Enemies" }, EditorStyles.toolbarButton, GUILayout.Width(300));
+        var newTab = (Tab)GUILayout.Toolbar((int)currentTab, new[] { "Weapons", "Projectiles", "Enemies", "Spawn" }, EditorStyles.toolbarButton, GUILayout.Width(300));
         if (newTab != currentTab)
         {
             currentTab = newTab;
@@ -137,7 +147,7 @@ public class BalanceTunerWindow : EditorWindow
 
         applyWhilePlaying = GUILayout.Toggle(applyWhilePlaying, "Apply in Play Mode", EditorStyles.toolbarButton);
 
-        if (GUILayout.Button("Refresh", EditorStyles.toolbarButton, GUILayout.Width(70)))
+        if (GUILayout.Button("Refresh", EditorStyles.toolbarButton, GUILayout.Width(80)))
         {
             RefreshAll();
         }
@@ -169,6 +179,7 @@ public class BalanceTunerWindow : EditorWindow
             case Tab.Weapons: return allWeapons;
             case Tab.Projectiles: return allProjectiles;
             case Tab.Enemies: return allEnemies;
+            case Tab.Spawn: return allSpawns;
         }
         return Enumerable.Empty<Object>();
     }
@@ -333,6 +344,7 @@ public class BalanceTunerWindow : EditorWindow
             case Tab.Weapons: return WeaponProps;
             case Tab.Projectiles: return ProjectileProps;
             case Tab.Enemies: return EnemyProps;
+            case Tab.Spawn: return SpawnProps;
         }
         return System.Array.Empty<string>();
     }

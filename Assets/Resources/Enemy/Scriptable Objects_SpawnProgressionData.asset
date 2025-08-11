@@ -66,22 +66,22 @@ MonoBehaviour:
   formationSpacing: 0.6
   windows:
   - startTime: 0
-    endTime: 10
+    endTime: 18
     enemy: {fileID: 11400000, guid: 5ae1804d72ef7d348abddebf38f28357, type: 2}
     weight: 1
-  - startTime: 10
-    endTime: 20
-    enemy: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
-    weight: 1
   - startTime: 15
-    endTime: 16
+    endTime: 20
     enemy: {fileID: 11400000, guid: db1da09487680724f9bcbc6c5c838ffa, type: 2}
     weight: 1
-  - startTime: 20
+  - startTime: 21
     endTime: 30
-    enemy: {fileID: 11400000, guid: 28f5dd031ce4a904fa3a992caa0772f5, type: 2}
+    enemy: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
     weight: 1
   - startTime: 30
     endTime: 40
+    enemy: {fileID: 11400000, guid: 28f5dd031ce4a904fa3a992caa0772f5, type: 2}
+    weight: 1
+  - startTime: 40
+    endTime: 50
     enemy: {fileID: 11400000, guid: 28d27791a84a80b409f745877e4b4149, type: 2}
     weight: 1

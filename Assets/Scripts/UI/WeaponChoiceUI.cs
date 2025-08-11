@@ -11,6 +11,13 @@ public class WeaponChoiceUI : MonoBehaviour
     public Button[] choiceButtons;
     public TextMeshProUGUI[] choiceTexts;
 
+    // ==== 추가 시작 ====
+    // 각 선택지의 아이콘, 레벨, 설명 표시용 UI 참조
+    public Image[] choiceIcons;
+    public TextMeshProUGUI[] choiceLevelTexts;
+    public TextMeshProUGUI[] choiceDescTexts;
+    // ==== 추가 끝 ====
+
     private List<WeaponData> allWeaponData;
     private List<WeaponData> currentChoices;
 
@@ -33,10 +40,38 @@ public class WeaponChoiceUI : MonoBehaviour
             int index = i;
             WeaponData weapon = currentChoices[i];
 
+            // 기존: 이름
             choiceTexts[i].text = weapon.weaponName;
+
+            // ==== 추가 시작 ====
+            // 아이콘
+            //if (choiceIcons != null && i < choiceIcons.Length && choiceIcons[i] != null)
+                //choiceIcons[i].sprite = weapon.icon;
+
+            // 레벨: 무기를 보유 중이면 현재 레벨, 아니면 '신규'
+            if (choiceLevelTexts != null && i < choiceLevelTexts.Length && choiceLevelTexts[i] != null)
+            {
+                bool has = WeaponManager.Instance.HasWeapon(weapon);
+                int level = has ? (TryGetWeaponLevel(weapon) ?? 1) : 1; // 보유 레벨을 알 수 없으면 기본 1
+                choiceLevelTexts[i].text = has ? $"Lv.{level}" : "신규";
+            }
+
+            // 설명: SO에 짧은 설명 필드가 있다고 가정(없으면 이름을 대신 사용)
+            //if (choiceDescTexts != null && i < choiceDescTexts.Length && choiceDescTexts[i] != null)
+            //{
+            //    string desc = !string.IsNullOrEmpty(weapon.shortDescription) ? weapon.shortDescription : weapon.weaponName;
+            //    choiceDescTexts[i].text = desc;
+            //}
+            // ==== 추가 끝 ====
+
             choiceButtons[i].onClick.RemoveAllListeners();
             choiceButtons[i].onClick.AddListener(() => OnWeaponSelected(index));
         }
+
+        // 필요 시 레벨업 동안 정지
+        // ==== 추가 시작 ====
+        // Time.timeScale = 0f;
+        // ==== 추가 끝 ====
     }
 
     private List<WeaponData> GetRandomWeaponChoices(int count)
@@ -53,7 +88,6 @@ public class WeaponChoiceUI : MonoBehaviour
 
         return result;
     }
-
 
     private void OnWeaponSelected(int index)
     {
@@ -72,4 +106,21 @@ public class WeaponChoiceUI : MonoBehaviour
         Time.timeScale = 1f; // 시간 재개
     }
 
+    // ==== 추가 시작 ====
+    // 무기 현재 레벨을 WeaponManager에서 가져오되,
+    // GetWeaponLevel(WeaponData) 메서드가 없는 프로젝트에서도 빌드되도록 리플렉션으로 안전 호출
+    private int? TryGetWeaponLevel(WeaponData weapon)
+    {
+        var wm = WeaponManager.Instance;
+        if (wm == null) return null;
+
+        var mi = wm.GetType().GetMethod("GetWeaponLevel", new System.Type[] { typeof(WeaponData) });
+        if (mi != null)
+        {
+            object ret = mi.Invoke(wm, new object[] { weapon });
+            if (ret is int lv) return lv;
+        }
+        return null;
+    }
+    // ==== 추가 끝 ====
 }
