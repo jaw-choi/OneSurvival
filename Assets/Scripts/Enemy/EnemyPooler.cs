@@ -1,4 +1,3 @@
-// Assets/Scripts/Pooling/EnemyPooler.cs
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -22,6 +21,14 @@ public class EnemyPooler : MonoBehaviour
         {
             GameObject obj = Instantiate(data.prefab, Vector3.zero, Quaternion.identity, transform);
             obj.SetActive(false);
+            // ===== 추가 시작 =====
+            // Ensure pooled instance always has EnemyData assigned
+            var eb = obj.GetComponent<EnemyBase>();
+            if (eb != null && eb.data == null)
+                eb.data = data;
+
+            obj.name = $"{data.name}_Pooled_{i}";
+            // ===== 추가 끝 =====
             pool.Add(obj);
         }
     }
@@ -32,6 +39,12 @@ public class EnemyPooler : MonoBehaviour
         {
             if (!pool[i].activeInHierarchy)
             {
+                // ===== 추가 시작 =====
+                // Defensive: re-assign data if something cleared it
+                var eb = pool[i].GetComponent<EnemyBase>();
+                if (eb != null && eb.data == null)
+                    eb.data = data;
+                // ===== 추가 끝 =====
                 pool[i].SetActive(true);
                 return pool[i];
             }
@@ -43,4 +56,18 @@ public class EnemyPooler : MonoBehaviour
         // return obj;
         return null;
     }
+
+    // ===== 추가 시작 =====
+    // Quality-of-life: spawn with position/rotation before activation (prevents OnEnable using wrong pos)
+    public GameObject GetEnemyAt(Vector3 pos, Quaternion rot)
+    {
+        var go = GetEnemy();
+        if (go != null)
+        {
+            go.transform.SetPositionAndRotation(pos, rot);
+            Physics2D.SyncTransforms();
+        }
+        return go;
+    }
+    // ===== 추가 끝 =====
 }

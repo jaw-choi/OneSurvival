@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 28f5dd031ce4a904fa3a992caa0772f5, type: 2}
   currentHP: 0
+  CanWarp: 1
 --- !u!95 &-9189982401158626682
 Animator:
   serializedVersion: 7

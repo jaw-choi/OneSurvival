@@ -1,4 +1,3 @@
-// Assets/Scripts/Enemy/EnemySpawner_TimeProgressive.cs
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +23,6 @@ public class EnemySpawner_TimeProgressive : MonoBehaviour
 
         float elapsed = GameManager.Instance.ElapsedTime;
 
-        // 현재 시간에 활성인 창만 취합
         var weighted = BuildActiveWeights(elapsed);
         if (weighted.Count == 0) return;
 
@@ -51,7 +49,7 @@ public class EnemySpawner_TimeProgressive : MonoBehaviour
             if (started && notEnded)
             {
                 if (!map.ContainsKey(w.enemy)) map[w.enemy] = 0;
-                map[w.enemy] += w.weight; // 같은 enemy가 여러 창에 걸리면 가중치 합산
+                map[w.enemy] += w.weight;
             }
         }
         return map;
@@ -70,7 +68,13 @@ public class EnemySpawner_TimeProgressive : MonoBehaviour
         {
             var data = PickWeighted(weighted);
             if (data != null)
+            {
+                // ===== 추가 시작 =====
+                // Ensure the hub sets EnemyData onto the spawned instance (inside hub)
+                // Here we just request spawn; the hub should assign eb.data = data internally.
+                // ===== 추가 끝 =====
                 poolHub.Spawn(data, center + offsets[i], Quaternion.identity);
+            }
 
             if (inGroupStagger > 0f)
                 yield return new WaitForSeconds(inGroupStagger);
