@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2545843408727850167}
   - component: {fileID: -9189982401158626682}
   - component: {fileID: 408668609792734015}
+  - component: {fileID: 7040191656169545110}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -81,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae44d6ca9dc728943a492226b377d3f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ff3bb5d141c2204ea7a71ac5fed23ad, type: 3}
   m_Color: {r: 0.93710685, g: 0.5569596, b: 0.5569596, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.85, y: 0.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -148,6 +149,7 @@ MonoBehaviour:
   currentHP: 0
   CanWarp: 1
   despawnDistance: 15
+  walkSpeedThreshold: 0.05
 --- !u!95 &-9189982401158626682
 Animator:
   serializedVersion: 7
@@ -156,7 +158,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720730591617371777}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ebc4339c978237a419eb9739004ec5b2, type: 2}
   m_CullingMode: 0
@@ -207,3 +209,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.22880524, y: -0.16237783}
   m_Size: {x: 0.29097068, y: 0.7781043}
   m_Direction: 0
+--- !u!114 &7040191656169545110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720730591617371777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6e3de5b910c94429e0246de5aa0725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: 8b7f18d7200cc0c459ea3d00994ac4a8, type: 2}
+  walkPrefix: walk-
+  deadPrefix: dead-
+  deadFps: 6
+  walkFps: 10
+  randomStartOffset: 1
+  loopDead: 0
+  speedScale: 0.92
+  state: 0
