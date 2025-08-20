@@ -123,6 +123,8 @@ public class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float dmg)
     {
         if (isDead) return;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+
         currentHP -= dmg;
         if (currentHP <= 0)
             Die();
@@ -135,6 +137,9 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
+        if(!GameManager.Instance.IsGameOver)
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+
         // if (animator != null) animator.SetTrigger("Die"); // Animator 미사용
         if (frameAnimator != null)
             frameAnimator.SetState(AtlasFrameAnimator.State.Dead);

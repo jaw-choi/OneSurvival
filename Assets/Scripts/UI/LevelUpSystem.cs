@@ -24,6 +24,7 @@ public class LevelUpSystem : MonoBehaviour
     void OnLevelUpHandler(int level)
     {
         Debug.Log($"레벨 {level} 달성! 무기 선택창 열기");
+        
 
         Time.timeScale = 0f; // 게임 정지
 

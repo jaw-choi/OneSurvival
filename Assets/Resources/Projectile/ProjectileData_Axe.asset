@@ -17,9 +17,9 @@ MonoBehaviour:
   speed: 3
   damage: 10
   lifetime: 2
-  pierceCount: 5
+  pierceCount: 2
   moveType: 5
   hitType: 1
   aoeRadius: 3
   hitEffectPrefab: {fileID: 0}
-  hitSFX: {fileID: 0}
+  hitSFX: {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}

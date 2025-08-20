@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponData_M16
   m_EditorClassIdentifier: 
   weaponName: M16
-  weaponIcon: {fileID: 21300066, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  weaponIcon: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   weaponPrefab: {fileID: 9133424743827533876, guid: b8f0548ec82882742a19c9ff649c4670,
     type: 3}
   projectilePrefab: {fileID: 8341461869080158616, guid: a6e573a65a7ac2a4b9ce2f05eab95b29,

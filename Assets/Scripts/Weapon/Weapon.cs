@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour
     {
         weaponData = data;
         currentLevel = Mathf.Max(1, startLevel);
+        data.currentLevel = currentLevel;
         SetFireBehaviourByType(weaponData.fireType);
         lastFireTime = -999f;
         TimeAcquired = Time.time;
@@ -30,6 +31,8 @@ public class Weapon : MonoBehaviour
         if (fireBehaviour != null && CanFire())
         {
             fireBehaviour.Fire(transform.position, direction, weaponData);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+
             lastFireTime = Time.time;
         }
     }
@@ -40,6 +43,7 @@ public class Weapon : MonoBehaviour
     public void Upgrade()
     {
         currentLevel++;
+        weaponData.currentLevel = currentLevel;
         Debug.Log($"{weaponData.weaponName} 무기 레벨업 → Lv.{currentLevel}");
     }
 

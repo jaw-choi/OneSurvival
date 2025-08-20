@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    Vector2 movement;
+    public Vector2 movement;
     public float moveSpeed = 3f;
     void Start()
     {
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
+        movement = movement.normalized;
         // 애니메이터에 이동 여부 전달
         bool isMoving = movement.sqrMagnitude > 0.01f;
         animator.SetBool("isMoving", isMoving);

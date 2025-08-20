@@ -34,7 +34,8 @@ public class WeaponChoiceUI : MonoBehaviour
     {
         panel.SetActive(true);
         currentChoices = GetRandomWeaponChoices(3);
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.instance.EffectBGM(true);
         for (int i = 0; i < choiceButtons.Length; i++)
         {
             int index = i;
@@ -43,16 +44,15 @@ public class WeaponChoiceUI : MonoBehaviour
             // 기존: 이름
             choiceTexts[i].text = weapon.weaponName;
 
-            // ==== 추가 시작 ====
             // 아이콘
-            //if (choiceIcons != null && i < choiceIcons.Length && choiceIcons[i] != null)
-                //choiceIcons[i].sprite = weapon.icon;
+            if (choiceIcons != null && i < choiceIcons.Length && choiceIcons[i] != null)
+                choiceIcons[i].sprite = weapon.weaponIcon;
 
             // 레벨: 무기를 보유 중이면 현재 레벨, 아니면 '신규'
             if (choiceLevelTexts != null && i < choiceLevelTexts.Length && choiceLevelTexts[i] != null)
             {
                 bool has = WeaponManager.Instance.HasWeapon(weapon);
-                int level = has ? (TryGetWeaponLevel(weapon) ?? 1) : 1; // 보유 레벨을 알 수 없으면 기본 1
+                int level = weapon.currentLevel;
                 choiceLevelTexts[i].text = has ? $"Lv.{level}" : "신규";
             }
 
@@ -101,7 +101,8 @@ public class WeaponChoiceUI : MonoBehaviour
         {
             WeaponManager.Instance.AddWeapon(selected);
         }
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.EffectBGM(false);
         panel.SetActive(false);
         Time.timeScale = 1f; // 시간 재개
     }

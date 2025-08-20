@@ -21,7 +21,5 @@ public class SingleShotBehaviour : IWeaponFireBehaviour
         if (data.projectileData.hitEffectPrefab != null)
             Object.Instantiate(data.projectileData.hitEffectPrefab, center, Quaternion.identity);
 
-        if (data.projectileData.hitSFX != null)
-            AudioSource.PlayClipAtPoint(data.projectileData.hitSFX, center);
     }
 }

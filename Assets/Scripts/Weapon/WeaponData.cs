@@ -9,6 +9,7 @@ public class WeaponData : ScriptableObject
     public GameObject weaponPrefab;      // 무기 자체 프리팹
     public GameObject projectilePrefab;
     public ProjectileData projectileData;
+    public int currentLevel;
 
     [Header("Fire Settings")]
     public WeaponFireType fireType;
@@ -22,7 +23,7 @@ public class WeaponData : ScriptableObject
     public LayerMask enemyLayerMask; // 범위 감지용
 
     [Header("Visual & Sound")]
-    public AudioClip attackSFX;
+    //public AudioClip attackSFX;
     public string attackAnimName;
 
     [Header("Level Scaling")]

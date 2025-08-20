@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    //[SerializeField] private GameObject settingsPanelPrefab;
+    //[SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
+
+    private GameObject settingsInstance;
     void Start()
     {
         if (GameResultData.Instance == null)
@@ -27,7 +31,9 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnClickSettings()
     {
-        Debug.Log("Settings clicked");
+        //if (settingsInstance == null)
+        //    settingsInstance = Instantiate(settingsPanelPrefab, uiRoot);
+        //settingsInstance.SetActive(true);
     }
 
     public void OnClickQuit()

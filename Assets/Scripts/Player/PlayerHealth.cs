@@ -74,6 +74,7 @@ public class PlayerHealth : MonoBehaviour
     {
         //Debug.Log("Player Dead");
         //gameObject.SetActive(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
 
         Destroy(gameObject);
         if (healthBarInstance != null)

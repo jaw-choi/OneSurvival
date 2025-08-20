@@ -21,8 +21,7 @@ public class FlamethrowerBehaviour : IWeaponFireBehaviour
         if (data.projectileData.hitEffectPrefab != null)
             Object.Instantiate(data.projectileData.hitEffectPrefab, center, Quaternion.identity);
 
-        if (data.projectileData.hitSFX != null)
-            AudioSource.PlayClipAtPoint(data.projectileData.hitSFX, center);
+
     }
 
     private IEnumerator FireFlame(Vector2 direction)

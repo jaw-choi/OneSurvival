@@ -22,4 +22,4 @@ MonoBehaviour:
   hitType: 2
   aoeRadius: 1
   hitEffectPrefab: {fileID: 0}
-  hitSFX: {fileID: 0}
+  hitSFX: {fileID: 8300000, guid: 6f0c572d865b4664db7a460972bc4768, type: 3}

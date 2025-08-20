@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WeaponData_Bible
   m_EditorClassIdentifier: 
   weaponName: Bible
-  weaponIcon: {fileID: 21300066, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  weaponPrefab: {fileID: 9133424743827533876, guid: b8f0548ec82882742a19c9ff649c4670,
+  weaponIcon: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  weaponPrefab: {fileID: 8371949384348530496, guid: f106064daf5b3eb4599bca5e4af8bdf7,
     type: 3}
   projectilePrefab: {fileID: 1972293696226914795, guid: 1ec72b8a94563434180597711a72dadc,
     type: 3}

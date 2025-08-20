@@ -1,5 +1,7 @@
 # OneSurvival
+
 OneSurvival game pojects
+
 # 🐍 2D 로그라이크 자동공격 서바이벌 게임
 
 Vampire Survivors 스타일의 자동 공격 생존 게임입니다.  
@@ -57,27 +59,27 @@ Vampire Survivors 스타일의 자동 공격 생존 게임입니다.
 ---
 
 ## 🗂️ 폴더 구조
-...
 
+...
 
 ## 🛠️ 설치 및 실행 방법
+
 ...
 
-
 📈 개발 로드맵
- 기본 무기 시스템 구축
+기본 무기 시스템 구축
 
- 경험치 및 레벨업 시스템
+경험치 및 레벨업 시스템
 
- 적 웨이브 및 AI 구현
+적 웨이브 및 AI 구현
 
- 무기 진화 시스템
+무기 진화 시스템
 
- 메타 성장 시스템
+메타 성장 시스템
 
- UI 사운드 및 연출 추가
+UI 사운드 및 연출 추가
 
- Google Play 출시
+Google Play 출시
 
 ✨ 스크린샷
 (추후 게임플레이, 레벨업 UI, 무기 이펙트 등 이미지 첨부 예정)
@@ -86,3 +88,8 @@ Vampire Survivors 스타일의 자동 공격 생존 게임입니다.
 개발자: jaw-choi
 
 연락처: ...
+
+저작권:
+Royalty Free Music: Bensound.com/royalty-free-music
+License code: ZX1JCESJEAP9QBXN
+Artist: : Benjamin Tissot

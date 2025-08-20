@@ -14,7 +14,7 @@ public class PlayerCollision : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             EnemyBase enemy = other.GetComponent<EnemyBase>();
-            Debug.Log("Collision!");
+            Debug.Log("Collision with" + other.name);
             if (playerHealth != null && !enemy.isDead)
             {
                 playerHealth.TakeDamage(enemy.data.contactDamage);

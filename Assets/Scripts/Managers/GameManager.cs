@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
     public Transform PlayerTransform { get; private set; }
     public CanvasGroup gameOverPanel;
+    public PlayerMovement player;
     public Image fadeImage; // Panel의 Image 컴포넌트
     public TextMeshProUGUI gameOverText;
     public WeaponData defaultWeaponData;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         gameStartTime = Time.time;
         gameOverPanel.gameObject.SetActive(false);
         PlayerTransform = FindAnyObjectByType<PlayerMovement>().transform;
+        player = FindAnyObjectByType<PlayerMovement>();
         GameStateManager.Instance.ChangeState(new InGameState());
         // 무기 1회만 생성
         Weapon weapon = WeaponManager.Instance.AddWeapon(defaultWeaponData);
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
         var autoAttack = FindAnyObjectByType<PlayerAutoAttack>();
         autoAttack.Initialize(weapon);
         IsGameOver = false;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.PlayBGM(true);
     }
     public void ResetRunState()
     {
@@ -61,6 +65,7 @@ public class GameManager : MonoBehaviour
         if (IsGameOver) return;
 
         IsGameOver = true;
+        AudioManager.instance.PlayBGM(false);
 
         // 1. 결과 데이터 저장
         GameResultData result = GameResultData.Instance;

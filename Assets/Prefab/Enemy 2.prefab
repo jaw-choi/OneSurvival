@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5769293151660403257}
   - component: {fileID: 3826281281885389647}
   - component: {fileID: 2545843408727850167}
-  - component: {fileID: -9189982401158626682}
   - component: {fileID: 408668609792734015}
+  - component: {fileID: -6262128423332903509}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -147,28 +147,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
   currentHP: 0
   CanWarp: 1
---- !u!95 &-9189982401158626682
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4720730591617371777}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ebc4339c978237a419eb9739004ec5b2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  despawnDistance: 20
+  walkSpeedThreshold: 0.05
 --- !u!70 &408668609792734015
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -206,3 +186,25 @@ CapsuleCollider2D:
   m_Offset: {x: -0.22880524, y: -0.16237783}
   m_Size: {x: 0.29097068, y: 0.7781043}
   m_Direction: 0
+--- !u!114 &-6262128423332903509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720730591617371777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6e3de5b910c94429e0246de5aa0725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: 8b7f18d7200cc0c459ea3d00994ac4a8, type: 2}
+  walkPrefix: walk-
+  deadPrefix: dead-
+  deadFps: 6
+  walkFps: 10
+  randomStartOffset: 1
+  loopDead: 0
+  speedScale: 0.5
+  state: 0
+  completedFired: 0

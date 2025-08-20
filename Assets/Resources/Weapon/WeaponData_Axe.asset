@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WeaponData_Axe
   m_EditorClassIdentifier: 
   weaponName: Axe
-  weaponIcon: {fileID: 21300066, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  weaponPrefab: {fileID: 9133424743827533876, guid: b8f0548ec82882742a19c9ff649c4670,
+  weaponIcon: {fileID: 21300088, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  weaponPrefab: {fileID: 1078896532859092400, guid: ed1457335d6612747b9d12b8d64d85ee,
     type: 3}
   projectilePrefab: {fileID: 7355188811844864829, guid: 1a765624b2d4fbb4587c1986c5f1a24d,
     type: 3}

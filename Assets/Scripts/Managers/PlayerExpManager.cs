@@ -6,10 +6,10 @@ public class PlayerExpManager : MonoBehaviour
     [Header("경험치 상태")]
     public int currentExp = 0;
     public int currentLevel = 1;
-    public int expToNextLevel = 10;
+    public int expToNextLevel = 6;
 
     [Header("레벨업 증가량")]
-    public float expGrowthRate = 2.5f; // 다음 레벨업까지 필요 경험치 증가 비율
+    public float expGrowthRate = 2.3f; // 다음 레벨업까지 필요 경험치 증가 비율
 
     public System.Action<int> OnLevelUp; // 레벨업 이벤트 (UI나 이펙트 연결용)
 
@@ -22,7 +22,7 @@ public class PlayerExpManager : MonoBehaviour
         int bonus = Mathf.RoundToInt(amount * (PlayerStats.Instance.GetExpBonusMultiplier() - 1f));
         currentExp += amount + bonus;
 
-        Debug.Log($"EXP +{amount} (+{bonus} 보너스) → {currentExp}/{expToNextLevel}");
+        //Debug.Log($"EXP +{amount} (+{bonus} 보너스) → {currentExp}/{expToNextLevel}");
         while (currentExp >= expToNextLevel)
         {
             currentExp -= expToNextLevel;
