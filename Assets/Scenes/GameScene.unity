@@ -8464,8 +8464,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00982c8a09942b2499292a2bb93600e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioDefaults: {fileID: 11400000, guid: 46c43bcdca8f0414c8eed77c5902da40, type: 2}
+  audioMixer: {fileID: 24100000, guid: f72ead20339d3da4b814fa9be7f16b5a, type: 2}
+  musicGroup: {fileID: 6988533748845657610, guid: f72ead20339d3da4b814fa9be7f16b5a,
+    type: 2}
+  sfxGroup: {fileID: -5606104216596328156, guid: f72ead20339d3da4b814fa9be7f16b5a,
+    type: 2}
   bgmClip: {fileID: 8300000, guid: 4559935c00ef8e94b846e2e03e39f0d0, type: 3}
-  bgmVolume: 0.2
+  bgmVolume: 0.152
   sfxClips:
   - {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}
   - {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}
@@ -8477,7 +8483,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f0c572d865b4664db7a460972bc4768, type: 3}
   - {fileID: 8300000, guid: 4b294d59d2399014daa718b35c9de73b, type: 3}
   - {fileID: 8300000, guid: 2c4bc183a5df5aa4baf7c4fcf236a2de, type: 3}
-  sfxVolume: 0.5
+  - {fileID: 8300000, guid: c5504baa219c7a949bc91638d0cef464, type: 3}
+  sfxVolume: 0.16
   channels: 16
 --- !u!1 &839568565
 GameObject:

@@ -18,5 +18,4 @@ public class ProjectileData : ScriptableObject
 
     [Header("Special")]
     public GameObject hitEffectPrefab;
-    public AudioClip hitSFX;
 }

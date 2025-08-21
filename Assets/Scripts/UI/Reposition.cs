@@ -6,6 +6,8 @@ public class Reposition : MonoBehaviour
     {
         if (!collision.CompareTag("Area"))
             return;
+        if (GameManager.Instance.IsGameOver)
+            return;
 
         Vector3 playerPos = GameManager.Instance.PlayerTransform.position;
         Vector3 myPos = transform.position;

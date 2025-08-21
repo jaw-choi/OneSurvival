@@ -37,6 +37,7 @@ public class ExpGem : MonoBehaviour
             {
                 if (PlayerExpManager.Instance != null)
                     PlayerExpManager.Instance.AddExp(expAmount);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.GetItem);
 
                 Destroy(gameObject);
             }

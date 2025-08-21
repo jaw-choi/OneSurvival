@@ -90,6 +90,13 @@ Google Play 출시
 연락처: ...
 
 저작권:
+BGM
 Royalty Free Music: Bensound.com/royalty-free-music
 License code: ZX1JCESJEAP9QBXN
 Artist: : Benjamin Tissot
+
+SFX
+Sound Effect by <a href="https://pixabay.com/ko/users/zennnsounds-35538808/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=163073">zennnsounds</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=163073">Pixabay</a>
+
+others
+언데드 서바이버 에셋 팩 by 골드메탈

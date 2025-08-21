@@ -160,16 +160,12 @@ public class Projectile : MonoBehaviour
             case ProjectileHitType.SingleHit:
                 col.GetComponent<EnemyBase>().TakeDamage(damage);
                 ownerWeapon?.AddDamage(damage); // 누적 데미지 기록
-                if (projectileData.hitSFX != null)
-                    AudioSource.PlayClipAtPoint(projectileData.hitSFX,transform.position);
                 Destroy(gameObject);
                 break;
 
             case ProjectileHitType.Pierce:
                 col.GetComponent<EnemyBase>().TakeDamage(damage);
                 ownerWeapon?.AddDamage(damage); // 누적 데미지 기록
-                if (projectileData.hitSFX != null)
-                    AudioSource.PlayClipAtPoint(projectileData.hitSFX, transform.position);
                 pierceCount--;
                 if (pierceCount <= 0)
                     Destroy(gameObject);
@@ -181,8 +177,6 @@ public class Projectile : MonoBehaviour
                 {
                     if (enemy.CompareTag("Enemy"))
                     {
-                        if (projectileData.hitSFX != null)
-                            AudioSource.PlayClipAtPoint(projectileData.hitSFX, enemy.transform.position);
                         enemy.GetComponent<EnemyBase>().TakeDamage(damage);
                         ownerWeapon?.AddDamage(damage); // 누적 데미지 기록
                     }

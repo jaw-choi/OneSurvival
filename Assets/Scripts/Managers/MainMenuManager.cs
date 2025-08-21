@@ -1,48 +1,70 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    //[SerializeField] private GameObject settingsPanelPrefab;
-    //[SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
+    [Header("Refs")]
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button quitButton;
+
+    [SerializeField] private GameObject settingsPanelPrefab;
+    [SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
 
     private GameObject settingsInstance;
+    void Awake()
+    {
+        // 버튼 바인딩을 전부 코드로 처리
+        if (startButton) startButton.onClick.AddListener(OnClickStart);
+        if (upgradeButton) upgradeButton.onClick.AddListener(OnClickUpGrade);
+        if (settingsButton) settingsButton.onClick.AddListener(OnClickSettings);
+        if (quitButton) quitButton.onClick.AddListener(OnClickQuit);
+    }
+
     void Start()
     {
         if (GameResultData.Instance == null)
-        {
             new GameObject("GameResultData").AddComponent<GameResultData>();
-        }
         else
-        {
             GameResultData.Instance.Reset();
-        }
     }
 
     public void OnClickStart()
     {
-        if (GameResultData.Instance != null)
-            GameResultData.Instance.Reset();
-        SceneManager.LoadScene("GameScene"); // 게임 씬 이름
+        GameResultData.Instance?.Reset();
+        SceneManager.LoadScene("GameScene");
     }
+
     public void OnClickUpGrade()
     {
         SceneManager.LoadScene("UpgradeScene");
     }
+
     public void OnClickSettings()
     {
-        //if (settingsInstance == null)
-        //    settingsInstance = Instantiate(settingsPanelPrefab, uiRoot);
-        //settingsInstance.SetActive(true);
+        if (uiRoot == null) uiRoot = FindFirstObjectByType<Canvas>()?.transform; // 안전장치
+        if (settingsInstance == null)
+            settingsInstance = Instantiate(settingsPanelPrefab, uiRoot);
+        settingsInstance.SetActive(true);
+    }
+
+    public void OnClickBack()
+    {
+        if (settingsInstance) settingsInstance.SetActive(false);
     }
 
     public void OnClickQuit()
     {
-        Debug.Log("Quit Clicked");
         Application.Quit();
     }
+
     public void OnClickMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+
+
 }

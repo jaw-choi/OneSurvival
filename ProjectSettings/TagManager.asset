@@ -8,6 +8,7 @@ TagManager:
   - WorldSpaceCanvas
   - Ground
   - Area
+  - UiRoot
   layers:
   - Default
   - TransparentFX
