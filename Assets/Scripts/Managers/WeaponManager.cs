@@ -32,7 +32,10 @@ public class WeaponManager : MonoBehaviour
         //CheckAoeWeaponStatus();
         return weapon;
     }
-
+    public int GetWeaponLevel(WeaponData data)
+    {
+        return data.currentLevel;
+    }
     public bool HasWeapon(WeaponData data)
     {
         return weapons.Exists(w => w.weaponData == data);

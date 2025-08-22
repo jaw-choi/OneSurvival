@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea056239a287db8478e0c375de165855, type: 3}
+  m_Name: StatOption
+  m_EditorClassIdentifier: 
+  id: stat_MoveSpeed
+  kind: 1
+  displayName: MoveSpeed
+  icon: {fileID: 21300000, guid: 265406c4eb5581249bb0f7999d03774c, type: 3}
+  shortDescription: speed
+  maxLevel: 5
+  statType: 0
+  isPercent: 1
+  perLevelValues:
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5

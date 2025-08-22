@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     private float lastFireTime;
     public float TotalDealtDamage { get; private set; } = 0f;
     public float TimeAcquired { get; private set; } = 0f;
-    public void Initialize(WeaponData data, int startLevel)
+    public void Initialize(WeaponData data, int startLevel) 
     {
         weaponData = data;
         currentLevel = Mathf.Max(1, startLevel);

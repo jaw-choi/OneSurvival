@@ -19,7 +19,8 @@ public class WeaponChoiceUI : MonoBehaviour
     // ==== 추가 끝 ====
 
     private List<WeaponData> allWeaponData;
-    private List<WeaponData> currentChoices;
+    private List<WeaponData> currentWeaponChoices;
+    private List<UpgradeOptionSO> currentChoices;
 
     void Awake()
     {
@@ -33,47 +34,98 @@ public class WeaponChoiceUI : MonoBehaviour
     public void ShowChoices()
     {
         panel.SetActive(true);
-        currentChoices = GetRandomWeaponChoices(3);
+
+        currentChoices = UpgradeRoller.Instance.Roll();
+
         AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
         AudioManager.instance.EffectBGM(true);
+
         for (int i = 0; i < choiceButtons.Length; i++)
         {
             int index = i;
-            WeaponData weapon = currentChoices[i];
+            var opt = currentChoices[i];
 
-            // 기존: 이름
-            choiceTexts[i].text = weapon.weaponName;
+            // name
+            choiceTexts[i].text = opt.displayName;
 
-            // 아이콘
+            // icon
             if (choiceIcons != null && i < choiceIcons.Length && choiceIcons[i] != null)
-                choiceIcons[i].sprite = weapon.weaponIcon;
+                choiceIcons[i].sprite = opt.icon;
 
-            // 레벨: 무기를 보유 중이면 현재 레벨, 아니면 '신규'
+            // level
             if (choiceLevelTexts != null && i < choiceLevelTexts.Length && choiceLevelTexts[i] != null)
             {
-                bool has = WeaponManager.Instance.HasWeapon(weapon);
-                int level = weapon.currentLevel;
-                choiceLevelTexts[i].text = has ? $"Lv.{level}" : "신규";
+                int lv = opt.GetCurrentLevel();
+                choiceLevelTexts[i].text = lv > 0 ? $"Lv.{lv}" : "신규";
             }
 
-            // 설명: SO에 짧은 설명 필드가 있다고 가정(없으면 이름을 대신 사용)
-            //if (choiceDescTexts != null && i < choiceDescTexts.Length && choiceDescTexts[i] != null)
-            //{
-            //    string desc = !string.IsNullOrEmpty(weapon.shortDescription) ? weapon.shortDescription : weapon.weaponName;
-            //    choiceDescTexts[i].text = desc;
-            //}
-            // ==== 추가 끝 ====
+            // desc
+            if (choiceDescTexts != null && i < choiceDescTexts.Length && choiceDescTexts[i] != null)
+            {
+                string prefix = opt.kind == UpgradeKind.Weapon ? "[무기] " : "[스탯] ";
+                choiceDescTexts[i].text = string.IsNullOrEmpty(opt.shortDescription)
+                    ? prefix + opt.displayName
+                    : prefix + opt.shortDescription;
+            }
 
+            // click
             choiceButtons[i].onClick.RemoveAllListeners();
-            choiceButtons[i].onClick.AddListener(() => OnWeaponSelected(index));
+            choiceButtons[i].onClick.AddListener(() => OnSelected(index));
         }
-
-        // 필요 시 레벨업 동안 정지
-        // ==== 추가 시작 ====
+        // Optionally pause during level-up UI
         // Time.timeScale = 0f;
-        // ==== 추가 끝 ====
-    }
+        //panel.SetActive(true);
+        //currentChoices = GetRandomWeaponChoices(3);
+        //AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+        //AudioManager.instance.EffectBGM(true);
+        //for (int i = 0; i < choiceButtons.Length; i++)
+        //{
+        //    int index = i;
+        //    WeaponData weapon = currentChoices[i];
 
+        //    // 기존: 이름
+        //    choiceTexts[i].text = weapon.weaponName;
+
+        //    // 아이콘
+        //    if (choiceIcons != null && i < choiceIcons.Length && choiceIcons[i] != null)
+        //        choiceIcons[i].sprite = weapon.weaponIcon;
+
+        //    // 레벨: 무기를 보유 중이면 현재 레벨, 아니면 '신규'
+        //    if (choiceLevelTexts != null && i < choiceLevelTexts.Length && choiceLevelTexts[i] != null)
+        //    {
+        //        bool has = WeaponManager.Instance.HasWeapon(weapon);
+        //        int level = weapon.currentLevel;
+        //        choiceLevelTexts[i].text = has ? $"Lv.{level}" : "신규";
+        //    }
+
+        //    // 설명: SO에 짧은 설명 필드가 있다고 가정(없으면 이름을 대신 사용)
+        //    //if (choiceDescTexts != null && i < choiceDescTexts.Length && choiceDescTexts[i] != null)
+        //    //{
+        //    //    string desc = !string.IsNullOrEmpty(weapon.shortDescription) ? weapon.shortDescription : weapon.weaponName;
+        //    //    choiceDescTexts[i].text = desc;
+        //    //}
+        //    // ==== 추가 끝 ====
+
+        //    choiceButtons[i].onClick.RemoveAllListeners();
+        //    choiceButtons[i].onClick.AddListener(() => OnWeaponSelected(index));
+        //}
+
+        //// 필요 시 레벨업 동안 정지
+        //// ==== 추가 시작 ====
+        //// Time.timeScale = 0f;
+        //// ==== 추가 끝 ====
+    }
+    private void OnSelected(int index)
+    {
+        var selected = currentChoices[index];
+        UpgradeRoller.Instance.Apply(selected);
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.EffectBGM(false);
+
+        panel.SetActive(false);
+        Time.timeScale = 1f;
+    }
     private List<WeaponData> GetRandomWeaponChoices(int count)
     {
         List<WeaponData> pool = new List<WeaponData>(allWeaponData);
@@ -91,7 +143,7 @@ public class WeaponChoiceUI : MonoBehaviour
 
     private void OnWeaponSelected(int index)
     {
-        WeaponData selected = currentChoices[index];
+        WeaponData selected = currentWeaponChoices[index];
 
         if (WeaponManager.Instance.HasWeapon(selected))
         {

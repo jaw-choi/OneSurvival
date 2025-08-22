@@ -7694,6 +7694,53 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &400781529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400781531}
+  - component: {fileID: 400781530}
+  m_Layer: 0
+  m_Name: StatUpgradeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &400781530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400781529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98fe2a74445d9c04099614fe424ec42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeList: []
+  upgradeItemPrefab: {fileID: 0}
+  contentParent: {fileID: 0}
+--- !u!4 &400781531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400781529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.058495805, y: -2.6397889, z: 0.07740857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504746186
 GameObject:
   m_ObjectHideFlags: 0
@@ -16054,6 +16101,7 @@ GameObject:
   - component: {fileID: 1015232767}
   - component: {fileID: 1015232768}
   - component: {fileID: 1015232769}
+  - component: {fileID: 1015232770}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -16272,12 +16320,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484767ba3d38c604f8f4307f52be65a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1015232770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015232760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3714f0e6e49cd4e46b14cdde74a91614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: One Man
+  baseDamage: 5
+  baseMoveSpeed: 3
+  baseMaxHealth: 100
+  baseRegen: 0
+  rtGlobalDamageMul: 1
+  rtGlobalFireRateMul: 1
+  rtCooldownMul: 1
+  rtProjectileSpeedMul: 1
+  rtPierceAdd: 0
+  rtMoveSpeedMul: 1
+  rtMoveSpeedAdd: 0
+  rtMaxHpAdd: 0
+  rtRegenAdd: 0
+  rtPickupRangeAdd: 0
 --- !u!4 &1035929013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7143216581958075441, guid: e8bcd09f46a0ad04a8f1d1f1b63a9a53,
     type: 3}
   m_PrefabInstance: {fileID: 1565013730}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1041007970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1041007972}
+  - component: {fileID: 1041007971}
+  m_Layer: 0
+  m_Name: Systems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1041007971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041007970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b258474351120240a775241636f70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - {fileID: 11400000, guid: 6252e4c532c33504f82e292f7f35a982, type: 2}
+  - {fileID: 11400000, guid: 464f69d462a49b040ad0622ad5554272, type: 2}
+  - {fileID: 11400000, guid: 11658d258eaa3534a9a621d41314a374, type: 2}
+  - {fileID: 11400000, guid: 46edf2f4a3a48b8489ab12307e30acfb, type: 2}
+  - {fileID: 11400000, guid: d91b172588aff39458e767fab91ea02b, type: 2}
+  - {fileID: 11400000, guid: 679159508cd4e4c4f86275403a4b65bc, type: 2}
+  - {fileID: 11400000, guid: f03a743bc420b794eb48896af160b08d, type: 2}
+  rollCount: 3
+--- !u!4 &1041007972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041007970}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.058495805, y: -2.6397889, z: 0.07740857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1149689360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23773,6 +23901,16 @@ MonoBehaviour:
   baseMoveSpeed: 3
   baseMaxHealth: 100
   baseRegen: 0
+  rtGlobalDamageMul: 1
+  rtGlobalFireRateMul: 1
+  rtCooldownMul: 1
+  rtProjectileSpeedMul: 1
+  rtPierceAdd: 0
+  rtMoveSpeedMul: 1
+  rtMoveSpeedAdd: 0
+  rtMaxHpAdd: 0
+  rtRegenAdd: 0
+  rtPickupRangeAdd: 0
 --- !u!114 &1515923807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31441,3 +31579,5 @@ SceneRoots:
   - {fileID: 839568567}
   - {fileID: 44517735}
   - {fileID: 826787172}
+  - {fileID: 1041007972}
+  - {fileID: 400781531}
