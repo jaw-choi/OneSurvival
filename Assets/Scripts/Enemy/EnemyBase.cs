@@ -15,7 +15,6 @@ public class EnemyBase : MonoBehaviour
     protected Rigidbody2D rb;
     protected Collider2D col;
 
-    public bool CanWarp = true;
     public bool isDead { get; private set; } = false;
 
     public float despawnDistance = 20f;
@@ -111,13 +110,14 @@ public class EnemyBase : MonoBehaviour
         }
         // ===== 추가 끝 =====
 
-        // 보스/예외 제외 후 거리로 풀 반환
-        if (!CanWarp) return;
 
         float distSqr = (transform.position - GameManager.Instance.PlayerTransform.position).sqrMagnitude;
         if (distSqr > despawnDistance * despawnDistance)
         {
             gameObject.SetActive(false);
+            //TODO:
+            //계속 도망 다니면 active false만 되다가 끝나기 때문에
+            //해당시간 enemy 및 이후 enemy의 respawn 끝나는 시간도 active false된 enemy에 비례해서 늘리기
         }
     }
     public virtual void TakeDamage(float dmg)

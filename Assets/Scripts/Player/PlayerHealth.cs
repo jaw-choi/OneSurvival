@@ -54,8 +54,10 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
+        //TODO:
         GoldManager.Instance.AddGold(50); // °ρµε Αυ°΅
         GoldManager.Instance.SpendGold(30); // °ρµε °¨ΌÒ
+        
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("currentHealth" + currentHealth);
