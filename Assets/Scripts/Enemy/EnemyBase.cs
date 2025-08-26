@@ -92,7 +92,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (!GameManager.Instance || GameManager.Instance.PlayerTransform == null) return;
         if (isDead) return;
-
+        if (GameManager.Instance.IsGameOver) return;
         // ===== 추가 시작 =====
         // 속도 기반으로 Idle/Walk 전환
         if (frameAnimator != null)

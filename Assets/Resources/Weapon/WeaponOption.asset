@@ -16,6 +16,7 @@ MonoBehaviour:
   kind: 0
   displayName: axe
   icon: {fileID: 21300088, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  shortDescription: axe good
+  shortDescription: "\uBB34\uC791\uC704 \uBC29\uD5A5\uC73C\uB85C \uB3C4\uB07C\uB97C
+    \uB358\uC9D1\uB2C8\uB2E4"
   maxLevel: 5
   weaponData: {fileID: 11400000, guid: da39a1f0928ccd043afd9dc59c7165d2, type: 2}

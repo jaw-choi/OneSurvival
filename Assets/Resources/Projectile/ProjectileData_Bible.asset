@@ -15,11 +15,10 @@ MonoBehaviour:
   projectileName: Bible
   sprite: {fileID: 21300000, guid: 2750b4c5b3ad38d43b4d095b1c6e9c0b, type: 3}
   speed: 3
-  damage: 10
+  damage: 5
   lifetime: 3
-  pierceCount: 2
+  pierceCount: 20
   moveType: 2
   hitType: 1
   aoeRadius: 2
   hitEffectPrefab: {fileID: 0}
-  hitSFX: {fileID: 8300000, guid: 6b7eaf4532a2f614595ad58d2b86efc4, type: 3}

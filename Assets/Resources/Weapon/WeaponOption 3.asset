@@ -15,7 +15,8 @@ MonoBehaviour:
   id: M16
   kind: 0
   displayName: M16
-  icon: {fileID: 21300000, guid: 2750b4c5b3ad38d43b4d095b1c6e9c0b, type: 3}
-  shortDescription: M16
+  icon: {fileID: -144335857, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  shortDescription: "\uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uC801\uC5D0\uAC8C \uD22C\uC0AC\uCCB4\uB97C
+    \uBC1C\uC0AC\uD569\uB2C8\uB2E4"
   maxLevel: 5
   weaponData: {fileID: 11400000, guid: 0a2066fb4407f604d9310a21e69b3eb3, type: 2}

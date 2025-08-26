@@ -15,8 +15,8 @@ MonoBehaviour:
   id: stat_Damage
   kind: 1
   displayName: Damage
-  icon: {fileID: 21300000, guid: 5bdd6c37d70a73048840f49b5f4c1587, type: 3}
-  shortDescription: 
+  icon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  shortDescription: "\uB370\uBBF8\uC9C0\uAC00 10% \uC99D\uAC00\uD569\uB2C8\uB2E4."
   maxLevel: 5
   statType: 1
   isPercent: 1

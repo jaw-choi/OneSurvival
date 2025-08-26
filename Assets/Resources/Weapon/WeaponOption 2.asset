@@ -15,7 +15,8 @@ MonoBehaviour:
   id: Garlic
   kind: 0
   displayName: Garlic
-  icon: {fileID: 21300088, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  shortDescription: Garlic
+  icon: {fileID: -912498489993581376, guid: a07072f9a09fbfc4aa043ec09310b02a, type: 3}
+  shortDescription: "\uBC94\uC704\uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C \uD53C\uD574\uB97C
+    \uC90D\uB2C8\uB2E4"
   maxLevel: 5
   weaponData: {fileID: 11400000, guid: 2a5251ddb62f43240b739238cb78dc29, type: 2}

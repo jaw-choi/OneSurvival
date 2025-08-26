@@ -10,6 +10,19 @@ public class PlayerHealth : MonoBehaviour
 
     private float regenTimer = 0f;
     private float regenInterval = 1f; // 20초마다 회복
+
+    [SerializeField] private bool keepPercentOnMaxHpChange = true;
+    void OnEnable()
+    {
+        if (PlayerStats.Instance != null)
+            PlayerStats.Instance.OnStatsChanged += HandleStatsChanged;
+    }
+
+    void OnDisable()
+    {
+        if (PlayerStats.Instance != null)
+            PlayerStats.Instance.OnStatsChanged -= HandleStatsChanged;
+    }
     void Start()
     {
         currentHealth = PlayerStats.Instance.TotalMaxHealth;
@@ -27,6 +40,11 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+                currentHealth = 1;
+                Debug.Log("F1 눌림 → 체력이 1로 설정됨");
+        }
         HandleRegen();
     }
     void HandleRegen()
@@ -55,12 +73,12 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         //TODO:
-        GoldManager.Instance.AddGold(50); // 골드 증가
-        GoldManager.Instance.SpendGold(30); // 골드 감소
+        //GoldManager.Instance.AddGold(50); // 골드 증가
+        //GoldManager.Instance.SpendGold(30); // 골드 감소
         
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0);
-        Debug.Log("currentHealth" + currentHealth);
+        Debug.Log("currentHealth" + currentHealth + "//" + maxHealth);
         if (healthBarInstance != null)
         {
             healthBarInstance.SetHealth(currentHealth, maxHealth);
@@ -83,5 +101,24 @@ public class PlayerHealth : MonoBehaviour
             Destroy(healthBarInstance.gameObject);
 
         GameManager.Instance.GameOver();
+    }
+    void HandleStatsChanged()
+    {
+        float newMax = PlayerStats.Instance.TotalMaxHealth;
+        if (Mathf.Approximately(newMax, maxHealth)) return;
+
+        if (keepPercentOnMaxHpChange && maxHealth > 0.0001f)
+        {
+            float percent = currentHealth / maxHealth;
+            maxHealth = newMax;
+            currentHealth = Mathf.Clamp(percent * maxHealth, 0, maxHealth);
+        }
+        else
+        {
+            maxHealth = newMax;
+            currentHealth = Mathf.Min(currentHealth, maxHealth);
+        }
+
+        if (healthBarInstance != null) healthBarInstance.SetHealth(currentHealth, maxHealth);
     }
 }

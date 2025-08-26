@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Vector2 movement;
     public float moveSpeed = 3f;
+    //[SerializeField] string animSpeedParam = "moveSpeedFactor";
     void Start()
     {
         // Get the SpriteRenderer component
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
         // Get horizontal input (-1 for left, 1 for right)
         float move = Input.GetAxisRaw("Horizontal");
 
@@ -30,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         // 애니메이터에 이동 여부 전달
         bool isMoving = movement.sqrMagnitude > 0.01f;
         animator.SetBool("isMoving", isMoving);
+        //if (!string.IsNullOrEmpty(animSpeedParam))
+        //    animator.SetFloat(animSpeedParam, PlayerStats.Instance.TotalMoveSpeed);
     }
 
     void FixedUpdate()
