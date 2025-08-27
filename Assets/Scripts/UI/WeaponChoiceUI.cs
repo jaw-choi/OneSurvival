@@ -126,54 +126,54 @@ public class WeaponChoiceUI : MonoBehaviour
         panel.SetActive(false);
         Time.timeScale = 1f;
     }
-    private List<WeaponData> GetRandomWeaponChoices(int count)
-    {
-        List<WeaponData> pool = new List<WeaponData>(allWeaponData);
-        List<WeaponData> result = new List<WeaponData>();
+    //private List<WeaponData> GetRandomWeaponChoices(int count)
+    //{
+    //    List<WeaponData> pool = new List<WeaponData>(allWeaponData);
+    //    List<WeaponData> result = new List<WeaponData>();
 
-        while (result.Count < count && pool.Count > 0)
-        {
-            int rand = Random.Range(0, pool.Count);
-            result.Add(pool[rand]);
-            pool.RemoveAt(rand);
-        }
+    //    while (result.Count < count && pool.Count > 0)
+    //    {
+    //        int rand = Random.Range(0, pool.Count);
+    //        result.Add(pool[rand]);
+    //        pool.RemoveAt(rand);
+    //    }
 
-        return result;
-    }
+    //    return result;
+    //}
 
-    private void OnWeaponSelected(int index)
-    {
-        WeaponData selected = currentWeaponChoices[index];
+    //private void OnWeaponSelected(int index)
+    //{
+    //    WeaponData selected = currentWeaponChoices[index];
 
-        if (WeaponManager.Instance.HasWeapon(selected))
-        {
-            WeaponManager.Instance.UpgradeWeapon(selected);
-        }
-        else
-        {
-            WeaponManager.Instance.AddWeapon(selected);
-        }
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
-        AudioManager.instance.EffectBGM(false);
-        panel.SetActive(false);
-        Time.timeScale = 1f; // 시간 재개
-    }
+    //    if (WeaponManager.Instance.HasWeapon(selected))
+    //    {
+    //        WeaponManager.Instance.UpgradeWeapon(selected);
+    //    }
+    //    else
+    //    {
+    //        WeaponManager.Instance.AddWeapon(selected);
+    //    }
+    //    AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    //    AudioManager.instance.EffectBGM(false);
+    //    panel.SetActive(false);
+    //    Time.timeScale = 1f; // 시간 재개
+    //}
 
-    // ==== 추가 시작 ====
-    // 무기 현재 레벨을 WeaponManager에서 가져오되,
-    // GetWeaponLevel(WeaponData) 메서드가 없는 프로젝트에서도 빌드되도록 리플렉션으로 안전 호출
-    private int? TryGetWeaponLevel(WeaponData weapon)
-    {
-        var wm = WeaponManager.Instance;
-        if (wm == null) return null;
+    //// ==== 추가 시작 ====
+    //// 무기 현재 레벨을 WeaponManager에서 가져오되,
+    //// GetWeaponLevel(WeaponData) 메서드가 없는 프로젝트에서도 빌드되도록 리플렉션으로 안전 호출
+    //private int? TryGetWeaponLevel(WeaponData weapon)
+    //{
+    //    var wm = WeaponManager.Instance;
+    //    if (wm == null) return null;
 
-        var mi = wm.GetType().GetMethod("GetWeaponLevel", new System.Type[] { typeof(WeaponData) });
-        if (mi != null)
-        {
-            object ret = mi.Invoke(wm, new object[] { weapon });
-            if (ret is int lv) return lv;
-        }
-        return null;
-    }
-    // ==== 추가 끝 ====
+    //    var mi = wm.GetType().GetMethod("GetWeaponLevel", new System.Type[] { typeof(WeaponData) });
+    //    if (mi != null)
+    //    {
+    //        object ret = mi.Invoke(wm, new object[] { weapon });
+    //        if (ret is int lv) return lv;
+    //    }
+    //    return null;
+    //}
+    //// ==== 추가 끝 ====
 }

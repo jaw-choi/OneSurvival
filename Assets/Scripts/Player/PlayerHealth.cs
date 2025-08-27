@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -12,21 +13,59 @@ public class PlayerHealth : MonoBehaviour
     private float regenInterval = 1f; // 20초마다 회복
 
     [SerializeField] private bool keepPercentOnMaxHpChange = true;
+
+
+    [Header("Hit Flash")]
+    [SerializeField] private Renderer playerRenderer; // 플레이어 MeshRenderer/SpriteRenderer 등 할당
+    [SerializeField] private Color hitColor = Color.black;
+    [SerializeField] private float flashDuration = 0.2f;
+    private Color originalColor;
+    private bool isFlashing = false;    
+
+    // Optional: small camera shake
+    [SerializeField] private Camera mainCam;
+    [SerializeField] private float shakeAmt = 0.05f;
+    [SerializeField] private float shakeTime = 0.04f;
+    private Coroutine _subscribeCo;
+    private bool _subscribed;
+
+    IEnumerator SubscribeWhenReady()
+    {
+        // 이미 구독돼 있으면 중복 방지
+        if (_subscribed) yield break;
+
+        // PlayerStats.Instance가 준비될 때까지 대기
+        while (PlayerStats.Instance == null)
+            yield return null;
+
+        PlayerStats.Instance.OnStatsChanged += HandleStatsChanged;
+        _subscribed = true;
+    }
+
     void OnEnable()
     {
-        if (PlayerStats.Instance != null)
-            PlayerStats.Instance.OnStatsChanged += HandleStatsChanged;
+        // 혹시 이전 코루틴이 남아있다면 안전하게 정리
+        if (_subscribeCo != null) StopCoroutine(_subscribeCo);
+        _subscribeCo = StartCoroutine(SubscribeWhenReady());
     }
 
     void OnDisable()
     {
-        if (PlayerStats.Instance != null)
+        // 구독 해제 및 코루틴 정리
+        if (_subscribeCo != null) { StopCoroutine(_subscribeCo); _subscribeCo = null; }
+
+        if (_subscribed && PlayerStats.Instance != null)
             PlayerStats.Instance.OnStatsChanged -= HandleStatsChanged;
+
+        _subscribed = false;
     }
     void Start()
     {
         currentHealth = PlayerStats.Instance.TotalMaxHealth;
         maxHealth = PlayerStats.Instance.TotalMaxHealth;
+
+        if (playerRenderer != null)
+            originalColor = playerRenderer.material.color;
 
         if (healthBarPrefab != null)
         {
@@ -40,6 +79,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        //DEBUG
         if (Input.GetKeyDown(KeyCode.F1))
         {
                 currentHealth = 1;
@@ -72,13 +112,19 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
-        //TODO:
-        //GoldManager.Instance.AddGold(50); // 골드 증가
-        //GoldManager.Instance.SpendGold(30); // 골드 감소
-        
+        //TODO: blood particle or animation play
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("currentHealth" + currentHealth + "//" + maxHealth);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+
+        // 1) small camera shake
+        if(SettingsManager.Instance.ScreenShake)
+            DoCameraShake();
+        // 2) Red Flash
+        if (playerRenderer != null && !isFlashing)
+            StartCoroutine(HitFlash());
+
         if (healthBarInstance != null)
         {
             healthBarInstance.SetHealth(currentHealth, maxHealth);
@@ -120,5 +166,33 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (healthBarInstance != null) healthBarInstance.SetHealth(currentHealth, maxHealth);
+    }
+
+    private void DoCameraShake()
+    {
+        if (mainCam == null || shakeAmt <= 0f || shakeTime <= 0f) return;
+        StartCoroutine(CameraShakeRoutine());
+    }
+
+    private System.Collections.IEnumerator CameraShakeRoutine()
+    {
+        Vector3 origin = mainCam.transform.localPosition;
+        float t = 0f;
+        while (t < shakeTime)
+        {
+            // simple per-frame jitter
+            mainCam.transform.localPosition = origin + (Vector3)Random.insideUnitCircle * shakeAmt;
+            t += Time.deltaTime;
+            yield return null;
+        }
+        mainCam.transform.localPosition = origin;
+    }
+    private IEnumerator HitFlash()
+    {
+        isFlashing = true;
+        playerRenderer.material.color = hitColor;
+        yield return new WaitForSeconds(flashDuration);
+        playerRenderer.material.color = originalColor;
+        isFlashing = false;
     }
 }

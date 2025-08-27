@@ -15126,6 +15126,16 @@ MonoBehaviour:
   maxHealth: 100
   healthBarPrefab: {fileID: -2235471199403470886, guid: 63402dafccccd174ab71c501696897d2,
     type: 3}
+  keepPercentOnMaxHpChange: 1
+  bloodVfxPrefab: {fileID: 8575349463540537639, guid: 2305e30b45b1a3444b84cc9f40622b33,
+    type: 3}
+  vfxSpawnPoint: {fileID: 1015232765}
+  playerRenderer: {fileID: 1015232764}
+  hitColor: {r: 0, g: 0, b: 0, a: 1}
+  flashDuration: 0.2
+  mainCam: {fileID: 1613030694}
+  shakeAmt: 0.05
+  shakeTime: 0.04
 --- !u!114 &1015232763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15184,7 +15194,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f501a61d4a9970448b0b3cc7896c8ead, type: 3}
-  m_Color: {r: 0.83447987, g: 0.76415086, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.7647059, b: 0.7654041, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

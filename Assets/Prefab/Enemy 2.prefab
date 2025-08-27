@@ -146,7 +146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
   currentHP: 0
-  CanWarp: 1
   despawnDistance: 20
   walkSpeedThreshold: 0.05
 --- !u!70 &408668609792734015
@@ -183,8 +182,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.22880524, y: -0.16237783}
-  m_Size: {x: 0.29097068, y: 0.7781043}
+  m_Offset: {x: -0.20936352, y: -0.18067575}
+  m_Size: {x: 0.17889512, y: 0.59969854}
   m_Direction: 0
 --- !u!114 &-6262128423332903509
 MonoBehaviour:

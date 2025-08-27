@@ -142,6 +142,7 @@ public class PlayerStats : MonoBehaviour
         TotalRegen = (baseRegen + permRegenAdd) + rtRegenAdd;
 
         OnStatsChanged?.Invoke();
+        //PlayerHealth.Instance.HandleStatsChanged();
     }
 
     // --- Global multipliers for weapons/projectiles ---

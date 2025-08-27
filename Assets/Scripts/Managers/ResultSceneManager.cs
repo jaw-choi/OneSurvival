@@ -106,6 +106,7 @@ public class ResultSceneManager : MonoBehaviour
         runAwardGold = Mathf.Max(0, result.totalGold);
         bonusAwardGold = CalculateBonus(result);
         totalAwardGold = runAwardGold + bonusAwardGold + Mathf.Max(0, clearBonus);
+        GoldManager.Instance.AddGold(totalAwardGold);
 
         if (autoStartAward) StartCoroutine(AnimateAward());
     }
