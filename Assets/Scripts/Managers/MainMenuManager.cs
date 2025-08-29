@@ -16,7 +16,6 @@ public class MainMenuManager : MonoBehaviour
     private GameObject settingsInstance;
     void Awake()
     {
-        // 버튼 바인딩을 전부 코드로 처리
         if (startButton) startButton.onClick.AddListener(OnClickStart);
         if (upgradeButton) upgradeButton.onClick.AddListener(OnClickUpGrade);
         if (settingsButton) settingsButton.onClick.AddListener(OnClickSettings);

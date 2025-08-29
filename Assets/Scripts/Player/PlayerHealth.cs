@@ -80,11 +80,11 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         //DEBUG
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-                currentHealth = 1;
-                Debug.Log("F1 눌림 → 체력이 1로 설정됨");
-        }
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //{
+        //        currentHealth = 1;
+        //        Debug.Log("F1 눌림 → 체력이 1로 설정됨");
+        //}
         HandleRegen();
     }
     void HandleRegen()

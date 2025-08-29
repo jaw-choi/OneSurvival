@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Vector2 movement;
     public float moveSpeed = 3f;
+    public FloatingJoystick joyStick;
+
     //[SerializeField] string animSpeedParam = "moveSpeedFactor";
     void Start()
     {
@@ -16,43 +19,27 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-
-        // Get horizontal input (-1 for left, 1 for right)
-        float move = Input.GetAxisRaw("Horizontal");
-
-        if (move > 0) spriteRenderer.flipX = false;
-        else if (move < 0) spriteRenderer.flipX = true;
-        // If not moving, do nothing (keep current direction)
-
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement = movement.normalized;
-        // 애니메이터에 이동 여부 전달
-        bool isMoving = movement.sqrMagnitude > 0.01f;
-        animator.SetBool("isMoving", isMoving);
-        //if (!string.IsNullOrEmpty(animSpeedParam))
-        //    animator.SetFloat(animSpeedParam, PlayerStats.Instance.TotalMoveSpeed);
-    }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement.normalized * PlayerStats.Instance.TotalMoveSpeed * Time.fixedDeltaTime);
-
-    }
-
-    /*
-     * 
-     public float moveSpeed = 5f;
-    public Joystick joystick; // JoystickPack의 Joystick 컴포넌트 연결
-
-    void Update()
-    {
-        Vector2 moveInput = new Vector2(joystick.Horizontal, joystick.Vertical);
+        Vector2 moveInput = new Vector2(joyStick.Horizontal, joyStick.Vertical);
         moveInput = moveInput.normalized;
 
-        transform.Translate(moveInput * moveSpeed * Time.deltaTime);
+        if (moveInput.x > 0) spriteRenderer.flipX = false;
+        else if (moveInput.x < 0) spriteRenderer.flipX = true;
+
+        bool isMoving = moveInput.sqrMagnitude > 0.01f;
+        animator.SetBool("isMoving", isMoving);
+
+        Vector2 nextVec = moveInput * PlayerStats.Instance.TotalMoveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + nextVec);
+
     }
-     */
+
+    void OnMove(InputValue value)
+    {
+        movement = value.Get<Vector2>();
+    }
+
+
 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Image fadeImage; // PanelÀÇ Image ÄÄÆ÷³ÍÆ®
     public TextMeshProUGUI gameOverText;
     public WeaponData defaultWeaponData;
+    public Button quitButton;
     private float gameStartTime;
     public float ElapsedTime => Time.time - gameStartTime;
     public int Gold { get; private set; } = 0;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();
+        
     }
     public void Init()
     {
