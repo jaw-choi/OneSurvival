@@ -16,12 +16,14 @@ public class EnemyBase : MonoBehaviour
     protected Collider2D col;
 
     public bool isDead { get; private set; } = false;
+    private bool isDying = false; 
 
     public float despawnDistance = 20f;
 
     // ===== 추가 시작 =====
     // 프레임 애니메이터 참조(신규)
     protected AtlasFrameAnimator frameAnimator;
+    private HitFlashKnockback hitFx;
 
     // 이동 속도 임계치(이 값 이상이면 Walk, 미만이면 Idle)
     [Header("Anim Switch")]
@@ -39,6 +41,7 @@ public class EnemyBase : MonoBehaviour
         frameAnimator = GetComponent<AtlasFrameAnimator>();
         if (frameAnimator != null)
             frameAnimator.onCompleted += OnAnimCompleted;
+        hitFx = GetComponent<HitFlashKnockback>();
     }
     protected virtual void OnEnable()
     {
@@ -129,7 +132,42 @@ public class EnemyBase : MonoBehaviour
         if (currentHP <= 0)
             Die();
     }
+    public virtual void TakeDamage(float dmg, Transform attacker)
+    {
+        if (isDead || isDying) return;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
 
+        // 공격자 반대 방향
+        Vector2 dir = Vector2.zero;
+        if (attacker != null)
+            dir = (transform.position - attacker.position).normalized;
+
+        currentHP -= dmg;
+
+        if (currentHP <= 0)
+        {
+            // 연출 → 끝나면 죽음
+            isDying = true;
+            if (hitFx != null)
+            {
+                hitFx.OnHitWithCallback(dir, () =>
+                {
+                    if (!isDead) Die();   // 안전 가드
+                    isDying = false;      // 죽으면서 비활성화될테니 사실상 의미는 적지만 일관성 유지
+                });
+            }
+            else
+            {
+                // 연출 컴포넌트가 없을 때는 즉시 죽음
+                Die();
+            }
+        }
+        else
+        {
+            // 일반 피격: 연출만
+            hitFx?.OnHit(dir);
+        }
+    }
     public virtual void OnWarped()
     {
         Debug.Log(this.name + " has warped");
@@ -164,7 +202,7 @@ public class EnemyBase : MonoBehaviour
             if (expGem != null)
                 expGem.SetExp(data.expDrop);
         }
-
+        hitFx?.ResetColor();
         //OnDeathAnimationEnd();
         //gameObject.SetActive(false);
     }

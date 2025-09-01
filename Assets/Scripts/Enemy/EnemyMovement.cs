@@ -4,7 +4,7 @@ public class EnemyMovement : MonoBehaviour
 {
     private EnemyBase enemyBase;
     private SpriteRenderer spriteRenderer;
-    public float speed = 2f;
+    public float speed = 1f;
 
     void Start()
     {
