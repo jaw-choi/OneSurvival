@@ -22767,8 +22767,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentExp: 0
   currentLevel: 1
-  expToNextLevel: 10
-  expGrowthRate: 2.2
+  expToNextLevel: 7
+  expGrowthRate: 1.6
 --- !u!4 &1496707472
 Transform:
   m_ObjectHideFlags: 0
@@ -23375,7 +23375,7 @@ RectTransform:
   m_Father: {fileID: 1025768889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchorMax: {x: 1, y: 0.1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
