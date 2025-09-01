@@ -98,5 +98,8 @@ Artist: : Benjamin Tissot
 SFX
 Sound Effect by <a href="https://pixabay.com/ko/users/zennnsounds-35538808/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=163073">zennnsounds</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=163073">Pixabay</a>
 
-others
+Grid,icon in game
 언데드 서바이버 에셋 팩 by 골드메탈
+
+App Icon
+<a href="https://www.flaticon.com/free-icons/dungeon" title="dungeon icons">Dungeon icons created by Freepik - Flaticon</a>
