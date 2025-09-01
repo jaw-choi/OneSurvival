@@ -17,9 +17,10 @@ MonoBehaviour:
     type: 3}
   weaponPrefab: {fileID: 3158357368613742983, guid: 7cf6684e783b6044eb87dc1007d11fec,
     type: 3}
-  projectilePrefab: {fileID: 8341461869080158616, guid: a6e573a65a7ac2a4b9ce2f05eab95b29,
+  projectilePrefab: {fileID: 7688091180297009822, guid: e59477182963b1f4e8f49df56441c95d,
     type: 3}
   projectileData: {fileID: 11400000, guid: ed441d53ed7ca4d4d8dfee957dc4411b, type: 2}
+  currentLevel: 2
   fireType: 3
   attackCooldown: 1
   burstCount: 2
@@ -29,7 +30,6 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 4
-  attackSFX: {fileID: 0}
   attackAnimName: 
   fireRateMultiplierPerLevel:
   - 1

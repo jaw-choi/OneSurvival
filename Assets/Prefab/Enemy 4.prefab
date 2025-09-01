@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2545843408727850167}
   - component: {fileID: 408668609792734015}
   - component: {fileID: -6322117935465109201}
+  - component: {fileID: -8002632537315889505}
   m_Layer: 0
   m_Name: Enemy 4
   m_TagString: Enemy
@@ -146,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 28d27791a84a80b409f745877e4b4149, type: 2}
   currentHP: 0
-  CanWarp: 1
   despawnDistance: 20
   walkSpeedThreshold: 0.05
 --- !u!70 &408668609792734015
@@ -208,3 +208,21 @@ MonoBehaviour:
   speedScale: 0.5
   state: 0
   completedFired: 0
+--- !u!114 &-8002632537315889505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720730591617371777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfde20c153b4724db65dbe6c1d6e52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 0}
+  flashColor: {r: 1.5, g: 1.5, b: 1.5, a: 1}
+  flashDuration: 0.2
+  rb: {fileID: 0}
+  knockbackForce: 2
+  knockbackTime: 0.1

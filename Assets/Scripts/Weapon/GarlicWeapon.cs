@@ -3,6 +3,7 @@ using UnityEngine;
 public class GarlicWeapon : MonoBehaviour
 {
     private Weapon weapon;
+    private Transform player;
     private float tickTimer;
     private float tickInterval = 0.5f; // 반초마다 데미지
 
@@ -10,6 +11,7 @@ public class GarlicWeapon : MonoBehaviour
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         weapon = GetComponent<Weapon>();
         visual = GetComponentInChildren<SpriteRenderer>();
     }
@@ -38,7 +40,7 @@ public class GarlicWeapon : MonoBehaviour
         foreach (var target in hits)
         {
             if (target.CompareTag("Enemy"))
-                target.GetComponent<EnemyBase>()?.TakeDamage(damage);
+                target.GetComponent<EnemyBase>()?.TakeDamage(damage, player);
         }
         weapon.AddDamage(damage);
 

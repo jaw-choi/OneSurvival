@@ -10,11 +10,12 @@ public class HitFlashKnockback : MonoBehaviour
 
     [Header("Knockback")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float knockbackForce = 0.1f;
+    [SerializeField] private float knockbackForce = 2f;
     [SerializeField] private float knockbackTime = 0.1f;
 
     private Color baseColor;
     private MaterialPropertyBlock mpb;
+    private bool isKnockback = false;
 
     void Awake()
     {
@@ -29,6 +30,7 @@ public class HitFlashKnockback : MonoBehaviour
 
     public void OnHit(Vector2 hitDir)
     {
+        if (isKnockback) return; // 넉백 중이면 무시
         StopAllCoroutines();
         StartCoroutine(CoFlashAndKnockback(hitDir.normalized));
     }
@@ -45,43 +47,19 @@ public class HitFlashKnockback : MonoBehaviour
     }
     public void OnHitWithCallback(Vector2 hitDir, System.Action onComplete)
     {
+        if (isKnockback) return;
         StopAllCoroutines();
         StartCoroutine(CoFlashAndKnockbackWithCallback(hitDir.normalized, onComplete));
     }
     private IEnumerator CoFlashAndKnockbackWithCallback(Vector2 dir, System.Action onComplete)
     {
-        // 원래 하던 플래시 + 넉백 (기존 CoFlashAndKnockback 내용 재사용)
-        // 1) 플래시
-        ApplyColor(flashColor);
-        yield return new WaitForSeconds(flashDuration);
-        ApplyColor(baseColor);
-
-        // 2) 넉백
-        if (rb)
-        {
-            var prevVel = rb.linearVelocity;         // 원하면 복원용
-            rb.linearVelocity = Vector2.zero;
-            rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(knockbackTime);
-            rb.linearVelocity = Vector2.zero;        // 관성 제거(권장). 복원하려면 prevVel로 대체
-        }
-        else
-        {
-            Vector3 start = transform.position;
-            Vector3 end = start + (Vector3)(dir * 0.3f);
-            float t = 0f;
-            while (t < knockbackTime)
-            {
-                t += Time.deltaTime;
-                transform.position = Vector3.Lerp(start, end, t / knockbackTime);
-                yield return null;
-            }
-        }
+        yield return StartCoroutine(CoFlashAndKnockback(dir));
 
         onComplete?.Invoke();
     }
     private IEnumerator CoFlashAndKnockback(Vector2 dir)
     {
+        isKnockback = true;
         // 1) 플래시
         ApplyColor(flashColor);
         yield return new WaitForSeconds(flashDuration);
@@ -115,6 +93,7 @@ public class HitFlashKnockback : MonoBehaviour
                 yield return null;
             }
         }
+        isKnockback = false;
     }
 
     private void ApplyColor(Color c)
