@@ -195,7 +195,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 24, y: 24}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!1 &46352399
 GameObject:
@@ -904,7 +904,6 @@ GameObject:
   - component: {fileID: 247252238}
   - component: {fileID: 247252237}
   - component: {fileID: 247252236}
-  - component: {fileID: 247252235}
   m_Layer: 6
   m_Name: Tilemap (2)
   m_TagString: Ground
@@ -921,24 +920,12 @@ Transform:
   m_GameObject: {fileID: 247252233}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14, y: -10, z: 0}
+  m_LocalPosition: {x: -12, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1897750677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &247252235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247252233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3764d4cf47bb9c541967ca0f7028a3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!66 &247252236
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -9289,7 +9276,6 @@ GameObject:
   - component: {fileID: 978954505}
   - component: {fileID: 978954504}
   - component: {fileID: 978954503}
-  - component: {fileID: 978954502}
   m_Layer: 6
   m_Name: Tilemap (1)
   m_TagString: Ground
@@ -9306,24 +9292,12 @@ Transform:
   m_GameObject: {fileID: 978954500}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 14, z: 0}
+  m_LocalPosition: {x: 12, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1897750677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &978954502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978954500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3764d4cf47bb9c541967ca0f7028a3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!66 &978954503
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -15534,7 +15508,7 @@ Transform:
   m_GameObject: {fileID: 1015232760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.84, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -16205,7 +16179,6 @@ GameObject:
   - component: {fileID: 1363173233}
   - component: {fileID: 1363173232}
   - component: {fileID: 1363173231}
-  - component: {fileID: 1363173234}
   m_Layer: 6
   m_Name: Tilemap
   m_TagString: Ground
@@ -16222,7 +16195,7 @@ Transform:
   m_GameObject: {fileID: 1363173227}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: -10, z: 0}
+  m_LocalPosition: {x: 12, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22236,18 +22209,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &1363173234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363173227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3764d4cf47bb9c541967ca0f7028a3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1371634364
 GameObject:
   m_ObjectHideFlags: 0
@@ -23506,7 +23467,6 @@ GameObject:
   - component: {fileID: 1797809638}
   - component: {fileID: 1797809637}
   - component: {fileID: 1797809636}
-  - component: {fileID: 1797809635}
   m_Layer: 6
   m_Name: Tilemap (3)
   m_TagString: Ground
@@ -23523,24 +23483,12 @@ Transform:
   m_GameObject: {fileID: 1797809633}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14, y: 14, z: 0}
+  m_LocalPosition: {x: -12, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1897750677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1797809635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1797809633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3764d4cf47bb9c541967ca0f7028a3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!66 &1797809636
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -29899,6 +29847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897750677}
   - component: {fileID: 1897750676}
+  - component: {fileID: 1897750678}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -29937,6 +29886,26 @@ Transform:
   - {fileID: 1797809634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1897750678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897750675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a881bbbcc0602547b4d6c1da162ec24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1015232765}
+  center: {fileID: 1897750677}
+  chunks:
+  - {fileID: 1363173228}
+  - {fileID: 978954501}
+  - {fileID: 247252234}
+  - {fileID: 1797809634}
+  cell: 48
 --- !u!1 &1948732899
 GameObject:
   m_ObjectHideFlags: 0
