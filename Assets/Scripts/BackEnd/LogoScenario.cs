@@ -22,6 +22,6 @@ public class LogoScenario : MonoBehaviour
     }
     private void OnAfterProgress()
     {
-        //SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Login");
     }
 }
