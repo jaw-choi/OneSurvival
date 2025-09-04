@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Logo.unity
     guid: a425f4af1ce10ac43ab1638744aeb625
   - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: f40c1873487a5824bacfbcf06868835d
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
@@ -20,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UpgradeScene.unity
     guid: 9a5ec79094c27d94487762facdc49c1b
-  - enabled: 1
-    path: Assets/Scenes/Login.unity
-    guid: f40c1873487a5824bacfbcf06868835d
   - enabled: 0
     path: Assets/Scenes/UpgradeScene 1.unity
     guid: eed8cdde30876c64aaab0d0dd89e9488
