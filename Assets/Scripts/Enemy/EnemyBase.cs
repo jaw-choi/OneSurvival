@@ -9,6 +9,8 @@ public class EnemyBase : MonoBehaviour
     [Header("Data")]
     public EnemyData data;
 
+    public EnemyMovement enemyMove;
+
     [HideInInspector] public float currentHP;
     // protected Animator animator;   // <-- Animator 미사용으로 주석 처리 권장
     protected SpriteRenderer spriteRenderer;
@@ -33,6 +35,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Awake()
     {
         // animator = GetComponent<Animator>(); // <-- 사용 안 함
+        enemyMove = GetComponent<EnemyMovement>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -46,7 +49,8 @@ public class EnemyBase : MonoBehaviour
     protected virtual void OnEnable()
     {
         isDead = false;
-
+        isDying = false;
+        enemyMove.speed = data.moveSpeed;
         if (data == null)
         {
             Debug.LogWarning($"[EnemyBase] data is null on {name}. Check prefab/pool assignment.");
@@ -56,6 +60,7 @@ public class EnemyBase : MonoBehaviour
         {
             currentHP = data.maxHP;
         }
+
 
 
         if (spriteRenderer != null && data != null && data.enemySprite != null)
@@ -96,6 +101,8 @@ public class EnemyBase : MonoBehaviour
         if (!GameManager.Instance || GameManager.Instance.PlayerTransform == null) return;
         if (isDead) return;
         if (GameManager.Instance.IsGameOver) return;
+
+
         // ===== 추가 시작 =====
         // 속도 기반으로 Idle/Walk 전환
         if (frameAnimator != null)
@@ -148,19 +155,7 @@ public class EnemyBase : MonoBehaviour
         {
             // 연출 → 끝나면 죽음
             isDying = true;
-            if (hitFx != null)
-            {
-                hitFx.OnHitWithCallback(dir, () =>
-                {
-                    if (!isDead) Die();   // 안전 가드
-                    isDying = false;      // 죽으면서 비활성화될테니 사실상 의미는 적지만 일관성 유지
-                });
-            }
-            else
-            {
-                // 연출 컴포넌트가 없을 때는 즉시 죽음
-                Die();
-            }
+            Die();
         }
         else
         {

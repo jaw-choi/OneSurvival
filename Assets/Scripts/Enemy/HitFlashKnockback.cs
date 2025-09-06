@@ -1,3 +1,4 @@
+// HitFlashKnockback.cs (추가/수정)
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class HitFlashKnockback : MonoBehaviour
     [SerializeField] private float knockbackForce = 2f;
     [SerializeField] private float knockbackTime = 0.1f;
 
+    // 추가
+    [SerializeField] private EnemyMovement move;
+
     private Color baseColor;
     private MaterialPropertyBlock mpb;
     private bool isKnockback = false;
@@ -21,78 +25,52 @@ public class HitFlashKnockback : MonoBehaviour
     {
         if (!sr) sr = GetComponentInChildren<SpriteRenderer>();
         if (!rb) rb = GetComponent<Rigidbody2D>();
-        mpb = new MaterialPropertyBlock();
+        if (!move) move = GetComponent<EnemyMovement>();   // ← 추가
 
-        // 현재 스프라이트의 색을 기본색으로 보관
-        baseColor = (sr != null) ? sr.color : Color.white;
+        mpb = new MaterialPropertyBlock();
+        baseColor = sr ? sr.color : Color.white;
         ApplyColor(baseColor);
     }
 
     public void OnHit(Vector2 hitDir)
     {
-        if (isKnockback) return; // 넉백 중이면 무시
+        if (isKnockback) return;
         StopAllCoroutines();
         StartCoroutine(CoFlashAndKnockback(hitDir.normalized));
     }
 
-    public void PlayHitStop(float duration, float slowScale = 0f)
-    {
-        StopCoroutineSafe(HitStop(duration, slowScale));
-        StartCoroutine(HitStop(duration, slowScale));
-    }
-
-    public void ResetColor()
-    {
-        ApplyColor(baseColor);
-    }
-    public void OnHitWithCallback(Vector2 hitDir, System.Action onComplete)
-    {
-        if (isKnockback) return;
-        StopAllCoroutines();
-        StartCoroutine(CoFlashAndKnockbackWithCallback(hitDir.normalized, onComplete));
-    }
-    private IEnumerator CoFlashAndKnockbackWithCallback(Vector2 dir, System.Action onComplete)
-    {
-        yield return StartCoroutine(CoFlashAndKnockback(dir));
-
-        onComplete?.Invoke();
-    }
     private IEnumerator CoFlashAndKnockback(Vector2 dir)
     {
         isKnockback = true;
-        // 1) 플래시
+
+        // 이동 잠시 중단 + 현재 속도 보관
+        float prevSpeed = move ? move.speed : 0f;
+        if (move) move.enabled = false;
+
+        // 플래시
         ApplyColor(flashColor);
         yield return new WaitForSeconds(flashDuration);
         ApplyColor(baseColor);
 
-        // 2) 넉백
+        // 넉백 (끝나면 속도 0으로 정리)
         if (rb)
         {
-            //rb.linearVelocity = Vector2.zero;
-            //rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
-            //yield return new WaitForSeconds(knockbackTime);
-
-            var prevVel = rb.linearVelocity;
             rb.linearVelocity = Vector2.zero;
-
             rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
             yield return new WaitForSeconds(knockbackTime);
-
-            rb.linearVelocity = prevVel; // 원래 속도로 복원
-
+            rb.linearVelocity = Vector2.zero;
         }
         else
         {
             Vector3 start = transform.position;
             Vector3 end = start + (Vector3)(dir * 0.3f);
             float t = 0f;
-            while (t < knockbackTime)
-            {
-                t += Time.deltaTime;
-                transform.position = Vector3.Lerp(start, end, t / knockbackTime);
-                yield return null;
-            }
+            while (t < knockbackTime) { t += Time.deltaTime; transform.position = Vector3.Lerp(start, end, t / knockbackTime); yield return null; }
         }
+
+        // 이동 재개 + 속도 복원
+        if (move) { move.speed = prevSpeed; move.enabled = true; }
+
         isKnockback = false;
     }
 
@@ -104,13 +82,8 @@ public class HitFlashKnockback : MonoBehaviour
         sr.SetPropertyBlock(mpb);
     }
 
-    private IEnumerator HitStop(float duration, float slowScale = 0f)
+    public void ResetColor()
     {
-        float original = Time.timeScale;
-        Time.timeScale = slowScale; // 0 = 정지, 0.05 = 초슬로우
-        yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = original;
+        ApplyColor(baseColor);
     }
-
-    private void StopCoroutineSafe(IEnumerator co) { /* 자리표시자: 필요시 구현 */ }
 }

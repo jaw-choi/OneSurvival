@@ -10,6 +10,7 @@ public class UserInfo : MonoBehaviour
 
 	private static UserInfoData data = new UserInfoData();
 	public static UserInfoData Data => data;
+	public static bool IsLoggedIn => data.isLoggedIn;
 
 	public void GetUserInfoFromBackend()
 	{
@@ -41,6 +42,7 @@ public class UserInfo : MonoBehaviour
 					// 예외 로그
 					Debug.LogError(e);
 				}
+				data.isLoggedIn = true;
 			}
 			// 정보 조회 실패
 			else
@@ -48,7 +50,10 @@ public class UserInfo : MonoBehaviour
 				// 실패 시 기본값으로 초기화
 				// Tip. 일반적으로 네트워크/세션 이슈로 실패할 수 있으므로 다음 프레임/재시도 시점에 다시 조회하는 것도 고려
 				data.Reset();
-				Debug.LogError(callback.GetMessage());
+				//Debug.LogError(callback.GetMessage());
+				//TODO : mainmenu에서 캐릭터 아이콘 대신 ? 아이콘 보이게하기 ( bool값으로 login했는지 안했는지 getter만들기)
+				//로그인하기 버튼활성화 하기
+				//이후 로그인했으면 버튼 비활성화하기
 			}
 
 			// 사용자 정보 조회 완료 시점에 onUserInfoEvent에 연결된 이벤트 호출
@@ -59,6 +64,7 @@ public class UserInfo : MonoBehaviour
 
 public class UserInfoData
 {
+	
 	public string gamerId;              // 게이머 ID
 	public string countryCode;          // 국가 코드(없으면 "Unknown")
 	public string nickname;             // 닉네임(없으면 "Noname")
@@ -66,6 +72,7 @@ public class UserInfoData
 	public string emailForFindPassword; // 비밀번호 찾기용 이메일
 	public string subscriptionType;     // 가입 유형(커스텀/연동 등)
 	public string federationId;         // 연동 로그인 ID(커스텀 가입이면 빈 문자열)
+	public bool isLoggedIn;
 
 	public void Reset()
 	{
@@ -76,5 +83,6 @@ public class UserInfoData
 		emailForFindPassword = string.Empty;
 		subscriptionType = string.Empty;
 		federationId = string.Empty;
+		isLoggedIn = false;
 	}
 }

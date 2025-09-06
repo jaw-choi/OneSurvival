@@ -4,13 +4,14 @@ public class EnemyMovement : MonoBehaviour
 {
     private EnemyBase enemyBase;
     private SpriteRenderer spriteRenderer;
-    public float speed = 1f;
+    public float speed;
 
     void Start()
     {
         // Get the SpriteRenderer component
         enemyBase = GetComponent<EnemyBase>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        speed = enemyBase.data.moveSpeed;
     }
 
     // Update is called once per frame

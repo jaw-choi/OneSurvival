@@ -21,7 +21,7 @@ MonoBehaviour:
   maxHP: 125
   moveSpeed: 2
   contactDamage: 8
-  expDrop: 20
+  expDrop: 50
   expGemPrefab: {fileID: 2818411570915226872, guid: 526b22cac6d5fd443a019cbefd439656,
     type: 3}
   spawnWeight: 1

@@ -28,11 +28,7 @@ public class EnemyPoolHub : MonoBehaviour
             return null;
         }
 
-        var go = pooler.GetEnemy();
-        if (go != null)
-        {
-            go.transform.SetPositionAndRotation(pos, rot);
-        }
-        return go;
+        
+        return pooler.GetEnemyAt(pos, rot);
     }
 }

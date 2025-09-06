@@ -21,7 +21,7 @@ public class EnemyData : ScriptableObject
     [Tooltip("Max health point")]
     public float maxHP = 10f;
     [Tooltip("Movement speed (units/sec)")]
-    public float moveSpeed = 2f;
+    public float moveSpeed = 1f;
     [Tooltip("Contact damage to player")]
     public float contactDamage = 1f;
 

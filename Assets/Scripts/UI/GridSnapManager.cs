@@ -12,6 +12,7 @@ public class GridSnapManager : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!player) { enabled = false; return; }
         var p = player.position;
         int ix = Mathf.FloorToInt((p.x - anchor.x) / stepX);
         int iy = Mathf.FloorToInt((p.y - anchor.y) / stepY);

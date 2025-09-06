@@ -9,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button loginButton;
 
     [SerializeField] private GameObject settingsPanelPrefab;
     [SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
@@ -20,6 +21,7 @@ public class MainMenuManager : MonoBehaviour
         if (upgradeButton) upgradeButton.onClick.AddListener(OnClickUpGrade);
         if (settingsButton) settingsButton.onClick.AddListener(OnClickSettings);
         if (quitButton) quitButton.onClick.AddListener(OnClickQuit);
+        if (loginButton) loginButton.onClick.AddListener(OnClickLogin);
     }
 
     void Start()
@@ -64,6 +66,9 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-
+    public void OnClickLogin()
+    {
+        SceneManager.LoadScene("Login");
+    }
 
 }

@@ -19,9 +19,9 @@ MonoBehaviour:
   expandable: 1
   maxExpand: 100
   maxHP: 50
-  moveSpeed: 2
+  moveSpeed: 1.4
   contactDamage: 3
-  expDrop: 3
+  expDrop: 8
   expGemPrefab: {fileID: 2818411570915226872, guid: 2747bb9388b9fde4bb4028f0b49826a0,
     type: 3}
   spawnWeight: 2

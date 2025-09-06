@@ -43,7 +43,7 @@ public class EnemyPooler : MonoBehaviour
                 // Defensive: re-assign data if something cleared it
                 var eb = pool[i].GetComponent<EnemyBase>();
                 if (eb != null && eb.data == null)
-                    eb.data = data;
+                    eb  .data = data;
                 // ===== 추가 끝 =====
                 pool[i].SetActive(true);
                 return pool[i];
@@ -59,15 +59,36 @@ public class EnemyPooler : MonoBehaviour
 
     // ===== 추가 시작 =====
     // Quality-of-life: spawn with position/rotation before activation (prevents OnEnable using wrong pos)
+    //public GameObject GetEnemyAt(Vector3 pos, Quaternion rot)
+    //{
+    //    var go = GetEnemy();
+    //    if (go != null)
+    //    {
+    //        go.transform.SetPositionAndRotation(pos, rot);
+    //        Physics2D.SyncTransforms();
+    //    }
+    //    return go;
+    //}
     public GameObject GetEnemyAt(Vector3 pos, Quaternion rot)
     {
-        var go = GetEnemy();
-        if (go != null)
+        for (int i = 0; i < pool.Count; i++)
         {
-            go.transform.SetPositionAndRotation(pos, rot);
-            Physics2D.SyncTransforms();
+            var go = pool[i];
+            if (!go.activeInHierarchy)
+            {
+                var eb = go.GetComponent<EnemyBase>();
+                if (eb && eb.data == null) eb.data = data;
+
+                // 1) 먼저 좌표/회전
+                go.transform.SetPositionAndRotation(pos, rot);
+                Physics2D.SyncTransforms();
+
+                // 2) 그 다음 활성화 → OnEnable에서 HP/상태 초기화
+                go.SetActive(true);
+                return go;
+            }
         }
-        return go;
+        return null;
     }
     // ===== 추가 끝 =====
 }
