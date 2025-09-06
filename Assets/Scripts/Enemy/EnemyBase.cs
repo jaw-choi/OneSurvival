@@ -58,7 +58,7 @@ public class EnemyBase : MonoBehaviour
         }
         else
         {
-            currentHP = data.maxHP;
+            currentHP = data.maxHP; 
         }
 
 
