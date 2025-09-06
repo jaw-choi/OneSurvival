@@ -1994,7 +1994,6 @@ MonoBehaviour:
   sfxSlider: {fileID: 5116611610545019450}
   hapticsToggle: {fileID: 1604149276212968638}
   shakeToggle: {fileID: 4946843985044134544}
-  hitStopToggle: {fileID: 6706072458303476622}
   masterLabel: {fileID: 5785005405090505472}
   musicLabel: {fileID: 733172799183654271}
   sfxLabel: {fileID: 4409960072975730221}
@@ -2014,7 +2013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &65972025005257314
 RectTransform:
   m_ObjectHideFlags: 0

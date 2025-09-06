@@ -28,7 +28,7 @@ public class SettingsUI : MonoBehaviour
 
         hapticsToggle.SetIsOnWithoutNotify(sm.Haptics);
         shakeToggle.SetIsOnWithoutNotify(sm.ScreenShake);
-        hitStopToggle.SetIsOnWithoutNotify(sm.HitStop);
+        //hitStopToggle.SetIsOnWithoutNotify(sm.HitStop);
 
         UpdateLabels();
         HookEvents(true);
@@ -46,7 +46,7 @@ public class SettingsUI : MonoBehaviour
 
             hapticsToggle.onValueChanged.AddListener(OnHaptics);
             shakeToggle.onValueChanged.AddListener(OnShake);
-            hitStopToggle.onValueChanged.AddListener(OnHitStop);
+            //hitStopToggle.onValueChanged.AddListener(OnHitStop);
 
         }
         else
@@ -57,7 +57,7 @@ public class SettingsUI : MonoBehaviour
 
             hapticsToggle.onValueChanged.RemoveListener(OnHaptics);
             shakeToggle.onValueChanged.RemoveListener(OnShake);
-            hitStopToggle.onValueChanged.RemoveListener(OnHitStop);
+            //hitStopToggle.onValueChanged.RemoveListener(OnHitStop);
 
         }
     }
