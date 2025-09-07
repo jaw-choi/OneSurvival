@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1ff3bb5d141c2204ea7a71ac5fed23ad, type: 3}
-  m_Color: {r: 0.93710685, g: 0.5569596, b: 0.5569596, a: 1}
+  m_Color: {r: 0.9433962, g: 0.5013646, b: 0.5013646, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5ae1804d72ef7d348abddebf38f28357, type: 2}
+  enemyMove: {fileID: 0}
   currentHP: 0
   despawnDistance: 15
   walkSpeedThreshold: 0.05
@@ -205,7 +206,7 @@ MonoBehaviour:
   walkFps: 10
   randomStartOffset: 1
   loopDead: 0
-  speedScale: 0.92
+  speedScale: 0.5
   state: 0
   completedFired: 0
 --- !u!114 &5079669962594891302
@@ -226,3 +227,4 @@ MonoBehaviour:
   rb: {fileID: 0}
   knockbackForce: 2
   knockbackTime: 0.1
+  move: {fileID: 0}

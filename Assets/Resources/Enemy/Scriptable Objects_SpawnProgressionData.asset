@@ -69,11 +69,11 @@ MonoBehaviour:
     endTime: 300
     enemy: {fileID: 11400000, guid: 5ae1804d72ef7d348abddebf38f28357, type: 2}
     weight: 50
-  - startTime: 60
+  - startTime: 10
     endTime: 900
     enemy: {fileID: 11400000, guid: 585ac8aca5d30c3478c2eb50cba48efe, type: 2}
     weight: 30
-  - startTime: 120
+  - startTime: 20
     endTime: 900
     enemy: {fileID: 11400000, guid: 28f5dd031ce4a904fa3a992caa0772f5, type: 2}
     weight: 20
