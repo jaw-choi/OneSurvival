@@ -167,6 +167,7 @@ Assets/Scripts/<br>
 ├─ WeaponInstance.cs // 장착 인스턴스/레벨/시너지<br>
 └─ WeaponUpgradeOptionSO.cs // 무기 업그레이드 옵션 SO<br>
 
+</details>
 ## 🛠️ 설치 및 실행 방법
 
 ...
