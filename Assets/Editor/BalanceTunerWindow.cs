@@ -6,72 +6,41 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+/// 무기/투사체/적/스폰 데이터 밸런스를 편집하기 위한 에디터 윈도우
+/// ScriptableObject 기반 데이터를 불러와 일괄 조정/저장/CSV 내보내기 가능
 public class BalanceTunerWindow : EditorWindow
 {
-    // --------------------------
-    // Types that your project uses
-    // Adjust type names or property names here if your SOs differ.
-    // --------------------------
+    // 데이터 타입명 (프로젝트 ScriptableObject 타입과 맞춰야 함)
     private const string WEAPON_DATA_TYPE = "WeaponData";
     private const string PROJECTILE_DATA_TYPE = "ProjectileData";
     private const string ENEMY_DATA_TYPE = "EnemyData";
     private const string SPAWN_DATA_TYPE = "SpawnProgressionData";
 
-    // Common property paths (edit these if your fields differ)
-    // WeaponData
-    private static readonly string[] WeaponProps = {
-        "weaponName",       // string
-        "cooldown",         // float
-        "burstCount",       // int
-        "fireType",         // enum/int
-        "projectileData"    // object ref
-    };
+    // 대표 속성 배열 (Inspector와 CSV 내보내기용)
+    private static readonly string[] WeaponProps = { "weaponName", "cooldown", "burstCount", "fireType", "projectileData" };
+    private static readonly string[] ProjectileProps = { "damage", "speed", "pierceCount", "aoeRadius", "lifetime" };
+    private static readonly string[] EnemyProps = { "enemyName", "maxHP", "moveSpeed", "contactDamage", "expDrop", "goldDrop", "spawnWeight" };
+    private static readonly string[] SpawnProps = { "difficultyDuration", "groupIntervalSec", "groupSize", "inGroupStagger", "spawnDistance", "formationSpacing" };
 
-    // ProjectileData
-    private static readonly string[] ProjectileProps = {
-        "damage",           // float
-        "speed",            // float
-        "pierceCount",      // int
-        "aoeRadius",        // float
-        "lifetime"          // float
-    };
-
-    // EnemyData
-    private static readonly string[] EnemyProps = {
-        "enemyName",        // string
-        "maxHP",            // float/int
-        "moveSpeed",        // float
-        "contactDamage",    // float
-        "expDrop",          // int/float
-        "goldDrop",         // int/float
-        "spawnWeight"       // int/float (optional)
-    };
-    private static readonly string[] SpawnProps = {
-    "difficultyDuration",
-    "groupIntervalSec",
-    "groupSize",
-    "inGroupStagger",
-    "spawnDistance",
-    "formationSpacing"
-    };
     private enum Tab { Weapons, Projectiles, Enemies, Spawn }
     private Tab currentTab = Tab.Weapons;
 
-    // Data caches
+    // 상태/캐시
     private Vector2 leftScroll, rightScroll;
     private string search = "";
     private bool applyWhilePlaying = true;
-    private float batchMultiplier = 1.1f; // default 10% up
+    private float batchMultiplier = 1.1f; // 일괄 배율
 
     private List<Object> allWeapons = new List<Object>();
     private List<Object> allProjectiles = new List<Object>();
     private List<Object> allEnemies = new List<Object>();
     private List<Object> allSpawns = new List<Object>();
 
-    private HashSet<Object> selection = new HashSet<Object>();
-    private SerializedObject serializedSelected; // single selection drawer
+    private HashSet<Object> selection = new HashSet<Object>(); // 좌측 다중 선택
+    private SerializedObject serializedSelected; // 단일 선택 상세 편집
     private Object singleSelected;
 
+    // 메뉴에서 열기
     [MenuItem("Tools/Balance Tuner")]
     public static void Open()
     {
@@ -80,12 +49,13 @@ public class BalanceTunerWindow : EditorWindow
         win.RefreshAll();
     }
 
+    // 윈도우가 포커스를 얻을 때 자동 갱신
     private void OnFocus()
     {
-        // Auto refresh when window regains focus
         RefreshAll();
     }
 
+    // 모든 ScriptableObject 로드
     private void RefreshAll()
     {
         allWeapons = LoadAllOfType(WEAPON_DATA_TYPE);
@@ -95,9 +65,9 @@ public class BalanceTunerWindow : EditorWindow
         Repaint();
     }
 
+    // 특정 타입 ScriptableObject 모두 불러오기
     private static List<Object> LoadAllOfType(string typeName)
     {
-        // Finds all assets by type name (ScriptableObjects)
         string[] guids = AssetDatabase.FindAssets($"t:{typeName}");
         var list = new List<Object>();
         foreach (var g in guids)
@@ -109,6 +79,7 @@ public class BalanceTunerWindow : EditorWindow
         return list.OrderBy(o => o.name).ToList();
     }
 
+    // 메인 GUI 렌더링
     private void OnGUI()
     {
         DrawToolbar();
@@ -116,14 +87,14 @@ public class BalanceTunerWindow : EditorWindow
         EditorGUILayout.Space(4);
         EditorGUILayout.BeginHorizontal();
 
-        // Left: list & actions
+        // 좌측: 리스트 및 버튼
         EditorGUILayout.BeginVertical(GUILayout.Width(320));
         DrawSearch();
         DrawList();
         DrawLeftActions();
         EditorGUILayout.EndVertical();
 
-        // Right: inspector/editor
+        // 우측: 상세 편집
         EditorGUILayout.BeginVertical();
         DrawInspector();
         EditorGUILayout.EndVertical();
@@ -131,6 +102,7 @@ public class BalanceTunerWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
+    // 상단 툴바 (탭 전환, 옵션)
     private void DrawToolbar()
     {
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
@@ -144,26 +116,19 @@ public class BalanceTunerWindow : EditorWindow
         }
 
         GUILayout.FlexibleSpace();
-
         applyWhilePlaying = GUILayout.Toggle(applyWhilePlaying, "Apply in Play Mode", EditorStyles.toolbarButton);
 
         if (GUILayout.Button("Refresh", EditorStyles.toolbarButton, GUILayout.Width(80)))
-        {
             RefreshAll();
-        }
 
         EditorGUILayout.EndHorizontal();
     }
 
+    // 검색창
     private void DrawSearch()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUI.BeginChangeCheck();
         search = EditorGUILayout.TextField("검색", search);
-        if (EditorGUI.EndChangeCheck())
-        {
-            // just trigger repaint
-        }
         if (GUILayout.Button("Clear", GUILayout.Width(60)))
         {
             search = "";
@@ -172,6 +137,7 @@ public class BalanceTunerWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
+    // 현재 탭에 맞는 리스트 반환
     private IEnumerable<Object> CurrentList()
     {
         switch (currentTab)
@@ -184,11 +150,12 @@ public class BalanceTunerWindow : EditorWindow
         return Enumerable.Empty<Object>();
     }
 
+    // 좌측 리스트 출력
     private void DrawList()
     {
         var list = CurrentList();
-
         leftScroll = EditorGUILayout.BeginScrollView(leftScroll, "box");
+
         foreach (var obj in list)
         {
             if (!string.IsNullOrEmpty(search) && !obj.name.ToLower().Contains(search.ToLower()))
@@ -206,22 +173,21 @@ public class BalanceTunerWindow : EditorWindow
 
             if (GUILayout.Button(obj.name, EditorStyles.label))
             {
-                // Single selection for inspector
+                // 단일 선택
                 singleSelected = obj;
                 serializedSelected = new SerializedObject(obj);
-                // If not already in multi-selection, keep it single
                 if (!selection.Contains(obj))
                 {
                     selection.Clear();
                     selection.Add(obj);
                 }
             }
-
             EditorGUILayout.EndHorizontal();
         }
         EditorGUILayout.EndScrollView();
     }
 
+    // 좌측 하단 액션 버튼들
     private void DrawLeftActions()
     {
         EditorGUILayout.Space(6);
@@ -230,12 +196,8 @@ public class BalanceTunerWindow : EditorWindow
 
         batchMultiplier = EditorGUILayout.FloatField("배율", batchMultiplier);
 
-        EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("선택 항목 수치 × 배율 적용"))
-        {
+        if (GUILayout.Button("선택 항목 × 배율 적용"))
             ApplyBatchMultiplier();
-        }
-        EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space(6);
         EditorGUILayout.BeginHorizontal();
@@ -246,9 +208,7 @@ public class BalanceTunerWindow : EditorWindow
             serializedSelected = null;
         }
         if (GUILayout.Button("모두 선택"))
-        {
             selection = new HashSet<Object>(CurrentList());
-        }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
 
@@ -257,28 +217,23 @@ public class BalanceTunerWindow : EditorWindow
         EditorGUILayout.LabelField("저장/내보내기", EditorStyles.boldLabel);
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("변경 저장"))
-        {
-            SaveAllDirty();
-        }
-        if (GUILayout.Button("CSV 내보내기"))
-        {
-            ExportCsv();
-        }
+        if (GUILayout.Button("변경 저장")) SaveAllDirty();
+        if (GUILayout.Button("CSV 내보내기")) ExportCsv();
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("CSV는 대표 필드만 내보냅니다. 필드명 다르면 코드 상단 배열 수정", MessageType.Info);
+        EditorGUILayout.HelpBox("CSV는 대표 필드만 내보냅니다. 필요 시 코드 상단 배열 수정", MessageType.Info);
         EditorGUILayout.EndVertical();
     }
 
+    // 우측 상세 편집 Inspector
     private void DrawInspector()
     {
         EditorGUILayout.BeginVertical("box");
-        EditorGUILayout.LabelField("상세 편집(단일 선택)", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("상세 편집", EditorStyles.boldLabel);
 
         if (singleSelected == null)
         {
-            EditorGUILayout.HelpBox("좌측 리스트에서 하나를 클릭하면 상세 편집 가능합니다.", MessageType.Info);
+            EditorGUILayout.HelpBox("좌측에서 하나를 클릭하면 상세 편집 가능", MessageType.Info);
             EditorGUILayout.EndVertical();
             return;
         }
@@ -287,56 +242,40 @@ public class BalanceTunerWindow : EditorWindow
             serializedSelected = new SerializedObject(singleSelected);
 
         rightScroll = EditorGUILayout.BeginScrollView(rightScroll);
-
-        EditorGUI.BeginChangeCheck();
-
-        // Draw common header
         EditorGUILayout.ObjectField("Target", singleSelected, typeof(Object), false);
 
-        // Draw known properties by tab
+        // 대표 속성 먼저 표시
         string[] propNames = GetPropNamesForCurrentTab();
         foreach (var p in propNames)
         {
             var prop = serializedSelected.FindProperty(p);
-            if (prop == null)
-            {
-                EditorGUILayout.LabelField($"(필드 없음) {p}");
-                continue;
-            }
-            EditorGUILayout.PropertyField(prop, true);
+            if (prop != null) EditorGUILayout.PropertyField(prop, true);
+            else EditorGUILayout.LabelField($"(필드 없음) {p}");
         }
 
-        // Draw rest of properties optionally
+        // 나머지 속성 자동 표시
         EditorGUILayout.Space(6);
-        EditorGUILayout.LabelField("추가 필드(자동 탐색)", EditorStyles.miniBoldLabel);
+        EditorGUILayout.LabelField("추가 필드", EditorStyles.miniBoldLabel);
         DrawUnknownProperties(serializedSelected, propNames);
 
-        if (EditorGUI.EndChangeCheck())
-        {
-            serializedSelected.ApplyModifiedProperties();
-            MarkDirty(singleSelected);
-        }
-
+        serializedSelected.ApplyModifiedProperties();
         EditorGUILayout.EndScrollView();
 
         EditorGUILayout.Space(6);
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Revert (파일 재로드)"))
+        if (GUILayout.Button("Revert")) // 파일 다시 불러오기
         {
             string path = AssetDatabase.GetAssetPath(singleSelected);
             AssetDatabase.ImportAsset(path);
             serializedSelected = new SerializedObject(singleSelected);
         }
-
-        if (GUILayout.Button("저장"))
-        {
-            SaveAllDirty();
-        }
+        if (GUILayout.Button("저장")) SaveAllDirty();
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.EndVertical();
     }
 
+    // 현재 탭 속성 배열 반환
     private string[] GetPropNamesForCurrentTab()
     {
         switch (currentTab)
@@ -349,9 +288,9 @@ public class BalanceTunerWindow : EditorWindow
         return System.Array.Empty<string>();
     }
 
+    // 알려지지 않은 속성 자동 탐색 표시
     private void DrawUnknownProperties(SerializedObject so, string[] known)
     {
-        // Draw any visible root props that are not in known list
         var it = so.GetIterator();
         bool enterChildren = true;
         HashSet<string> knownSet = new HashSet<string>(known);
@@ -363,44 +302,33 @@ public class BalanceTunerWindow : EditorWindow
             if (knownSet.Contains(it.propertyPath)) continue;
             EditorGUILayout.PropertyField(it, true);
         }
-        so.ApplyModifiedProperties();
     }
 
+    // 선택 항목 수치 일괄 배율 적용
     private void ApplyBatchMultiplier()
     {
         if (selection.Count == 0) return;
-
         Undo.RecordObjects(selection.ToArray(), "Batch Multiply");
 
         foreach (var obj in selection)
         {
             var so = new SerializedObject(obj);
-            string[] props = GetPropNamesForCurrentTab();
-
-            foreach (var p in props)
+            foreach (var p in GetPropNamesForCurrentTab())
             {
                 var sp = so.FindProperty(p);
                 if (sp == null) continue;
-
-                // Multiply numeric fields only
-                switch (sp.propertyType)
-                {
-                    case SerializedPropertyType.Integer:
-                        sp.intValue = Mathf.RoundToInt(sp.intValue * batchMultiplier);
-                        break;
-                    case SerializedPropertyType.Float:
-                        sp.floatValue *= batchMultiplier;
-                        break;
-                }
+                if (sp.propertyType == SerializedPropertyType.Integer)
+                    sp.intValue = Mathf.RoundToInt(sp.intValue * batchMultiplier);
+                else if (sp.propertyType == SerializedPropertyType.Float)
+                    sp.floatValue *= batchMultiplier;
             }
-
             so.ApplyModifiedProperties();
             MarkDirty(obj);
         }
-
         ShowTempNotification("배치 적용 완료");
     }
 
+    // Dirty Flag 저장
     private void SaveAllDirty()
     {
         AssetDatabase.SaveAssets();
@@ -408,16 +336,13 @@ public class BalanceTunerWindow : EditorWindow
         ShowTempNotification("저장 완료");
     }
 
+    // Dirty Flag표시 (플레이 모드에서도 즉시 반영)
     private void MarkDirty(Object obj)
     {
-        // Mark asset dirty, and allow runtime applying if desired
         EditorUtility.SetDirty(obj);
-        if (applyWhilePlaying && Application.isPlaying)
-        {
-            // No extra steps required; values on ScriptableObject are read live by your systems
-        }
     }
 
+    // CSV 내보내기
     private void ExportCsv()
     {
         string path = EditorUtility.SaveFilePanel("Export CSV", Application.dataPath, $"balance_{currentTab}.csv", "csv");
@@ -428,12 +353,10 @@ public class BalanceTunerWindow : EditorWindow
 
         using (var sw = new StreamWriter(path))
         {
-            // header
             sw.Write("assetName");
             foreach (var h in headers) sw.Write($",{h}");
             sw.WriteLine();
 
-            // rows
             foreach (var obj in list)
             {
                 var so = new SerializedObject(obj);
@@ -442,11 +365,7 @@ public class BalanceTunerWindow : EditorWindow
                 {
                     var sp = so.FindProperty(h);
                     sw.Write(",");
-                    if (sp == null)
-                    {
-                        sw.Write("");
-                        continue;
-                    }
+                    if (sp == null) { sw.Write(""); continue; }
                     switch (sp.propertyType)
                     {
                         case SerializedPropertyType.Integer: sw.Write(sp.intValue); break;
@@ -460,11 +379,11 @@ public class BalanceTunerWindow : EditorWindow
                 sw.WriteLine();
             }
         }
-
         EditorUtility.RevealInFinder(path);
         ShowTempNotification("CSV 내보내기 완료");
     }
 
+    // 일시적 알림 메시지
     private void ShowTempNotification(string msg)
     {
         this.ShowNotification(new GUIContent(msg));

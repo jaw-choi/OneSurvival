@@ -9,7 +9,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private GameObject aoeVisualizerPrefab;
 
     private List<Weapon> weapons = new List<Weapon>();
-    private GarlicWeapon GarlicWeapons;
 
     void Awake()
     {
@@ -29,7 +28,6 @@ public class WeaponManager : MonoBehaviour
         weapon.Initialize(data, 1);
         weapons.Add(weapon);
 
-        //CheckAoeWeaponStatus();
         return weapon;
     }
     public int GetWeaponLevel(WeaponData data)
