@@ -81,7 +81,7 @@ public class RegisterAccount : LoginBase
 					if (callback.IsSuccess())
 					{
 						SetMessage($"계정 생성 완료. {inputFieldID.text}님 환영합니다.");
-
+						BackendGameData.Instance.GameDataInsert();
 						// Lobby 씬으로 이동
 						SceneManager.LoadScene("MainMenu");
 					}

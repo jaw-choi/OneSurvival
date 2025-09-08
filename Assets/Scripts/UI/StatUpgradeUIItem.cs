@@ -45,7 +45,7 @@ public class StatUpgradeUIItem : MonoBehaviour
         {
             PermanentStatManager.SetLevel(upgradeData.statType, level + 1);
             Refresh();
-            UIManager.Instance.UpdateGoldUI(GoldManager.Instance.Gold);
+            //UIManager.Instance.UpdateGoldUI(GoldManager.Instance.Gold);
         }
     }
 

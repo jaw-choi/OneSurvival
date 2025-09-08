@@ -50,7 +50,7 @@ public class DebugUI : MonoBehaviour
         // 4) 저장 및 UI 갱신
         PlayerPrefs.Save();
         RefreshAllStatItems();
-        UIManager.Instance.UpdateGoldUI(GoldManager.Instance.Gold);
+        //UIManager.Instance.UpdateGoldUI(GoldManager.Instance.Gold);
 
         Debug.Log($"[Reset] 업그레이드 초기화 완료. 환급: {refund} G");
     }

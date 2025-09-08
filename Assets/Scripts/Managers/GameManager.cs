@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     private float gameStartTime; // 게임 시작 시각
     public float ElapsedTime => Time.time - gameStartTime; // 경과 시간
-    public int Gold { get; private set; } = 0; // 획득한 골드
 
     // 싱글톤 인스턴스 초기화
     void Awake()
@@ -68,7 +67,6 @@ public class GameManager : MonoBehaviour
     public void ResetRunState()
     {
         IsGameOver = false;
-        Gold = 0;
         gameStartTime = Time.time;
         StopAllCoroutines();
         CancelInvoke();
@@ -82,12 +80,13 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
         AudioManager.instance.PlayBGM(false);
 
+        //BackendGameData.Instance.GameDataUpdate();
         // 결과 데이터 저장
         GameResultData result = GameResultData.Instance;
         result.playTime = Time.timeSinceLevelLoad;
-        result.totalGold = Gold;
+        result.totalGold = GoldManager.Instance.Gold;
         result.playerLevel = PlayerExpManager.Instance.currentLevel;
-        result.enemyKillCount = EnemyKillCounter.Instance.TotalKills;
+        result.enemyKillCount += EnemyKillCounter.Instance.TotalKills;
         result.characterName = PlayerStats.Instance.characterName;
         result.mapName = SceneManager.GetActiveScene().name;
 
@@ -103,12 +102,12 @@ public class GameManager : MonoBehaviour
             };
             result.weaponResults.Add(w);
         }
+        //if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+            BackendGameData.Instance.GameDataUpdate(AfterGameOver);
+    }
+    public void AfterGameOver()
+    {
+        //
     }
 
-    // 골드 추가 및 UI 갱신
-    public void AddGold(int value)
-    {
-        Gold += value;
-        UIManager.Instance.UpdateGoldUI(Gold);
-    }
 }

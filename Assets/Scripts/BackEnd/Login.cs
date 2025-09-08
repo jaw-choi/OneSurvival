@@ -57,6 +57,10 @@ public class Login : LoginBase
             {
                 SetMessage($"{inputFieldID.text}님 환영합니다.");
 
+                if (GoldManager.Instance != null)
+                {
+                    GoldManager.Instance.LoadGold();
+                }
                 // MainMenu 씬으로 이동
                 SceneManager.LoadScene("MainMenu");
             }

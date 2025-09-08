@@ -16,6 +16,7 @@ public class GoldManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             LoadGold();
         }
         else
@@ -45,8 +46,18 @@ public class GoldManager : MonoBehaviour
 
     private void SaveGold()
     {
-        PlayerPrefs.SetInt(GOLD_KEY, Gold);
-        PlayerPrefs.Save();
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+        {
+            // 서버 업데이트
+            BackendGameData.Instance.UserGameData.gold = Gold;
+            BackendGameData.Instance.GameDataUpdate();
+        }
+        else
+        {
+            // 로컬 저장
+            PlayerPrefs.SetInt(GOLD_KEY, Gold);
+            PlayerPrefs.Save();
+        }
     }
     public void SetGold(int amount)
     {
@@ -61,8 +72,18 @@ public class GoldManager : MonoBehaviour
     {
         SetGold(0);
     }
-    private void LoadGold()
+    public void LoadGold()
     {
-        Gold = PlayerPrefs.GetInt(GOLD_KEY, 0); // 기본값 0
+        //Gold = GameResultData.Instance.totalGold;
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+        {
+            // 서버 데이터 사용
+            Gold = BackendGameData.Instance.UserGameData.gold;
+        }
+        else
+        {
+            // 로컬 PlayerPrefs 사용
+            Gold = PlayerPrefs.GetInt(GOLD_KEY, 0);
+        }
     }
 }

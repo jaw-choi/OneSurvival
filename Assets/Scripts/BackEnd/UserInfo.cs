@@ -43,6 +43,8 @@ public class UserInfo : MonoBehaviour
 					Debug.LogError(e);
 				}
 				data.isLoggedIn = true;
+				if(BackendGameData.Instance!=null)
+					BackendGameData.Instance.GameDataLoad();
 			}
 			// 정보 조회 실패
 			else
