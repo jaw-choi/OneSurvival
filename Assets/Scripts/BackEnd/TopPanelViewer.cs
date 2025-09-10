@@ -8,7 +8,8 @@ public class TopPanelViewer : MonoBehaviour
     [SerializeField] private Image avatarImage;
 	[SerializeField] private Image noneImage;
 	[SerializeField] private GameObject loginButton;
-	[SerializeField] private TextMeshProUGUI textKillNumber;
+	[SerializeField] private GameObject rankButton;
+    [SerializeField] private TextMeshProUGUI textKillNumber;
 	[SerializeField] private TextMeshProUGUI textGold;
     private const string GOLD_KEY = "PlayerGold";
     private void Awake()
@@ -61,6 +62,7 @@ public class TopPanelViewer : MonoBehaviour
             }
         }
         if (loginButton) loginButton.SetActive(!loggedIn);
+        if (rankButton) rankButton.SetActive(loggedIn);
 
         // 골드 UI,Kill UI 즉시 초기화
         UpdateGameData();

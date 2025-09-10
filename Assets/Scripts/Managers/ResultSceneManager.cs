@@ -33,6 +33,8 @@ public class ResultSceneManager : MonoBehaviour
     int bonusAwardGold;
     int totalAwardGold;
     int savedGoldBefore;
+    [SerializeField]
+    private RankRegister rankRegister;
 
     void Start()
     {
@@ -59,8 +61,8 @@ public class ResultSceneManager : MonoBehaviour
         //GoldManager.Instance.AddGold(totalAwardGold);
         if (BackendGameData.Instance != null)
         {
-            BackendGameData.Instance.UserGameData.score += result.enemyKillCount;
-            //GoldManager.Instance.AddGold(totalAwardGold);
+            rankRegister.Process(result.enemyKillCount);
+            BackendGameData.Instance.UserGameData.score = result.enemyKillCount;
             BackendGameData.Instance.UserGameData.gold += totalAwardGold;
             BackendGameData.Instance.UserGameData.playTime += result.playTime;
             BackendGameData.Instance.GameDataUpdate(); // 서버 저장

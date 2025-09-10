@@ -40,8 +40,9 @@ public class BackendGameData
         {
             { "score",           UserGameData.score },
             { "gold",            UserGameData.gold },
-            { "playTime",        UserGameData.playTime }
-		};
+            { "playTime",        UserGameData.playTime },
+            { "bestScore",        UserGameData.bestScore }
+        };
 
         // 첫 번째 매개변수는 뒤끝 콘솔의 "게임 정보 관리" 탭에 생성한 테이블 이름
         Backend.GameData.Insert("USER_DATA", param, callback =>
@@ -92,6 +93,7 @@ public class BackendGameData
                         userGameData.score = int.Parse(gameDataJson[0]["score"].ToString());
                         userGameData.gold = int.Parse(gameDataJson[0]["gold"].ToString());
                         userGameData.playTime = Mathf.RoundToInt(float.Parse(gameDataJson[0]["playTime"].ToString()));
+                        userGameData.bestScore = int.Parse(gameDataJson[0]["bestScore"].ToString());
                         //userGameData.experience = float.Parse(gameDataJson[0]["experience"].ToString());
                         //userGameData.gold = int.Parse(gameDataJson[0]["gold"].ToString());
                         //userGameData.jewel = int.Parse(gameDataJson[0]["jewel"].ToString());
@@ -130,7 +132,8 @@ public class BackendGameData
     {
             { "score",           UserGameData.score },
             { "gold",            UserGameData.gold },
-            { "playTime",        UserGameData.playTime }
+            { "playTime",        UserGameData.playTime },
+            { "bestScore",        UserGameData.bestScore }
         //{ "jewel", userGameData.jewel },
         //{ "heart", userGameData.heart }
     };
