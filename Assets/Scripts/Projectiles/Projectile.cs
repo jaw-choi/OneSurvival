@@ -25,12 +25,13 @@ public class Projectile : MonoBehaviour
     {
         projectileData = baseData;
         damage = baseData.damage * weapon.GetDamageMultiplier();
+        //damage = baseData.damage;
         speed = baseData.speed * weapon.GetSpeedMultiplier();
         pierceCount = baseData.pierceCount + Mathf.RoundToInt(weapon.GetPierceBonus());
         ownerWeapon = weapon;
         Destroy(gameObject, baseData.lifetime);
     }
-
+    private float CurrentDamage => damage * PlayerStats.Instance.TotalDamage;
     public void Init(Vector2 direction)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -137,7 +138,7 @@ public class Projectile : MonoBehaviour
                 {
                     Vector2 contact = col.ClosestPoint(transform.position);
                     SpawnHitFx(contact, dir);
-                    col.GetComponent<EnemyBase>()?.TakeDamage(damage, player);
+                    col.GetComponent<EnemyBase>()?.TakeDamage(CurrentDamage, player);
                     ownerWeapon?.AddDamage(damage);
                     Destroy(gameObject);
                     break;
@@ -146,7 +147,7 @@ public class Projectile : MonoBehaviour
                 {
                     Vector2 contact = col.ClosestPoint(transform.position);
                     SpawnHitFx(contact, dir);
-                    col.GetComponent<EnemyBase>()?.TakeDamage(damage, player);
+                    col.GetComponent<EnemyBase>()?.TakeDamage(CurrentDamage, player);
                     ownerWeapon?.AddDamage(damage);
                     pierceCount--;
                     if (pierceCount <= 0) Destroy(gameObject);
@@ -161,7 +162,7 @@ public class Projectile : MonoBehaviour
                         if (!enemyCol.CompareTag("Enemy")) continue;
                         Vector2 contact = enemyCol.ClosestPoint(transform.position);
                         SpawnHitFx(contact, (contact - (Vector2)transform.position).sqrMagnitude > 0.0001f ? (contact - (Vector2)transform.position).normalized : dir);
-                        enemyCol.GetComponent<EnemyBase>()?.TakeDamage(damage, player);
+                        enemyCol.GetComponent<EnemyBase>()?.TakeDamage(CurrentDamage, player);
                         ownerWeapon?.AddDamage(damage);
                     }
                     Destroy(gameObject);

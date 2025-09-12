@@ -15,7 +15,7 @@ public class AoeFireBehaviour : IWeaponFireBehaviour
     {
         Vector2 center = ownerTransform.position;
         float radius = data.projectileData.aoeRadius;
-        float damage = data.projectileData.damage * weapon.GetDamageMultiplier();
+        float damage = data.projectileData.damage * weapon.GetDamageMultiplier() * PlayerStats.Instance.TotalDamage;
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(center, radius);
         foreach (var enemy in enemies)

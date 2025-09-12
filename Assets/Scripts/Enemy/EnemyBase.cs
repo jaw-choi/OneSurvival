@@ -130,7 +130,7 @@ public class EnemyBase : MonoBehaviour
             dir = (transform.position - attacker.position).normalized;
 
         currentHP -= dmg;
-
+        Debug.Log($"{name} + has taken {dmg} dmg");
         if (currentHP <= 0)
         {
             isDying = true;

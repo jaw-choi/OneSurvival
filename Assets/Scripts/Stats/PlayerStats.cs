@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public string characterName = "One Man";
 
     [Header("Base Stats")]
-    public float baseDamage = 5f;
+    public float baseDamage = 1f;
     public float baseMoveSpeed = 3f;
     public float baseMaxHealth = 100f;
     public float baseRegen = 0f;
@@ -45,10 +45,15 @@ public class PlayerStats : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
-        RecalculateAll(); // includes permanent + runtime
-    }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // 이미 Instance가 있으면 자신을 제거
+            return;
+        }
 
+        Instance = this;
+        RecalculateAll();
+    }
     // --- Permanent (meta) ---
     private void PullPermanent()
     {

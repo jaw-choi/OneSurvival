@@ -21,30 +21,9 @@ public class GarlicWeapon : MonoBehaviour
         if (weapon == null || weapon.weaponData == null)
             return;
 
-        tickTimer += Time.deltaTime;
-        if (tickTimer >= tickInterval)
-        {
-            ApplyAreaDamage();
-            tickTimer = 0f;
-        }
-
         UpdateVisualRadius();
     }
 
-    void ApplyAreaDamage()
-    {
-        float radius = weapon.weaponData.projectileData.aoeRadius;
-        float damage = weapon.weaponData.projectileData.damage * weapon.GetDamageMultiplier();
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
-        foreach (var target in hits)
-        {
-            if (target.CompareTag("Enemy"))
-                target.GetComponent<EnemyBase>()?.TakeDamage(damage, player);
-        }
-        weapon.AddDamage(damage);
-
-    }
 
     void UpdateVisualRadius()
     {
