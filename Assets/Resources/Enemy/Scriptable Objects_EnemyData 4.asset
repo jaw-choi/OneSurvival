@@ -19,7 +19,7 @@ MonoBehaviour:
   expandable: 1
   maxExpand: 100
   maxHP: 70
-  moveSpeed: 1.6
+  moveSpeed: 1.1
   contactDamage: 5
   expDrop: 12
   expGemPrefab: {fileID: 2818411570915226872, guid: 2747bb9388b9fde4bb4028f0b49826a0,

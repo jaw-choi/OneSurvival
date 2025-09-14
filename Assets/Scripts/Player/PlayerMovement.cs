@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isMoving", isMoving);
 
         Vector2 nextVec = moveInput * PlayerStats.Instance.TotalMoveSpeed * Time.fixedDeltaTime;
+
         rb.MovePosition(rb.position + nextVec);
 
     }

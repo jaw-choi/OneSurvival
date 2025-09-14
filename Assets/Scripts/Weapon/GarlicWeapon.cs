@@ -3,15 +3,11 @@ using UnityEngine;
 public class GarlicWeapon : MonoBehaviour
 {
     private Weapon weapon;
-    private Transform player;
-    private float tickTimer;
-    private float tickInterval = 0.5f; // 반초마다 데미지
 
     private SpriteRenderer visual;
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         weapon = GetComponent<Weapon>();
         visual = GetComponentInChildren<SpriteRenderer>();
     }

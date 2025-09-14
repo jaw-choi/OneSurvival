@@ -15460,7 +15460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: One Man
   baseDamage: 1
-  baseMoveSpeed: 3
+  baseMoveSpeed: 1.8
   baseMaxHealth: 100
   baseRegen: 0
   rtGlobalDamageMul: 1
