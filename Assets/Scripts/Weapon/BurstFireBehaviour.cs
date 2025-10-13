@@ -20,8 +20,6 @@ public class BurstFireBehaviour : IWeaponFireBehaviour
         Vector2 center = ownerTransform.position;
         if (data.projectileData.hitEffectPrefab != null)
             Object.Instantiate(data.projectileData.hitEffectPrefab, center, Quaternion.identity);
-
-
     }
 
     private IEnumerator FireBurst(Vector2 direction)

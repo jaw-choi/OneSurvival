@@ -62,6 +62,9 @@ public class Weapon : MonoBehaviour
             case WeaponFireType.Flamethrower:
                 fireBehaviour = new FlamethrowerBehaviour(this);
                 break;
+            case WeaponFireType.Bible:
+                fireBehaviour = new OrbitFireBehaviour(this);
+                break;
             case WeaponFireType.Aoe:
                 fireBehaviour = new AoeFireBehaviour(this);
                 break;
