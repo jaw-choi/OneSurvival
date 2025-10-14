@@ -19,7 +19,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1972293696226914795, guid: 1ec72b8a94563434180597711a72dadc,
     type: 3}
   projectileData: {fileID: 11400000, guid: a1fae4693908249459bd31496a5a6d91, type: 2}
-  fireType: 1
+  currentLevel: 2
+  fireType: 3
   attackCooldown: 2
   burstCount: 1
   timeBetweenBurstShots: 0
@@ -28,8 +29,25 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  attackSFX: {fileID: 0}
   attackAnimName: 
+  orbitCount: 3
+  orbitRadius: 1.5
+  orbitSpeedDeg: 300
+  orbitFaceOutward: 1
+  orbitDuration: 0
+  orbitUseRigidbodyMove: 0
+  orbitRandomStart: 1
+  orbitSpawnEase: 0
+  orbitSpawnEaseTime: 0
+  orbitPersistent: 1
+  orbitSpeedBaseDeg: 120
+  orbitCountPerLevel: 0100000002000000030000000400000005000000
+  orbitSpeedDegPerLevel:
+  - 120
+  - 140
+  - 160
+  - 180
+  - 200
   fireRateMultiplierPerLevel:
   - 1
   - 1.3
