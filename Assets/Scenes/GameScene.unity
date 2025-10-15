@@ -15371,6 +15371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b611fe10159ff4796c63fbb871792f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animCon:
+  - {fileID: 9100000, guid: 287f0cf778b95fb4a9e79f2338f7f15d, type: 2}
+  - {fileID: 9100000, guid: eb1ae3e395b532e4d8dbc08a412e4a7d, type: 2}
+  - {fileID: 9100000, guid: aef488f549a848948a736455522fe730, type: 2}
+  - {fileID: 9100000, guid: f2855d618fc8d9c499189d3f39b9cbbc, type: 2}
   movement: {x: 0, y: 0}
   moveSpeed: 3
   joyStick: {fileID: 1343299636}

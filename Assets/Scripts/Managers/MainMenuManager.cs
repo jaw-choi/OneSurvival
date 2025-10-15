@@ -13,8 +13,9 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject settingsPanelPrefab;
     [SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
-
+    [SerializeField] private GameObject characterSelectPanel;
     private GameObject settingsInstance;
+
     void Awake()
     {
         if (startButton) startButton.onClick.AddListener(OnClickStart);
@@ -23,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
         if (quitButton) quitButton.onClick.AddListener(OnClickQuit);
         if (loginButton) loginButton.onClick.AddListener(OnClickLogin);
     }
+
 
     void Start()
     {
@@ -35,9 +37,15 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickStart()
     {
         GameResultData.Instance?.Reset();
+        characterSelectPanel.SetActive(true);
+        //SceneManager.LoadScene("GameScene");
+    }
+    public void OnClickCharacter(int Id)
+    {
+       SettingsManager.Instance.playerID = Id;
+        // 게임 시작
         SceneManager.LoadScene("GameScene");
     }
-
     public void OnClickUpGrade()
     {
         SceneManager.LoadScene("UpgradeScene");

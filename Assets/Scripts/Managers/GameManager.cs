@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Transform PlayerTransform { get; private set; } // 플레이어 위치 참조
     public CanvasGroup gameOverPanel; // 게임 오버 패널
     public PlayerMovement player; // 플레이어 스크립트
+    
     public Image fadeImage; // 페이드용 이미지
     public TextMeshProUGUI gameOverText; // 게임 오버 텍스트
     public WeaponData defaultWeaponData; // 기본 무기 데이터
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     // 게임 시작 시 초기화 실행

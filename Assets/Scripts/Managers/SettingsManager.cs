@@ -11,6 +11,7 @@ public sealed class SettingsManager : MonoBehaviour
     [Header("Mixers")]
     [SerializeField] private AudioMixer audioMixer;
 
+    public int playerID;
     private const string KeyMaster = "vol_master";
     private const string KeyMusic = "vol_music";
     private const string KeySfx = "vol_sfx";
