@@ -830,6 +830,7 @@ MonoBehaviour:
   loginButton: {fileID: 0}
   settingsPanelPrefab: {fileID: 0}
   uiRoot: {fileID: 0}
+  characterSelectPanel: {fileID: 0}
 --- !u!4 &922640418
 Transform:
   m_ObjectHideFlags: 0

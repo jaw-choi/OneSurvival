@@ -15350,7 +15350,6 @@ GameObject:
   - component: {fileID: 1015232767}
   - component: {fileID: 1015232768}
   - component: {fileID: 1015232769}
-  - component: {fileID: 1015232770}
   - component: {fileID: 1015232771}
   m_Layer: 0
   m_Name: Player
@@ -15376,9 +15375,9 @@ MonoBehaviour:
   - {fileID: 9100000, guid: eb1ae3e395b532e4d8dbc08a412e4a7d, type: 2}
   - {fileID: 9100000, guid: aef488f549a848948a736455522fe730, type: 2}
   - {fileID: 9100000, guid: f2855d618fc8d9c499189d3f39b9cbbc, type: 2}
+  joyStick: {fileID: 1343299636}
   movement: {x: 0, y: 0}
   moveSpeed: 3
-  joyStick: {fileID: 1343299636}
 --- !u!114 &1015232762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15583,33 +15582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484767ba3d38c604f8f4307f52be65a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1015232770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015232760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3714f0e6e49cd4e46b14cdde74a91614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: One Man
-  baseDamage: 1
-  baseMoveSpeed: 1.8
-  baseMaxHealth: 100
-  baseRegen: 0
-  rtGlobalDamageMul: 1
-  rtGlobalFireRateMul: 1
-  rtCooldownMul: 1
-  rtProjectileSpeedMul: 1
-  rtPierceAdd: 0
-  rtMoveSpeedMul: 1
-  rtMoveSpeedAdd: 0
-  rtMaxHpAdd: 0
-  rtRegenAdd: 0
-  rtPickupRangeAdd: 0
 --- !u!114 &1015232771
 MonoBehaviour:
   m_ObjectHideFlags: 0

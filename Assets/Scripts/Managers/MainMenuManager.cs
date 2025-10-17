@@ -42,7 +42,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnClickCharacter(int Id)
     {
-       SettingsManager.Instance.playerID = Id;
+       PlayerStats.Instance.playerID = Id;
         // 게임 시작
         SceneManager.LoadScene("GameScene");
     }

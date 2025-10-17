@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats Instance { get; private set; }
     [Header("Player")]
     public string characterName = "One Man";
+    public int playerID = 0;
 
     [Header("Base Stats")]
     public float baseDamage = 1f;
@@ -52,8 +53,10 @@ public class PlayerStats : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject); // 씬 전환 시 유지
         RecalculateAll();
     }
+
     // --- Permanent (meta) ---
     private void PullPermanent()
     {
@@ -141,10 +144,10 @@ public class PlayerStats : MonoBehaviour
         PullPermanent();
 
         // Totals = base × perm × runtime + runtime_add
-        TotalDamage = baseDamage * permDamageMul * rtGlobalDamageMul;
-        TotalMoveSpeed = (baseMoveSpeed + rtMoveSpeedAdd) * permMoveSpeedMul * rtMoveSpeedMul;
-        TotalMaxHealth = (baseMaxHealth * permMaxHpMul) + rtMaxHpAdd;
-        TotalRegen = (baseRegen + permRegenAdd) + rtRegenAdd;
+        TotalDamage = baseDamage * permDamageMul * rtGlobalDamageMul * Character.WeaponDamage;
+        TotalMoveSpeed = (baseMoveSpeed + rtMoveSpeedAdd) * permMoveSpeedMul * rtMoveSpeedMul * Character.Speed;
+        TotalMaxHealth = ((baseMaxHealth * permMaxHpMul) + rtMaxHpAdd) * Character.MaxHP;
+        TotalRegen = ((baseRegen + permRegenAdd) + rtRegenAdd) * Character.RegenHP;
 
         OnStatsChanged?.Invoke();
         //PlayerHealth.Instance.HandleStatsChanged();
