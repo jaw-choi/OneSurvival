@@ -10,7 +10,11 @@ public class UserInfo : MonoBehaviour
 
 	private static UserInfoData data = new UserInfoData();
 	public static UserInfoData Data => data;
-	public static bool IsLoggedIn => data.isLoggedIn;
+	public static bool IsLoggedIn
+	{
+		get => data.isLoggedIn;
+		set => data.isLoggedIn = value;
+	}
 
 	public void GetUserInfoFromBackend()
 	{
@@ -33,6 +37,7 @@ public class UserInfo : MonoBehaviour
 					data.emailForFindPassword = json["emailForFindPassword"]?.ToString();    // 비밀번호 찾기용 이메일(없으면 null)
 					data.subscriptionType = json["subscriptionType"].ToString();         // 가입 유형(커스텀/연동 등)
 					data.federationId = json["federationId"]?.ToString();            // 연동 계정 ID(커스텀 가입 시 null)
+					data.isLoggedIn = true;
 				}
 				// JSON 파싱 예외 처리
 				catch (System.Exception e)

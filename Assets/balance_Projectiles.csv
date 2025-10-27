@@ -1,0 +1,5 @@
+assetName,damage,speed,pierceCount,aoeRadius,lifetime
+ProjectileData_Axe,5,3,10,3,2
+ProjectileData_Bible,5,3,20,2,3
+ProjectileData_Garlic,5,1,1,1,1
+ProjectileData_P1,10,5,2,0,1.331

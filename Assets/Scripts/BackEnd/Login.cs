@@ -56,7 +56,7 @@ public class Login : LoginBase
             if (callback.IsSuccess())
             {
                 SetMessage($"{inputFieldID.text}님 환영합니다.");
-
+                UserInfo.IsLoggedIn = true;
                 if (GoldManager.Instance != null)
                 {
                     GoldManager.Instance.LoadGold();

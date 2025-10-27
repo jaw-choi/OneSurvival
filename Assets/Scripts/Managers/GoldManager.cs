@@ -27,16 +27,17 @@ public class GoldManager : MonoBehaviour
 
     public void AddGold(int amount)
     {
-        Gold += amount;
+        BackendGameData.Instance.UserGameData.gold += amount;
         SaveGold();
         OnGoldChanged.Invoke(Gold);
     }
 
     public bool SpendGold(int amount)
     {
-        if (Gold >= amount)
+        
+        if (BackendGameData.Instance.UserGameData.gold >= amount)
         {
-            Gold -= amount;
+            BackendGameData.Instance.UserGameData.gold -= amount;
             SaveGold();
             OnGoldChanged.Invoke(Gold);
             return true;
@@ -49,7 +50,7 @@ public class GoldManager : MonoBehaviour
         if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
         {
             // 서버 업데이트
-            BackendGameData.Instance.UserGameData.gold = Gold;
+            //BackendGameData.Instance.UserGameData.gold = Gold;
             BackendGameData.Instance.GameDataUpdate();
         }
         else

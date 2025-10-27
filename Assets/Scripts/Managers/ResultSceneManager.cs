@@ -101,6 +101,8 @@ public class ResultSceneManager : MonoBehaviour
         goldText.text = "얻은 골드 : " + targetDisplay.ToString();
 
         int finalWallet = savedGoldBefore + totalAwardGold;
+        //if (BackendGameData.Instance != null)
+            //BackendGameData.Instance.UserGameData.gold = totalAwardGold;
         //GoldManager.Instance.AddGold(finalWallet); // 서버/로컬 연동
         //PlayerPrefs.SetInt("Gold", finalWallet);
         //PlayerPrefs.Save();
