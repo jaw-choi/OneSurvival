@@ -59,13 +59,17 @@ public class ResultSceneManager : MonoBehaviour
         bonusAwardGold = CalculateBonus(result);
         totalAwardGold = runAwardGold + bonusAwardGold + Mathf.Max(0, clearBonus);
         //GoldManager.Instance.AddGold(totalAwardGold);
-        if (BackendGameData.Instance != null)
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
         {
             rankRegister.Process(result.enemyKillCount);
             BackendGameData.Instance.UserGameData.score = result.enemyKillCount;
             BackendGameData.Instance.UserGameData.gold += totalAwardGold;
             BackendGameData.Instance.UserGameData.playTime += result.playTime;
             BackendGameData.Instance.GameDataUpdate(); // 서버 저장
+        }
+        else
+        {
+            GoldManager.Instance.AddGold(totalAwardGold);
         }
         if (autoStartAward) StartCoroutine(AnimateAward());
     }

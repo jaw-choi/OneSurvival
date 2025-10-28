@@ -27,7 +27,14 @@ public class GoldManager : MonoBehaviour
 
     public void AddGold(int amount)
     {
-        BackendGameData.Instance.UserGameData.gold += amount;
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+        {
+            BackendGameData.Instance.UserGameData.gold += amount;
+        }
+        else
+        {
+            Gold += amount;
+        }
         SaveGold();
         OnGoldChanged.Invoke(Gold);
     }

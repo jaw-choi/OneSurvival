@@ -21,7 +21,7 @@ MonoBehaviour:
     type: 3}
   projectileData: {fileID: 11400000, guid: ed441d53ed7ca4d4d8dfee957dc4411b, type: 2}
   currentLevel: 2
-  fireType: 3
+  fireType: 4
   attackCooldown: 1
   burstCount: 2
   timeBetweenBurstShots: 1
@@ -31,6 +31,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4
   attackAnimName: 
+  orbitCount: 1
+  orbitRadius: 1.5
+  orbitSpeedDeg: 120
+  orbitFaceOutward: 1
+  orbitDuration: 0
+  orbitUseRigidbodyMove: 0
+  orbitRandomStart: 1
+  orbitSpawnEase: 1
+  orbitSpawnEaseTime: 0.12
+  orbitPersistent: 1
+  orbitSpeedBaseDeg: 120
+  orbitCountPerLevel: 0100000002000000030000000400000005000000
+  orbitSpeedDegPerLevel:
+  - 120
+  - 140
+  - 160
+  - 180
+  - 200
   fireRateMultiplierPerLevel:
   - 1
   - 1.3
