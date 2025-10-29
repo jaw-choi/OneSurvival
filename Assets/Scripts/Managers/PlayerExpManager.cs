@@ -19,7 +19,10 @@ public class PlayerExpManager : MonoBehaviour
     }
     public void AddExp(int amount)
     {
-        int bonus = Mathf.RoundToInt(amount * (PlayerStats.Instance.GetExpBonusMultiplier() - 1f));
+        int bonus = 0;
+        if(PlayerStats.Instance!=null)
+            bonus = Mathf.RoundToInt(amount * (PlayerStats.Instance.GetExpBonusMultiplier() - 1f));
+
         currentExp += amount + bonus;
 
         Debug.Log($"EXP {amount}");

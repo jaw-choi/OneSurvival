@@ -4,6 +4,11 @@ using TMPro;
 
 public class SettingsUI : MonoBehaviour
 {
+    public enum SettingsMode { MainMenu, InGame }
+
+    [Header("Mode")]
+    [SerializeField] private SettingsMode mode;
+
     [Header("Sliders")]
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
@@ -18,6 +23,9 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI masterLabel;
     [SerializeField] private TextMeshProUGUI musicLabel;
     [SerializeField] private TextMeshProUGUI sfxLabel;
+
+    [Header("Button")]
+    [SerializeField] private Button backButton;
 
     void OnEnable()
     {
@@ -48,6 +56,8 @@ public class SettingsUI : MonoBehaviour
             shakeToggle.onValueChanged.AddListener(OnShake);
             //hitStopToggle.onValueChanged.AddListener(OnHitStop);
 
+            backButton.onClick.RemoveAllListeners();
+            backButton.onClick.AddListener(OnBack);
         }
         else
         {
@@ -59,6 +69,7 @@ public class SettingsUI : MonoBehaviour
             shakeToggle.onValueChanged.RemoveListener(OnShake);
             //hitStopToggle.onValueChanged.RemoveListener(OnHitStop);
 
+            backButton.onClick.RemoveAllListeners();
         }
     }
 
@@ -70,6 +81,22 @@ public class SettingsUI : MonoBehaviour
     private void OnShake(bool on) { SettingsManager.Instance.SetScreenShake(on); }
     private void OnHitStop(bool on) { SettingsManager.Instance.SetHitStop(on); }
 
+    private void OnBack()
+    {
+        if (mode == SettingsMode.MainMenu)
+        {
+            // 메인메뉴용: 단순 닫기
+            gameObject.SetActive(false);
+        }
+        else if (mode == SettingsMode.InGame)
+        {
+            // 인게임용: 일시정지 해제 후 닫기
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            gameObject.SetActive(false);
+        }
+    }
+
     private void UpdateLabels()
     {
         if (masterLabel) masterLabel.text = Mathf.RoundToInt(SettingsManager.Instance.Master * 100f) + "%";
@@ -77,5 +104,8 @@ public class SettingsUI : MonoBehaviour
         if (sfxLabel) sfxLabel.text = Mathf.RoundToInt(SettingsManager.Instance.Sfx * 100f) + "%";
     }
 
-    public void OnClickClose() { gameObject.SetActive(false); }
+    public void SetMode(SettingsMode newMode)
+    {
+        mode = newMode;
+    }
 }

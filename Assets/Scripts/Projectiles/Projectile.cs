@@ -31,7 +31,8 @@ public class Projectile : MonoBehaviour
         ownerWeapon = weapon;
         Destroy(gameObject, baseData.lifetime);
     }
-    private float CurrentDamage => damage * PlayerStats.Instance.TotalDamage;
+    private float CurrentDamage => damage * (PlayerStats.Instance?.TotalDamage ?? 1f);
+
     public void Init(Vector2 direction)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;

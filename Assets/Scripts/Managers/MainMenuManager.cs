@@ -32,6 +32,7 @@ public class MainMenuManager : MonoBehaviour
             new GameObject("GameResultData").AddComponent<GameResultData>();
         else
             GameResultData.Instance.Reset();
+
     }
 
     public void OnClickStart()
@@ -57,6 +58,9 @@ public class MainMenuManager : MonoBehaviour
         if (settingsInstance == null)
             settingsInstance = Instantiate(settingsPanelPrefab, uiRoot);
         settingsInstance.SetActive(true);
+        var panel = settingsInstance.GetComponent<SettingsUI>();
+        panel.SetMode(SettingsUI.SettingsMode.MainMenu);
+
     }
 
     public void OnClickBack()

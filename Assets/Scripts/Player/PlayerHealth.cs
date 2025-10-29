@@ -61,6 +61,8 @@ public class PlayerHealth : MonoBehaviour
     }
     void Start()
     {
+        if (PlayerStats.Instance == null)
+            return;
         currentHealth = PlayerStats.Instance.TotalMaxHealth;
         maxHealth = PlayerStats.Instance.TotalMaxHealth;
 
@@ -83,8 +85,10 @@ public class PlayerHealth : MonoBehaviour
         HandleRegen();
     }
     void HandleRegen()
-    { 
-        float regenAmount = PlayerStats.Instance.TotalRegen;
+    {
+        float regenAmount = 0f;
+        if (PlayerStats.Instance!=null)
+            regenAmount = PlayerStats.Instance.TotalRegen;
         if (regenAmount <= 0f) return;
 
         regenTimer += Time.deltaTime;

@@ -1989,14 +1989,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16036c74e1b73f34d9971844f195497b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   masterSlider: {fileID: 7614780360765847584}
   musicSlider: {fileID: 3385627082540814157}
   sfxSlider: {fileID: 5116611610545019450}
   hapticsToggle: {fileID: 1604149276212968638}
   shakeToggle: {fileID: 4946843985044134544}
+  hitStopToggle: {fileID: 0}
   masterLabel: {fileID: 5785005405090505472}
   musicLabel: {fileID: 733172799183654271}
   sfxLabel: {fileID: 4409960072975730221}
+  backButton: {fileID: 6453281180262795599}
 --- !u!1 &5908891435603049096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,19 +2308,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5415624392645245041}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5826991206221522737}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7065913841085710793
 GameObject:
   m_ObjectHideFlags: 0

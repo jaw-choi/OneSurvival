@@ -1,50 +1,52 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
-    public CanvasGroup pausePanel;
-    //public CanvasGroup overlay;
+
     public float fadeDuration = 0.15f;
 
     bool isPaused;
     UnscaledFader fader;
 
+    [SerializeField] private GameObject settingsPanelPrefab;
+    [SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
+
+    private GameObject settingsInstance;
+
     void Awake()
     {
         fader = new UnscaledFader();
-        SetPanel(false);
     }
 
     public void Toggle()
     {
-        if (isPaused) Resume();
-        else Pause();
+        Pause();
     }
-
     public void Pause()
     {
-        if (isPaused) return;
-        isPaused = true;
         Time.timeScale = 0f;
         AudioListener.pause = true;
-        SetPanel(true);
-        fader.Fade(pausePanel, 0f, 1f, fadeDuration);
-        //fader.Fade(overlay, 0f, 1f, fadeDuration);
+
+        if (uiRoot == null) uiRoot = FindFirstObjectByType<Canvas>()?.transform; // 안전장치
+        if (settingsInstance == null)
+            settingsInstance = Instantiate(settingsPanelPrefab, uiRoot);
+        settingsInstance.SetActive(true);
+        var panel = settingsInstance.GetComponent<SettingsUI>();
+        panel.SetMode(SettingsUI.SettingsMode.InGame);
+
     }
 
     public void Resume()
     {
-        if (!isPaused) return;
-        isPaused = false;
-        fader.Fade(pausePanel, 1f, 0f, fadeDuration, () =>
-        {
-            SetPanel(false);
-            Time.timeScale = 1f;
-            AudioListener.pause = false;
-        });
-        //fader.Fade(overlay, 1f, 0f, fadeDuration);
+        if (settingsInstance)
+            settingsInstance.SetActive(false);
+
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
+
 
     public void Restart()
     {
@@ -62,13 +64,6 @@ public class PauseManager : MonoBehaviour
 #endif
     }
 
-    void SetPanel(bool show)
-    {
-        pausePanel.alpha = show ? 1f : 0f;
-        pausePanel.interactable = show;
-        pausePanel.blocksRaycasts = show;
-        //overlay.alpha = show ? 1f : 0f;
-        //overlay.interactable = show;
-        //overlay.blocksRaycasts = show;
-    }
 }
+
+
