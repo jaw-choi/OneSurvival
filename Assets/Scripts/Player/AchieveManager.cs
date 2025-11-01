@@ -45,4 +45,39 @@ public class AchieveManager : MonoBehaviour
     {
         
     }
+    private void LateUpdate()
+    {
+        foreach(Achieve achieve in achieves)
+        {
+            CheckAchieve(achieve);
+        }
+    }
+
+    void CheckAchieve(Achieve achieve)
+    {
+        bool isAchieve = false;
+
+        switch(achieve)
+        {
+            case Achieve.unlockCharacter1:
+                if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+                {
+                    isAchieve = BackendGameData.Instance.UserGameData.bestScore >= 20;
+                }
+                break;
+            case Achieve.unlockCharacter2:
+                if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+                {
+                    isAchieve = BackendGameData.Instance.UserGameData.gold >100;
+                }
+                break;
+            case Achieve.unlockCharacter3:
+                break;
+
+        }
+        if(isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0)
+        {
+            PlayerPrefs.SetInt(achieve.ToString(), 1);
+        }
+    }
 }

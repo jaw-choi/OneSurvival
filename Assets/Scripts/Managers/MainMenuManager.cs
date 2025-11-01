@@ -38,6 +38,8 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickStart()
     {
         GameResultData.Instance?.Reset();
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
         characterSelectPanel.SetActive(true);
         //SceneManager.LoadScene("GameScene");
     }

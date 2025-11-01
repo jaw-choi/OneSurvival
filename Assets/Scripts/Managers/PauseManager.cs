@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanelPrefab;
     [SerializeField] private Transform uiRoot; // Canvas 아래 빈 오브젝트
 
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
     private GameObject settingsInstance;
 
     void Awake()
@@ -36,8 +38,19 @@ public class PauseManager : MonoBehaviour
         var panel = settingsInstance.GetComponent<SettingsUI>();
         panel.SetMode(SettingsUI.SettingsMode.InGame);
 
-    }
+        var mainMenuBtn = settingsInstance.transform.Find("Button_MainMenu")?.GetComponent<Button>();
+        if (mainMenuBtn != null)
+        {
+            mainMenuBtn.gameObject.SetActive(true);
+            mainMenuBtn.onClick.RemoveAllListeners();
+            mainMenuBtn.onClick.AddListener(GoToMainMenu);
 
+        }
+    }
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void Resume()
     {
         if (settingsInstance)

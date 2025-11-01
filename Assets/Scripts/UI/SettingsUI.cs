@@ -25,10 +25,16 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sfxLabel;
 
     [Header("Button")]
+    [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button backButton;
 
     void OnEnable()
     {
+        if (mode == SettingsMode.MainMenu)
+            mainMenuButton.gameObject.SetActive(false);
+        else if (mode == SettingsMode.InGame)
+            mainMenuButton.gameObject.SetActive(true);
+
         var sm = SettingsManager.Instance;
         masterSlider.SetValueWithoutNotify(sm.Master);
         musicSlider.SetValueWithoutNotify(sm.Music);
