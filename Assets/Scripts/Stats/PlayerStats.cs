@@ -148,6 +148,9 @@ public class PlayerStats : MonoBehaviour
         TotalMoveSpeed = (baseMoveSpeed + rtMoveSpeedAdd) * permMoveSpeedMul * rtMoveSpeedMul * Character.Speed;
         TotalMaxHealth = ((baseMaxHealth * permMaxHpMul) + rtMaxHpAdd) * Character.MaxHP;
         TotalRegen = ((baseRegen + permRegenAdd) + rtRegenAdd) * Character.RegenHP;
+        Debug.Log(Character.WeaponDamage + "Character.WeaponDamage");
+        Debug.Log(playerID + "playerID");
+        Debug.Log(TotalMaxHealth + "TotalMaxHealth");
 
         OnStatsChanged?.Invoke();
         //PlayerHealth.Instance.HandleStatsChanged();

@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         if (animCon == null || animCon.Length == 0 || animator == null) return;
 
         int id = PlayerStats.Instance?.playerID??0;
-
+        PlayerStats.Instance.RecalculateAll();
         animator.runtimeAnimatorController = animCon[id];
     }
 
