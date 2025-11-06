@@ -41,13 +41,26 @@ public class GoldManager : MonoBehaviour
 
     public bool SpendGold(int amount)
     {
-        
-        if (BackendGameData.Instance.UserGameData.gold >= amount)
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
         {
-            BackendGameData.Instance.UserGameData.gold -= amount;
-            SaveGold();
-            OnGoldChanged.Invoke(Gold);
-            return true;
+            if (BackendGameData.Instance.UserGameData.gold >= amount)
+            {
+                BackendGameData.Instance.UserGameData.gold -= amount;
+                SaveGold();
+                //OnGoldChanged.Invoke(Gold);
+                return true;
+            }
+        }
+        else
+        {
+            //Gold += amount;
+            if (Gold >= amount)
+            {
+                Gold -= amount;
+                SaveGold();
+                OnGoldChanged.Invoke(Gold);
+                return true;
+            }
         }
         return false;
     }

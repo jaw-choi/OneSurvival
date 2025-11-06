@@ -12,6 +12,9 @@ public class GameResultData : MonoBehaviour
     public string characterName;
     public string mapName;
 
+    public int totalEnemyKillCount; // 전체 누적 킬 수
+    private const string TOTAL_KILL_KEY = "TotalEnemyKillCount";
+
     public List<WeaponResult> weaponResults = new();
 
     void Awake()
@@ -20,6 +23,7 @@ public class GameResultData : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            LoadTotalKillCount();
         }
         else Destroy(gameObject);
     }
@@ -33,8 +37,31 @@ public class GameResultData : MonoBehaviour
         mapName = "";
         weaponResults.Clear();
     }
+    public void SaveTotalKillCount()
+    {
+        PlayerPrefs.SetInt(TOTAL_KILL_KEY, totalEnemyKillCount);
+        PlayerPrefs.Save();
+    }
 
+    public void LoadTotalKillCount()
+    {
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+        {
+            totalEnemyKillCount = BackendGameData.Instance.UserGameData.score;
+        }
+        else
+        {
+            totalEnemyKillCount = PlayerPrefs.GetInt(TOTAL_KILL_KEY, 0);
+        }
+    }
+    public void AddToTotalKillCount(int count)
+    {
+        totalEnemyKillCount += count;
+        SaveTotalKillCount();
+    }
 }
+
+
 
 [System.Serializable]
 public class WeaponResult

@@ -5361,7 +5361,7 @@ MonoBehaviour:
   baseDamage: 1
   baseMoveSpeed: 3
   baseMaxHealth: 100
-  baseRegen: 0
+  baseRegen: 0.1
   rtGlobalDamageMul: 1
   rtGlobalFireRateMul: 1
   rtCooldownMul: 1

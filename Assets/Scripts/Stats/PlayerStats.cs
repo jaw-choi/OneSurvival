@@ -12,7 +12,7 @@ public class PlayerStats : MonoBehaviour
     public float baseDamage = 1f;
     public float baseMoveSpeed = 3f;
     public float baseMaxHealth = 100f;
-    public float baseRegen = 0f;
+    public float baseRegen = 0.1f;
 
     [Header("Permanent (read-only multipliers from meta)")]
     // These are derived from PermanentStatManager on each recalc
@@ -79,7 +79,7 @@ public class PlayerStats : MonoBehaviour
     public float GetGoldBonusMultiplier()
     {
         // NOTE: GlodBonus 철자 확인 필요. 실제 enum명이 GlodBonus면 그대로 두세요.
-        return 1f + PermanentStatManager.GetValue(PermanentStatType.GlodBonus);
+        return 1f + PermanentStatManager.GetValue(PermanentStatType.GoldBonus);
     }
 
     // --- Runtime upgrades API (used by level-up options) ---
@@ -147,10 +147,12 @@ public class PlayerStats : MonoBehaviour
         TotalDamage = baseDamage * permDamageMul * rtGlobalDamageMul * Character.WeaponDamage;
         TotalMoveSpeed = (baseMoveSpeed + rtMoveSpeedAdd) * permMoveSpeedMul * rtMoveSpeedMul * Character.Speed;
         TotalMaxHealth = ((baseMaxHealth * permMaxHpMul) + rtMaxHpAdd) * Character.MaxHP;
-        TotalRegen = ((baseRegen + permRegenAdd) + rtRegenAdd) * Character.RegenHP;
-        Debug.Log(Character.WeaponDamage + "Character.WeaponDamage");
+        TotalRegen += ((baseRegen + permRegenAdd) + rtRegenAdd) * Character.RegenHP;
         Debug.Log(playerID + "playerID");
+        Debug.Log(TotalMoveSpeed + "TotalMoveSpeed");
+        Debug.Log(TotalDamage + "Character.WeaponDamage");
         Debug.Log(TotalMaxHealth + "TotalMaxHealth");
+        Debug.Log(TotalRegen + "TotalRegen");
 
         OnStatsChanged?.Invoke();
         //PlayerHealth.Instance.HandleStatsChanged();

@@ -31,7 +31,15 @@ public class StatUpgradeUIItem : MonoBehaviour
         //effectText.text = $"Effect: {upgradeData.GetValue(level)}";
         costText.text = $"{upgradeData.GetCost(level)} G";
 
-        bool canUpgrade = level < max && BackendGameData.Instance.UserGameData.gold >= upgradeData.GetCost(level);
+        bool canUpgrade = false;
+        if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+        {
+            canUpgrade = level < max && BackendGameData.Instance.UserGameData.gold >= upgradeData.GetCost(level);
+        }
+        else
+        {
+            canUpgrade = level < max && GoldManager.Instance.Gold >= upgradeData.GetCost(level);
+        }
         upgradeButton.interactable = canUpgrade;
     }
 

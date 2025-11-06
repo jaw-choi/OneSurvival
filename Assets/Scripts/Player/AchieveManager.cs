@@ -64,14 +64,30 @@ public class AchieveManager : MonoBehaviour
                 {
                     isAchieve = BackendGameData.Instance.UserGameData.bestScore >= 20;
                 }
+                else
+                {
+                    isAchieve = GameResultData.Instance.totalEnemyKillCount >= 20;
+                }
                 break;
             case Achieve.unlockCharacter2:
                 if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
                 {
                     isAchieve = BackendGameData.Instance.UserGameData.gold >100;
                 }
+                else
+                {
+                    isAchieve = GoldManager.Instance.Gold > 100;
+                }
                 break;
             case Achieve.unlockCharacter3:
+                if (UserInfo.IsLoggedIn && BackendGameData.Instance != null)
+                {
+                    isAchieve = BackendGameData.Instance.UserGameData.gold > 100;
+                }
+                else
+                {
+                    isAchieve = GoldManager.Instance.Gold > 100;
+                }
                 break;
 
         }

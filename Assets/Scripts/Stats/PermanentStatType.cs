@@ -6,5 +6,5 @@ public enum PermanentStatType
     MoveSpeed,
     ProjectileSpeed,
     ExpBonus,
-    GlodBonus
+    GoldBonus
 }

@@ -23,7 +23,7 @@ public static class PermanentStatManager
             case PermanentStatType.MoveSpeed: return level * 0.05f;// 2 level
             case PermanentStatType.ProjectileSpeed: return level * 0.1f;// 2 level
             case PermanentStatType.ExpBonus: return level * 0.03f;// 5 level
-            case PermanentStatType.GlodBonus: return level * 0.1f;// 5 level
+            case PermanentStatType.GoldBonus: return level * 0.1f;// 5 level
             case PermanentStatType.MaxHP: return level * 0.1f;// 5 level
             case PermanentStatType.Regen: return level * 0.1f;// 5 level
             default: return 0f;

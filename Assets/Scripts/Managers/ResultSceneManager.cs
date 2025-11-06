@@ -70,6 +70,7 @@ public class ResultSceneManager : MonoBehaviour
         else
         {
             GoldManager.Instance.AddGold(totalAwardGold);
+            GameResultData.Instance.AddToTotalKillCount(result.enemyKillCount);
         }
         if (autoStartAward) StartCoroutine(AnimateAward());
     }
