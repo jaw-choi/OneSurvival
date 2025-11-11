@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DebugUI : MonoBehaviour
@@ -9,7 +10,12 @@ public class DebugUI : MonoBehaviour
     //    PlayerPrefs.Save();
     //    Debug.Log("PlayerPrefs (stat + gold) Reset");
     //    //GoldManager.Instance.SetGold(0);
-    //    // Áï½Ã UI ¹İ¿µ
+    [SerializeField] private Button resetButton;
+        if (resetButton != null)
+        {
+            resetButton.interactable = false;
+        }
+    //    // ì¦‰ì‹œ UI ë°˜ì˜
     //    //UIManager.Instance.UpdateGoldUI(0);
     //    RefreshAllStatItems();
     //}
@@ -23,36 +29,36 @@ public class DebugUI : MonoBehaviour
     {
         if (allStatUpgrades == null || allStatUpgrades.Length == 0)
         {
-            Debug.LogWarning("ResetUpgradesAndRefund: allStatUpgrades ºñ¾î ÀÖÀ½");
+            Debug.LogWarning("ResetUpgradesAndRefund: allStatUpgrades ë¹„ì–´ ìˆìŒ");
             return;
         }
 
-        // 1) ÇöÀç ´©Àû ÅõÀÚ±İ °è»ê
+        // 1) í˜„ì¬ ëˆ„ì  íˆ¬ìê¸ˆ ê³„ì‚°
         int refund = 0;
         foreach (var data in allStatUpgrades)
         {
             if (data == null) continue;
             int level = PermanentStatManager.GetLevel(data.statType);
             for (int i = 0; i < level; i++)
-                refund += data.GetCost(i);      // 0¡æ1, 1¡æ2, ... ´Ü°èº° ºñ¿ë ÇÕ»ê
+                refund += data.GetCost(i);      // 0â†’1, 1â†’2, ... ë‹¨ê³„ë³„ ë¹„ìš© í•©ì‚°
         }
 
-        // 2) ¾÷±×·¹ÀÌµå ·¹º§ ÀüºÎ 0À¸·Î ÃÊ±âÈ­
+        // 2) ì—…ê·¸ë ˆì´ë“œ ë ˆë²¨ ì „ë¶€ 0ìœ¼ë¡œ ì´ˆê¸°í™”
         foreach (var data in allStatUpgrades)
         {
             if (data == null) continue;
             PermanentStatManager.SetLevel(data.statType, 0);
         }
 
-        // 3) °ñµå È¯±Ş Áö±Ş (º¸À¯ °ñµå´Â À¯Áö + È¯±Ş¸¸ Ãß°¡)
+        // 3) ê³¨ë“œ í™˜ê¸‰ ì§€ê¸‰ (ë³´ìœ  ê³¨ë“œëŠ” ìœ ì§€ + í™˜ê¸‰ë§Œ ì¶”ê°€)
         GoldManager.Instance.AddGold(refund);
 
-        // 4) ÀúÀå ¹× UI °»½Å
+        // 4) ì €ì¥ ë° UI ê°±ì‹ 
         PlayerPrefs.Save();
         RefreshAllStatItems();
         //UIManager.Instance.UpdateGoldUI(GoldManager.Instance.Gold);
 
-        Debug.Log($"[Reset] ¾÷±×·¹ÀÌµå ÃÊ±âÈ­ ¿Ï·á. È¯±Ş: {refund} G");
+        Debug.Log($"[Reset] ì—…ê·¸ë ˆì´ë“œ ì´ˆê¸°í™” ì™„ë£Œ. í™˜ê¸‰: {refund} G");
     }
     public void AddGold10k()
     {
