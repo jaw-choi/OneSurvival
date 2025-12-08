@@ -10,16 +10,21 @@ public class DebugUI : MonoBehaviour
     //    PlayerPrefs.Save();
     //    Debug.Log("PlayerPrefs (stat + gold) Reset");
     //    //GoldManager.Instance.SetGold(0);
-    [SerializeField] private Button resetButton;
-        if (resetButton != null)
-        {
-            resetButton.interactable = false;
-        }
+
+
     //    // 즉시 UI 반영
     //    //UIManager.Instance.UpdateGoldUI(0);
     //    RefreshAllStatItems();
     //}
+
     [SerializeField] private StatUpgradeData[] allStatUpgrades;
+
+    [SerializeField] private Button resetButton;
+
+    //if (resetButton != null)
+    //{
+    //    resetButton.interactable = false;
+    //}
 
     private void Awake()
     {

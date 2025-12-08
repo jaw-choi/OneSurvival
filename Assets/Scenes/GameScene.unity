@@ -15378,6 +15378,7 @@ MonoBehaviour:
   joyStick: {fileID: 1343299636}
   movement: {x: 0, y: 0}
   moveSpeed: 3
+  visualRoot: {fileID: 0}
 --- !u!114 &1015232762
 MonoBehaviour:
   m_ObjectHideFlags: 0

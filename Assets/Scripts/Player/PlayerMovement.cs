@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 movement;
     public float moveSpeed = 3f;
 
+    public Transform visualRoot;
+
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-
+    private Weapon weapon;
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     void Awake()
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        weapon = GetComponent<Weapon>();
+
     }
 
     void OnEnable()
@@ -58,6 +62,15 @@ public class PlayerMovement : MonoBehaviour
         int id = PlayerStats.Instance?.playerID??0;
         PlayerStats.Instance.RecalculateAll();
         animator.runtimeAnimatorController = animCon[id];
+
+
+        if (id == 1 || id == 3)
+        {
+            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        }
+        else
+            transform.localScale = Vector3.one;
+
     }
 
     static bool HasParam(Animator anim, int hash, AnimatorControllerParameterType type)
