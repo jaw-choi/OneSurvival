@@ -169,8 +169,6 @@ Assets/Scripts/<br>
 
 </details>
 
-## 🛠️ 기타 정보
-
 
 
 ## 📈 개발 로드맵
